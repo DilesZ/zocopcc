@@ -1,0 +1,488 @@
+[
+ {
+  "handle": "fiio-ft5",
+  "cat": "Auriculares HiFi",
+  "brand": "FiiO",
+  "query": "FiiO FT5",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "fiio-ft3",
+  "cat": "Auriculares HiFi",
+  "brand": "FiiO",
+  "query": "FiiO FT3",
+  "url_pcc": "https://www.pccomponentes.com/fiio-ft3-32-ohm-auriculares-hifi-negros",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "sennheiser-hd800s",
+  "cat": "Auriculares HiFi",
+  "brand": "Sennheiser",
+  "query": "Sennheiser HD 800S",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "sennheiser-hd-550",
+  "cat": "Auriculares HiFi",
+  "brand": "Sennheiser",
+  "query": "Sennheiser HD 550",
+  "url_pcc": "https://www.pccomponentes.com/auriculares-sennheiser-con-cable-circumaurales-abiertos-alta-fidelidad-150-ohm",
+  "verified_no_pcc": false,
+  "note": "«Precio mínimo histórico» en la tarjeta del buscador; SKU/stock no visible en la tarjeta"
+ },
+ {
+  "handle": "sennheiser-hd-560s",
+  "cat": "Auriculares HiFi",
+  "brand": "Sennheiser",
+  "query": "Sennheiser HD 560S",
+  "url_pcc": "https://www.pccomponentes.com/sennheiser-hd-560s-auriculares-gaming-con-cable-jack-3-5-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "hifiman-sundara",
+  "cat": "Auriculares HiFi",
+  "brand": "Hifiman",
+  "query": "Hifiman Sundara",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "meze-audio-109-pro",
+  "cat": "Auriculares HiFi",
+  "brand": "Meze Audio",
+  "query": "Meze Audio 109 PRO",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "grado-sr80x",
+  "cat": "Auriculares HiFi",
+  "brand": "GRADO",
+  "query": "GRADO SR80x",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "audio-technica-ath-m50x",
+  "cat": "Auriculares HiFi",
+  "brand": "Audio-Technica",
+  "query": "Audio-Technica ATH-M50x",
+  "url_pcc": "https://www.pccomponentes.com/audio-technica-ath-m50x-auriculares-de-estudio-cerrados",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "sennheiser-momentum-true-wireless-4",
+  "cat": "Auriculares Bluetooth",
+  "brand": "Sennheiser",
+  "query": "Sennheiser Momentum True Wireless 4",
+  "url_pcc": "https://www.pccomponentes.com/sennheiser-momentum-true-wireless-4-auriculares-bluetooth-con-cancelacion-de-ruido-grafito-negro",
+  "verified_no_pcc": false,
+  "note": "Precio del índice (ficha no accesible en directo por protección reforzada); violeta 243,90 vendido por PCC"
+ },
+ {
+  "handle": "sennheiser-accentum-wireless",
+  "cat": "Auriculares Bluetooth",
+  "brand": "Sennheiser",
+  "query": "Sennheiser ACCENTUM Wireless",
+  "url_pcc": "https://www.pccomponentes.com/sennheiser-accentum-wireless-auriculares-inalambricos-bluetooth-con-cancelacion-de-ruido-negros",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "denon-ah-c630w",
+  "cat": "Auriculares Bluetooth",
+  "brand": "Denon",
+  "query": "Denon AH-C630W",
+  "url_pcc": "https://www.pccomponentes.com/denon-ah-c630w-auriculares-bluetooth-negros",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "audio-technica-ath-twx7",
+  "cat": "Auriculares Bluetooth",
+  "brand": "Audio-Technica",
+  "query": "Audio-Technica ATH-TWX7",
+  "url_pcc": "https://www.pccomponentes.com/audio-technica-ath-twx7-auriculares-inalambricos-con-estuche-de-carga-blancos",
+  "verified_no_pcc": false,
+  "note": "La ficha en directo corresponde a la variante blanca (la URL del índice ya no existe)"
+ },
+ {
+  "handle": "topping-l50",
+  "cat": "DAC / Amplificador",
+  "brand": "Topping",
+  "query": "Topping L50",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "topping-dx1",
+  "cat": "DAC / Amplificador",
+  "brand": "Topping",
+  "query": "Topping DX1",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "smsl-a2",
+  "cat": "DAC / Amplificador",
+  "brand": "SMSL",
+  "query": "SMSL A2",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "ifi-audio-zen-air-dac-2",
+  "cat": "DAC / Amplificador",
+  "brand": "IFI-Audio",
+  "query": "iFi Audio ZEN Air DAC 2",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "marantz-pm6007",
+  "cat": "Amplificador integrado",
+  "brand": "Marantz",
+  "query": "Marantz PM6007",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "denon-pma-600ne",
+  "cat": "Amplificador integrado",
+  "brand": "Denon",
+  "query": "Denon PMA-600NE",
+  "url_pcc": "https://www.pccomponentes.com/denon-pma-600ne-amplificador-integrado-bluetooth-70w-20-canales-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "yamaha-as301",
+  "cat": "Amplificador integrado",
+  "brand": "Yamaha",
+  "query": "Yamaha A-S301",
+  "url_pcc": "https://www.pccomponentes.com/yamaha-a-s301-amplificador-hibrido-stereo-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "yamaha-as201",
+  "cat": "Amplificador integrado",
+  "brand": "Yamaha",
+  "query": "Yamaha A-S201",
+  "url_pcc": "https://www.pccomponentes.com/yamaha-a-s201-amplificador-hi-fi-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "nad-d3020-v2",
+  "cat": "Amplificador integrado",
+  "brand": "NAD",
+  "query": "NAD D3020 V2",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "cambridge-audio-axa25",
+  "cat": "Amplificador integrado",
+  "brand": "Cambridge Audio",
+  "query": "Cambridge Audio AXA25",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "audio-technica-at-lp120x",
+  "cat": "Tocadiscos",
+  "brand": "Audio-Technica",
+  "query": "Audio-Technica AT-LP120XUSB",
+  "url_pcc": "https://www.pccomponentes.com/audio-technica-lp120x-tocadiscos-usb-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "audio-technica-at-lp60xbt",
+  "cat": "Tocadiscos",
+  "brand": "Audio-Technica",
+  "query": "Audio-Technica AT-LP60XBT",
+  "url_pcc": "https://www.pccomponentes.com/audio-technica-lp60xbt-tocadiscos-bluetooth-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "audio-technica-at-lp3xbt",
+  "cat": "Tocadiscos",
+  "brand": "Audio-Technica",
+  "query": "Audio-Technica AT-LP3XBT",
+  "url_pcc": "https://www.pccomponentes.com/audio-technica-at-lp3xbtbk-plato-dj-bluetooth-traccion-por-correa-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "audio-technica-at-lpw30tk",
+  "cat": "Tocadiscos",
+  "brand": "Audio-Technica",
+  "query": "Audio-Technica AT-LPW30TK",
+  "url_pcc": "https://www.pccomponentes.com/tocadiscos-audio-technica-at-lpw30tk-manual-madera-preamplificador-integrado",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "denon-dp-400",
+  "cat": "Tocadiscos",
+  "brand": "Denon",
+  "query": "Denon DP-400",
+  "url_pcc": "https://www.pccomponentes.com/denon-dp-400-giradiscos-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "rekkord-audio-f110",
+  "cat": "Tocadiscos",
+  "brand": "Rekkord Audio",
+  "query": "Rekkord Audio F110",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "dual-cs418",
+  "cat": "Tocadiscos",
+  "brand": "Dual",
+  "query": "Dual CS418",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "edifier-s1000mkii",
+  "cat": "Altavoces activos",
+  "brand": "Edifier",
+  "query": "Edifier S1000MKII",
+  "url_pcc": "https://www.pccomponentes.com/edifier-s1000-mkii-altavoces-hifi-20-madera",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "edifier-r1280db",
+  "cat": "Altavoces activos",
+  "brand": "Edifier",
+  "query": "Edifier R1280DB",
+  "url_pcc": "https://www.pccomponentes.com/edifier-r1280db-altavoces-bluetooth-21w-rms-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "edifier-r1855db",
+  "cat": "Altavoces activos",
+  "brand": "Edifier",
+  "query": "Edifier R1855DB",
+  "url_pcc": null,
+  "verified_no_pcc": false,
+  "note": "Oferta «Vendido y enviado por PCComponentes»; URL de ficha no indexada"
+ },
+ {
+  "handle": "edifier-r2000db",
+  "cat": "Altavoces activos",
+  "brand": "Edifier",
+  "query": "Edifier R2000DB",
+  "url_pcc": "https://www.pccomponentes.com/edifier-r2000db-altavoces-bluetooth-120w-rms-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "edifier-qd35",
+  "cat": "Altavoces activos",
+  "brand": "Edifier",
+  "query": "Edifier QD35",
+  "url_pcc": "https://www.pccomponentes.com/edifier-qd35-altavoz-inalambrico-bluetooth-de-mesa-40w-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "edifier-g7000",
+  "cat": "Altavoces activos",
+  "brand": "Edifier",
+  "query": "Edifier G7000",
+  "url_pcc": "https://www.pccomponentes.com/edifier-g7000-barra-de-sonido-bluetooth-71",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "klipsch-the-fives-v2",
+  "cat": "Altavoces activos",
+  "brand": "Klipsch",
+  "query": "Klipsch The Fives V2",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "kef-lsx-ii",
+  "cat": "Altavoces activos",
+  "brand": "KEF",
+  "query": "KEF LSX II",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "dali-oberon-1c",
+  "cat": "Altavoces activos",
+  "brand": "Dali",
+  "query": "Dali Oberon 1C",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "triangle-ln01a",
+  "cat": "Altavoces activos",
+  "brand": "Triangle HiFi",
+  "query": "Triangle LN01A",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "sonos-ray",
+  "cat": "Barra de sonido",
+  "brand": "Sonos",
+  "query": "Sonos Ray",
+  "url_pcc": "https://www.pccomponentes.com/sonos-ray-barra-de-sonido-wifi-negra",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "sonos-beam-gen-2",
+  "cat": "Barra de sonido",
+  "brand": "Sonos",
+  "query": "Sonos Beam Gen 2",
+  "url_pcc": "https://www.pccomponentes.com/sonos-beam-gen2-barra-de-sonido-multiroom-wi-fi-negra",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "denon-dht-s217",
+  "cat": "Barra de sonido",
+  "brand": "Denon",
+  "query": "Denon DHT-S217",
+  "url_pcc": "https://www.pccomponentes.com/denon-dht-s217-barra-de-sonido-dolby-atmos-21",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "bose-tv-speaker",
+  "cat": "Barra de sonido",
+  "brand": "Bose",
+  "query": "Bose TV Speaker",
+  "url_pcc": "https://www.pccomponentes.com/bose-tv-speaker-barra-de-sonido-con-conectividad-bluetooth",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "sonos-era-100",
+  "cat": "Altavoz Bluetooth",
+  "brand": "Sonos",
+  "query": "Sonos Era 100",
+  "url_pcc": "https://www.pccomponentes.com/sonos-era-100-altavoz-bluetooth-negro",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "bluesound-powernode-edge",
+  "cat": "Streamers / En red",
+  "brand": "Bluesound",
+  "query": "Bluesound POWERNODE EDGE",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "arylic-s50-pro",
+  "cat": "Streamers / En red",
+  "brand": "Arylic",
+  "query": "Arylic S50 Pro+",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "eversolo-dmp-a6-gen-2",
+  "cat": "Streamers / En red",
+  "brand": "EverSolo",
+  "query": "Eversolo DMP-A6 Gen 2",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "En PCC solo la versión DMP-A6 Master Edition Gen 2 (1.299 €)"
+ },
+ {
+  "handle": "denon-avr-x2800h",
+  "cat": "Receptor AV",
+  "brand": "Denon",
+  "query": "Denon AVR-X2800H",
+  "url_pcc": "https://www.pccomponentes.com/denon-avr-x2800h-receptor-av-72-canales-dolby-atmos-8k-bluetooth",
+  "verified_no_pcc": false,
+  "note": null
+ },
+ {
+  "handle": "yamaha-rx-v6a",
+  "cat": "Receptor AV",
+  "brand": "Yamaha",
+  "query": "Yamaha RX-V6A",
+  "url_pcc": "https://www.pccomponentes.com/yamaha-rx-v6a-receptor-av-4k-72-canales-wifi-bluetooth-negro",
+  "verified_no_pcc": false,
+  "note": "Única oferta publicada en la ficha (marketplace, PVP anterior); el índice citaba 853,23 € el 07/09/2026"
+ },
+ {
+  "handle": "marantz-nr1510",
+  "cat": "Receptor AV",
+  "brand": "Marantz",
+  "query": "Marantz NR1510",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "fiio-dm13",
+  "cat": "Reproductor CD",
+  "brand": "FiiO",
+  "query": "FiiO DM13",
+  "url_pcc": null,
+  "verified_no_pcc": false,
+  "note": "Ofertas en la ficha PCC entre 163,02 y 200; versión BT transparente 181,99"
+ },
+ {
+  "handle": "fosi-audio-merak-cd-player",
+  "cat": "Reproductor CD",
+  "brand": "Fosi Audio",
+  "query": "Fosi Audio Merak CD Player",
+  "url_pcc": null,
+  "verified_no_pcc": true,
+  "note": "Sin ficha en PCComponentes el día de la consulta (búsqueda interna verificada)"
+ },
+ {
+  "handle": "denon-dcd-900ne",
+  "cat": "Reproductor CD",
+  "brand": "Denon",
+  "query": "Denon DCD-900NE",
+  "url_pcc": "https://www.pccomponentes.com/denon-dcd900-reproductor-cd-hifi-negro",
+  "verified_no_pcc": false,
+  "note": null
+ }
+]

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zococity vs PCComponentes · Precios en directo</title>
+<style>
+  :root{
+    --bg:#0d1117; --bg2:#161b22; --bg3:#1c2333; --line:#2a3348;
+    --tx:#e6edf3; --tx2:#8b98ab; --acc:#4f8cff; --green:#3fb950; --red:#f85149;
+    --amber:#d29922; --mono:'Cascadia Code',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--bg); color:var(--tx); font:14px/1.45 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; padding:0 0 60px}
+  header{position:sticky; top:0; z-index:10; background:linear-gradient(180deg,var(--bg2) 92%, transparent); border-bottom:1px solid var(--line); padding:16px 26px 14px}
+  h1{font-size:19px; letter-spacing:.3px}
+  h1 .z{color:var(--green)} h1 .p{color:var(--acc)}
+  .sub{color:var(--tx2); font-size:12.5px; margin-top:3px}
+  .bar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:12px}
+  button{border:1px solid var(--line); background:var(--bg3); color:var(--tx); padding:9px 16px; border-radius:8px; font-size:13.5px; cursor:pointer; transition:.15s}
+  button:hover{border-color:var(--acc); color:#fff}
+  button:disabled{opacity:.45; cursor:not-allowed}
+  #btnRefresh{background:#1f6feb; border-color:#1f6feb; font-weight:600}
+  #btnRefresh:hover{background:#388bfd}
+  #btnRefresh.running{background:#5a3a12; border-color:var(--amber); color:var(--amber)}
+  select,input[type=search]{background:var(--bg3); border:1px solid var(--line); color:var(--tx); padding:8px 10px; border-radius:8px; font-size:13px; outline:none}
+  input[type=search]{width:220px}
+  label.chk{color:var(--tx2); font-size:12.5px; display:flex; gap:6px; align-items:center; user-select:none}
+  .prog{display:none; margin-top:12px; background:var(--bg3); border:1px solid var(--line); border-radius:10px; padding:10px 14px}
+  .prog.on{display:block}
+  .prog .row{display:flex; justify-content:space-between; font-size:12.5px; color:var(--tx2); margin-bottom:6px}
+  .prog .cur{color:var(--tx); font-family:var(--mono); font-size:12px}
+  .track{height:8px; background:#0a0e14; border-radius:6px; overflow:hidden}
+  .fill{height:100%; width:0%; background:linear-gradient(90deg,#1f6feb,var(--green)); transition:width .4s}
+  .log{margin-top:7px; font-family:var(--mono); font-size:11px; color:var(--tx2); white-space:pre-wrap; max-height:86px; overflow:auto}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; padding:20px 26px 4px}
+  .kpi{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:13px 16px}
+  .kpi .n{font-size:23px; font-weight:700}
+  .kpi .l{color:var(--tx2); font-size:11.5px; margin-top:2px}
+  .kpi.g .n{color:var(--green)} .kpi.b .n{color:var(--acc)}
+  .wrap{padding:14px 26px}
+  table{width:100%; border-collapse:collapse; font-size:13px}
+  thead th{position:sticky; top:96px; background:var(--bg2); color:var(--tx2); font-size:11px; text-transform:uppercase; letter-spacing:.5px; text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); z-index:5}
+  tbody td{padding:8px 10px; border-bottom:1px solid #1d2534; vertical-align:top}
+  tbody tr:hover{background:#141b28}
+  td.num{font-family:var(--mono); font-size:12.5px; white-space:nowrap}
+  .p{color:var(--acc); font-weight:600} .g{color:var(--green); font-weight:600}
+  .r{color:var(--red)} .mut{color:var(--tx2)}
+  .badge{display:inline-block; padding:2px 8px; border-radius:20px; font-size:10.5px; font-weight:600; border:1px solid}
+  .b-ok{color:var(--green); border-color:#2ea04355; background:#12261e}
+  .b-no{color:var(--tx2); border-color:#3a445a; background:#161b22}
+  .b-own{color:#79c0ff; border-color:#1f6feb55; background:#122038}
+  .b-mkt{color:var(--amber); border-color:#d2992255; background:#2a2113}
+  .b-out{color:var(--red); border-color:#f8514955; background:#2d1214}
+  a{color:var(--acc); text-decoration:none} a:hover{text-decoration:underline}
+  .ttl{max-width:260px}
+  .ttl .t1{font-weight:600; line-height:1.3}
+  .ttl .t2{color:var(--tx2); font-size:11.5px; margin-top:2px}
+  .src{color:var(--tx2); font-size:11px; max-width:210px}
+  .cat{font-size:11px; color:var(--tx2); white-space:nowrap}
+  footer{padding:26px; color:var(--tx2); font-size:11.5px; text-align:center}
+  .err{background:#2d1214; border:1px solid #f8514955; color:var(--red); padding:10px 14px; border-radius:10px; font-size:12.5px; margin:0 26px; display:none}
+  @media(max-width:900px){ thead th:nth-child(12),tbody td:nth-child(12){display:none} }
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="z">Zococity</span> vs <span class="p">PCComponentes</span> · seguimiento de precios en directo</h1>
+  <div class="sub" id="meta">Cargando…</div>
+  <div class="bar">
+    <button id="btnRefresh">🔄 Actualizar precios</button>
+    <button id="btnExcel">⬇ Descargar Excel</button>
+    <input type="search" id="q" placeholder="Filtrar productos…">
+    <select id="fCat"><option value="">Todas las categorías</option></select>
+    <select id="fAvail">
+      <option value="">Todos</option>
+      <option value="both">Solo en ambas tiendas</option>
+      <option value="only">Solo Zococity</option>
+      <option value="live">Solo con lectura en directo</option>
+    </select>
+    <label class="chk"><input type="checkbox" id="skipSearch"> Saltar verificación del buscador (más rápido)</label>
+    <button id="btnCancel" style="display:none">⏹ Parar</button>
+  </div>
+  <div class="prog" id="prog">
+    <div class="row"><span id="progPhase">—</span><span id="progCount">0/0</span></div>
+    <div class="track"><div class="fill" id="progFill"></div></div>
+    <div class="cur" id="progCur"></div>
+    <div class="log" id="progLog"></div>
+  </div>
+  <div class="err" id="errBox"></div>
+</header>
+
+<div class="kpis" id="kpis"></div>
+<div class="wrap">
+  <table>
+    <thead><tr>
+      <th>Categoría</th><th>Producto (Zococity)</th><th>Precio Zoco</th><th>Stock Zoco</th>
+      <th>En PCC</th><th>Producto PCC</th><th>Cod. art.</th><th>Vendedor PCC</th>
+      <th>Precio PCC</th><th>Dif €</th><th>Dif %</th><th>Mejor en</th>
+      <th>Disponibilidad PCC</th><th>Fuente</th><th>Enlaces</th>
+    </tr></thead>
+    <tbody id="tbody"><tr><td colspan="15" class="mut">Cargando datos…</td></tr></tbody>
+  </table>
+</div>
+<footer id="foot"></footer>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = s => (s==null?'':String(s)).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const eur = v => v==null ? '—' : v.toFixed(2).replace('.',',')+' €';
+const PCC_BASE='https://www.pccomponentes.com/', ZOCO_BASE='https://zococity.es/products/';
+
+let DATA=null, TIMER=null;
+
+async function api(path, opts){ const r=await fetch(path, opts); const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||('HTTP '+r.status)); return j; }
+
+async function loadData(){
+  try{
+    DATA = await api('/api/data');
+    render();
+  }catch(e){ showErr('No se pudieron cargar los datos: '+e.message); }
+}
+
+function showErr(m){ const b=$('errBox'); b.textContent=m; b.style.display='block'; }
+function hideErr(){ $('errBox').style.display='none'; }
+
+function render(){
+  const p = DATA.products||[], meta = DATA.meta||{};
+  $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
+    ' · '+p.length+' productos · Zococity vía Shopify JSON · PCComponentes vía fichas oficiales (nodriver + Cloudflare)';
+  const both = p.filter(x=>x.in_pcc).length;
+  const zorBar = p.filter(x=>x.price_zoco!=null && x.price_pcc!=null && x.price_zoco > x.price_pcc).length;
+  const pccBar = p.filter(x=>x.price_zoco!=null && x.price_pcc!=null && x.price_zoco < x.price_pcc).length;
+  const diffs = p.filter(x=>x.price_zoco && x.price_pcc).map(x=>(x.price_zoco-x.price_pcc)/x.price_pcc);
+  const avg = diffs.length ? diffs.reduce((a,b)=>a+b,0)/diffs.length : null;
+  const live = p.filter(x=>(x.source_pcc||'').includes('en directo')).length;
+  $('kpis').innerHTML = [
+    ['Productos', p.length, ''],
+    ['En ambas tiendas', both, 'b'],
+    ['Con lectura en directo', live, 'b'],
+    ['Zococity más barato', zorBar, 'g'],
+    ['PCC más barato', pccBar, ''],
+    ['Dif. media (PCC s/ Zoco)', avg==null?'—':(avg>=0?'+':'')+(avg*100).toFixed(1)+'%', zorBar>pccBar?'g':''],
+  ].map(k=>`<div class="kpi ${k[2]}"><div class="n">${k[1]}</div><div class="l">${k[0]}</div></div>`).join('');
+
+  // categorías
+  const cats=[...new Set(p.map(x=>x.cat).filter(Boolean))].sort();
+  const sel=$('fCat'); const cur=sel.value;
+  sel.innerHTML='<option value="">Todas las categorías</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join('');
+  sel.value = cats.includes(cur)?cur:'';
+
+  renderTable();
+}
+
+function filtered(){
+  const q=$('q').value.trim().toLowerCase(), cat=$('fCat').value, av=$('fAvail').value;
+  return (DATA.products||[]).filter(x=>{
+    if(cat && x.cat!==cat) return false;
+    if(av==='both' && !x.in_pcc) return false;
+    if(av==='only' && x.in_pcc) return false;
+    if(av==='live' && !(x.source_pcc||'').includes('en directo')) return false;
+    if(q){
+      const s=(x.title_zoco+' '+(x.title_pcc||'')+' '+x.brand+' '+x.cat+' '+(x.sku_zoco||'')+' '+(x.ean||'')+' '+(x.code_pcc||'')).toLowerCase();
+      if(!s.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function sellerBadge(r){
+  if(!r.in_pcc) return '<span class="badge b-no">No en PCC</span>';
+  const s=(r.seller_pcc||'').toLowerCase();
+  if(s.includes('pccomponentes')) return '<span class="badge b-own">PCC propio</span>';
+  if(r.seller_pcc) return `<span class="badge b-mkt">${esc(r.seller_pcc)}</span>`;
+  return '<span class="badge b-ok">En PCC</span>';
+}
+
+function availBadge(r){
+  if(!r.in_pcc) return '';
+  const a=r.pcc_avail;
+  if(a==='InStock') return '<span class="badge b-ok">en stock</span>';
+  if(a==='OutOfStock') return '<span class="badge b-out">agotado</span>';
+  return '';
+}
+
+function renderTable(){
+  const rows=filtered();
+  const tb=$('tbody');
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="15" class="mut">Sin resultados para el filtro actual.</td></tr>'; return; }
+  tb.innerHTML = rows.map(r=>{
+    let dif=null, difp=null, mejor=null;
+    if(r.price_zoco!=null && r.price_pcc!=null){
+      dif=r.price_zoco-r.price_pcc; difp=r.price_pcc? dif/r.price_pcc : null;
+      mejor = dif===0?'Empate': dif>0?'PCComponentes':'Zococity';
+    }
+    const pccTtl = r.title_pcc ? `<div class="t2">${esc(r.title_pcc)}</div>` : '';
+    return `<tr>
+      <td class="cat">${esc(r.cat)}</td>
+      <td class="ttl"><a href="${ZOCO_BASE}${esc(r.handle)}" target="_blank" rel="noopener"><span class="t1">${esc(r.title_zoco)}</span></a><div class="t2">${esc(r.brand||'')} ${r.sku_zoco?'· '+esc(r.sku_zoco):''}</div></td>
+      <td class="num">${eur(r.price_zoco)}</td>
+      <td>${r.stock_zoco===true?'<span class="badge b-ok">en stock</span>':r.stock_zoco===false?'<span class="badge b-out">agotado</span>':'<span class="mut">—</span>'}</td>
+      <td>${r.in_pcc?'<span class="badge b-ok">Sí</span>':'<span class="badge b-no">No</span>'}</td>
+      <td class="ttl">${r.url_pcc?`<a href="${esc(r.url_pcc)}" target="_blank" rel="noopener">${pccTtl||esc(r.title_pcc||'ver ficha')}</a>`:pccTtl}</td>
+      <td class="num mut">${esc(r.code_pcc||'—')}</td>
+      <td>${sellerBadge(r)} ${availBadge(r)}</td>
+      <td class="num">${r.price_pcc!=null?`<span class="p">${eur(r.price_pcc)}</span>`:'—'}</td>
+      <td class="num">${dif==null?'—':`<span class="${dif>0?'p':dif<0?'g':''}">${dif>=0?'+':''}${dif.toFixed(2)}</span>`}</td>
+      <td class="num">${difp==null?'—':`<span class="${difp>0?'p':difp<0?'g':''}">${difp>=0?'+':''}${(difp*100).toFixed(1)}%</span>`}</td>
+      <td>${mejor?`<span class="${mejor==='Zococity'?'g':mejor==='PCComponentes'?'p':'mut'}">${mejor}</span>`:'<span class="mut">—</span>'}</td>
+      <td class="src"${r.note_pcc?` title="${esc(r.note_pcc)}"`:''}>${esc(r.note_pcc&&!r.in_pcc?'No disponible en PCComponentes · '+r.note_pcc:'Vendido en PCC'+(({'InStock':' · en stock','OutOfStock':' · agotado'}[r.pcc_avail])||'')+(r.pcc_own_avail&&r.seller_pcc&&!r.seller_pcc.toLowerCase().includes('pccomponentes')?' · oferta propia PCC: '+({'InStock':'en stock','OutOfStock':'agotado'}[r.pcc_own_avail]||''):''))}</td>
+      <td class="src">${esc(r.source_pcc||'—')}</td>
+      <td class="src">${r.url_pcc?`<a href="${esc(r.url_pcc)}" target="_blank" rel="noopener">ficha PCC</a>`:''}</td>
+    </tr>`;
+  }).join('');
+  // las notas se muestran bajo la fila mediante atributo title en la celda de disponibilidad
+  $('foot').textContent = 'Precios con IVA sin gastos de envío · lectura en directo significa que el dato se tomó de la web oficial en el momento de la actualización · herramientas: nodriver + Chrome';
+}
+
+/* ---- progreso ---- */
+async function poll(){
+  try{
+    const st = await api('/api/status');
+    updateProg(st);
+  }catch(e){}
+}
+function updateProg(st){
+  const on = st.running;
+  const hasErr = !!(st.last_result && st.last_result.error);
+  $('btnRefresh').disabled = on;
+  $('btnRefresh').classList.toggle('running', on);
+  $('btnCancel').style.display = on?'':'none';
+  $('prog').classList.toggle('on', !!(on || hasErr));
+  if(hasErr && !on) showErr('Último proceso con error: ' + st.last_result.error);
+  if(on){
+    const phases={zoco:'Leyendo catálogo de Zococity', pcc_fichas:'Abriendo fichas de PCComponentes en directo', pcc_buscar:'Verificando productos en el buscador de PCC', inicio:'Preparando'};
+    $('progPhase').textContent = phases[st.phase]||st.phase||'…';
+    const total=st.total||0, done=st.done||0;
+    $('progCount').textContent = done+'/'+total;
+    $('progFill').style.width = total? (done/total*100).toFixed(1)+'%' : '0%';
+    $('progCur').textContent = st.current||'';
+    $('progLog').textContent = (st.log||[]).join('\n');
+  }
+  if(!on && TIMER){ clearInterval(TIMER); TIMER=null; loadData(); }
+}
+async function refresh(){
+  hideErr();
+  const skip = $('skipSearch').checked ? '1':'0';
+  try{
+    await api('/api/refresh?skip_search='+skip, {method:'POST'});
+  }catch(e){ showErr('No se pudo iniciar: '+e.message); return; }
+  if(!TIMER) TIMER=setInterval(poll, 1600);
+  poll();
+}
+async function cancelRun(){
+  try{ await api('/api/cancel',{method:'POST'}); }catch(e){}
+}
+
+$('btnRefresh').addEventListener('click', refresh);
+$('btnCancel').addEventListener('click', cancelRun);
+$('btnExcel').addEventListener('click', ()=>{ window.location='/api/excel'; });
+['q','fCat','fAvail'].forEach(id=>$(id).addEventListener('input', renderTable));
+$('fCat').addEventListener('change', renderTable); $('fAvail').addEventListener('change', renderTable);
+
+loadData();
+poll(); setInterval(()=>{ poll(); }, 5000);
+</script>
+</body>
+</html>
