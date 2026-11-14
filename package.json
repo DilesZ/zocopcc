@@ -1,0 +1,10 @@
+{
+  "name": "zocopcc",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "bash .zscripts/build.sh",
+    "start": "python3 download/zoco-pcc-monitor/server.py",
+    "dev": "python3 download/zoco-pcc-monitor/server.py"
+  }
+}
