@@ -163,12 +163,31 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
-    srv = ThreadingHTTPServer(('0.0.0.0', PORT), Handler)
-    log(f'Servidor listo en http://localhost:{PORT}')
+    try:
+        srv = ThreadingHTTPServer(('0.0.0.0', PORT), Handler)
+    except OSError as e:
+        print(f'ERROR: el puerto {PORT} ya está en uso ({e}).', file=sys.stderr)
+        print(f'Arranca en otro puerto:', file=sys.stderr)
+        print('  Linux/macOS:  PORT=9000 python3 server.py', file=sys.stderr)
+        print('  Windows:      set PORT=9000 && python server.py', file=sys.stderr)
+        sys.exit(1)
+    url = f'http://localhost:{PORT}'
+    log(f'Servidor listo en {url}  (Ctrl+C para detener)')
+    log('IMPORTANTE: usa esta URL; no abras index.html con doble clic ni con Live Server (el botón necesita este backend)')
+    if os.environ.get('AUTO_OPEN', '1') != '0':
+        threading.Timer(0.8, lambda: _open_browser(url)).start()
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
         log('Servidor detenido')
+
+
+def _open_browser(url):
+    try:
+        import webbrowser
+        webbrowser.open(url)
+    except Exception:
+        pass  # sin navegador gráfico (SSH, servidor…): abre la URL a mano
 
 
 if __name__ == '__main__':

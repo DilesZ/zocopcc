@@ -14,6 +14,37 @@ python3 server.py
 
 Requisito: Google Chrome instalado (o `export CHROME_PATH=/ruta/a/chrome`).
 
+Al arrancar, `server.py` abre solo `http://localhost:8765` en tu navegador
+(desactívalo con `AUTO_OPEN=0` si no quieres).
+
+## Problemas frecuentes
+
+**«No se pudo iniciar (HTTP 404)» al pulsar Actualizar.**
+La página se está abriendo **sin el backend**. Este 404 no lo da `server.py` (que siempre
+responde a la API): lo da el entorno desde el que abriste la página. Causas típicas:
+doble clic en `index.html` (file://), «Open with Live Server» de VS Code,
+`python3 -m http.server`, XAMPP/Apache, o una web publicada en un hosting.
+**Solución única:** cierra esa pestaña, ejecuta `python3 server.py` en la carpeta y usa
+`http://localhost:8765`. La propia web detecta esta situación y muestra un banner azul.
+
+**«El puerto 8765 ya está en uso.** Arranca en otro puerto:
+`PORT=9000 python3 server.py` (Linux/macOS) o `set PORT=9000 && python server.py` (Windows),
+y abre `http://localhost:9000`.
+
+**«Chrome no encontrado».** Instala Google Chrome o exporta `CHROME_PATH=/ruta/a/chrome`.
+
+**¿Puedo publicarla en internet?** La tabla sí es estática, pero el botón **no**: ejecuta
+el proceso en la máquina donde corre `server.py`. En tu propia red local ya funciona en
+otras máquinas con `http://TU-IP:8765` (el servidor escucha en todas las interfaces).
+En un hosting de internet necesitarías el backend Python ahí, y Cloudflare es aún más
+agresivo con IPs de datacenter — no recomendado.
+
+**Linux sin entorno gráfico.** Instala xvfb (`sudo apt install xvfb`); el fetcher lo
+arranca solo.
+
+**Excel falla (501).** Falta openpyxl: `pip install openpyxl`.
+
+
 ## Qué hace el botón Actualizar
 
 1. Lee el catálogo de **Zococity** en directo (Shopify `/products/<handle>.js` vía

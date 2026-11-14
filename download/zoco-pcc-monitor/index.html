@@ -60,6 +60,9 @@
   .cat{font-size:11px; color:var(--tx2); white-space:nowrap}
   footer{padding:26px; color:var(--tx2); font-size:11.5px; text-align:center}
   .err{background:#2d1214; border:1px solid #f8514955; color:var(--red); padding:10px 14px; border-radius:10px; font-size:12.5px; margin:0 26px; display:none}
+  .warn{background:#17233b; border:1px solid #4f8cff66; color:#c9dcff; padding:13px 16px; border-radius:10px; font-size:13px; margin:14px 26px 0; display:none; line-height:1.7}
+  .warn code{background:#0d1117; padding:2px 7px; border-radius:5px; font-family:var(--mono); font-size:12px; color:#9ecbff}
+  .warn b{color:#fff}
   @media(max-width:900px){ thead th:nth-child(12),tbody td:nth-child(12){display:none} }
 </style>
 </head>
@@ -90,6 +93,16 @@
   <div class="err" id="errBox"></div>
 </header>
 
+<div class="warn" id="envBox">
+  <b>Esta web necesita su servidor local para funcionar.</b><br>
+  La página se está abriendo <b>sin el backend</b> (doble clic en <code>index.html</code>,
+  «Open with Live Server», <code>python3 -m http.server</code>, XAMPP o un hosting estático).
+  Por eso «Actualizar precios» falla con 404: el botón llama a la API de <code>server.py</code>,
+  que no existe en ese entorno.<br>
+  <b>Solución:</b> en la carpeta de la app ejecuta <code>python3 server.py</code> y abre
+  <b><code>http://localhost:8765</code></b> en el navegador.
+</div>
+
 <div class="kpis" id="kpis"></div>
 <div class="wrap">
   <table>
@@ -119,11 +132,25 @@ async function loadData(){
   try{
     DATA = await api('/api/data');
     render();
-  }catch(e){ showErr('No se pudieron cargar los datos: '+e.message); }
+  }catch(e){
+    if((e.message||'').includes('404')) return; // el banner de entorno lo explica
+    showErr('No se pudieron cargar los datos: '+e.message);
+  }
 }
 
 function showErr(m){ const b=$('errBox'); b.textContent=m; b.style.display='block'; }
 function hideErr(){ $('errBox').style.display='none'; }
+function showEnv(){ $('envBox').style.display='block'; }
+
+async function detectEnv(){
+  if(location.protocol==='file:'){ showEnv(); return; }
+  try{
+    const r=await fetch('/api/status');
+    if(!r.ok){ showEnv(); return; }
+    const j=await r.json().catch(()=>null);
+    if(!j || j.running===undefined) showEnv();
+  }catch(e){ showEnv(); }
+}
 
 function render(){
   const p = DATA.products||[], meta = DATA.meta||{};
@@ -248,7 +275,13 @@ async function refresh(){
   const skip = $('skipSearch').checked ? '1':'0';
   try{
     await api('/api/refresh?skip_search='+skip, {method:'POST'});
-  }catch(e){ showErr('No se pudo iniciar: '+e.message); return; }
+  }catch(e){
+    const m=e.message||'';
+    showErr(m.includes('404')
+      ? 'No se pudo iniciar (HTTP 404): esta página no la está sirviendo server.py. Ejecuta «python3 server.py» en la carpeta de la app y abre http://localhost:8765'
+      : 'No se pudo iniciar: '+m);
+    return;
+  }
   if(!TIMER) TIMER=setInterval(poll, 1600);
   poll();
 }
@@ -263,6 +296,7 @@ $('btnExcel').addEventListener('click', ()=>{ window.location='/api/excel'; });
 $('fCat').addEventListener('change', renderTable); $('fAvail').addEventListener('change', renderTable);
 
 loadData();
+detectEnv();
 poll(); setInterval(()=>{ poll(); }, 5000);
 </script>
 </body>

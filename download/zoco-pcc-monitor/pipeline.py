@@ -170,9 +170,14 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         'products': records,
     }
     with DATA_LOCK:
-        if os.path.exists(DATA):
-            os.replace(DATA, DATA_PREV)
-        json.dump(snapshot, open(DATA, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        if limit:
+            # las actualizaciones de prueba (limit=N) no tocan el snapshot principal
+            json.dump(snapshot, open(os.path.join(BASE, 'data_test.json'), 'w', encoding='utf-8'),
+                      ensure_ascii=False, indent=1)
+        else:
+            if os.path.exists(DATA):
+                os.replace(DATA, DATA_PREV)
+            json.dump(snapshot, open(DATA, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     return snapshot
 
 
