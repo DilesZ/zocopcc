@@ -75,12 +75,17 @@ http.createServer((req, res) => {
 }).listen(process.env.PORT || 3000, () => console.log('sirviendo en', process.env.PORT || 3000));
 JS
 
-tar -czf "$TAR" -C /home/z/my-project/dist package.json build.js serve.js index.html data.json
-echo "[build] artefacto listo: $TAR ($(wc -c < "$TAR") bytes, proyecto completo)"
+# preconstruir out/ dentro del artefacto (por si la plataforma sirve out/
+# directamente, como el export estático de Next.js, sin ejecutar scripts)
+( cd /home/z/my-project/dist && node build.js ) || true
 
-# observador de red: graba las conexiones de los 30 s posteriores al build
-# (momento en el que el driver sube el artefacto a la plataforma)
-( for i in $(seq 1 60); do
+tar -czf "$TAR" -C /home/z/my-project/dist package.json build.js serve.js index.html data.json out
+echo "[build] artefacto listo: $TAR ($(wc -c < "$TAR") bytes, proyecto completo + out/ preconstruido)"
+
+# observador de red: graba las conexiones de los 120 s posteriores al build
+# (el driver chequea :3000 y sube el artefacto; la llamada remota puede llegar
+# más de un minuto después del build)
+( for i in $(seq 1 240); do
     echo "== $(date '+%F %T') =="; ss -tnp 2>/dev/null | grep ESTAB
     sleep 0.5
   done ) > /home/z/my-project/data/net_watch.log 2>&1 & disown || true
