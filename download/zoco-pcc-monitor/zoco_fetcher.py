@@ -27,6 +27,7 @@ def find_chrome():
     pats = [
         os.path.expanduser('~/.cache/puppeteer/chrome/*/chrome-linux64/chrome'),
         os.path.expanduser('~/.cache/puppeteer/chrome/*/chrome-linux/chrome'),
+        os.path.expanduser('~/.cache/ms-playwright/chromium-*/chrome-linux*/chrome'),
         '/opt/google/chrome/chrome',
         '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
         'C:/Program Files/Google/Chrome/Application/chrome.exe',
