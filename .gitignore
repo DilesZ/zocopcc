@@ -1,2 +1,7 @@
 skills/
 node_modules/
+.env
+data/
+upload/
+__pycache__/
+*.log
