@@ -1,5 +1,7 @@
 skills/
 node_modules/
+.next/
+out/
 .env
 data/
 upload/

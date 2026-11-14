@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "bash .zscripts/build.sh",
-    "start": "python3 download/zoco-pcc-monitor/server.py",
-    "dev": "python3 download/zoco-pcc-monitor/server.py"
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "deploy": "bash .zscripts/build.sh"
+  },
+  "dependencies": {
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   }
 }
