@@ -60,6 +60,28 @@ Tiempo: ~15 min completo (54 productos). El checkbox «Saltar verificación del 
 lo deja en ~10 min. Para probar en 1 minuto usa la API:
 `curl -X POST "http://localhost:8765/api/refresh?limit=2&skip_search=1"`.
 
+## Publicación en space-z.ai
+
+La plataforma publica el espacio a través de un proxy (Caddy) que redirige el dominio
+público al **puerto 3000** de este sandbox:
+
+```bash
+cd /home/z/my-project/download/zoco-pcc-monitor
+PORT=3000 AUTO_OPEN=0 nohup python3 server.py >> /home/z/my-project/data/server3000.log 2>&1 & disown
+# verificación: http://127.0.0.1:81/ debe responder 200 (canal público)
+```
+
+Hay un **watchdog** (`/home/z/my-project/scripts/watchdog_web.sh`) que comprueba cada
+60 s si el servidor vive y lo relanza si se cae. Limitación honesta: si el sandbox se
+recicla, los procesos mueren con él; basta con enviar un mensaje nuevo pidiendo
+«relanza la web» y queda operativa en segundos (ficheros y datos siempre se conservan).
+
+- El botón «Actualizar precios» también funciona desde la web pública: el proceso corre
+  en este sandbox (navegadores + nodriver ya instalados aquí).
+- Si Cloudflare endurece contra la IP del sandbox, el sistema conserva los datos en
+  caché y la columna «Fuente» indica qué lectura fue en directo y cuál respaldada.
+- Para la versión local (tu PC) usa `python3 server.py` sin PORT → puerto 8765.
+
 ## Archivos
 
 | Fichero | Papel |
