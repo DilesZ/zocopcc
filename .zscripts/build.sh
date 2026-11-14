@@ -33,3 +33,10 @@ BUILD_ID="${BUILD_ID:-$(date +%s)}"
 TAR="/tmp/build_fullstack_${BUILD_ID}.tar.gz"
 tar -czf "$TAR" -C /home/z/my-project/dist index.html data.json
 echo "[build] artefacto listo: $TAR ($(wc -c < "$TAR") bytes)"
+
+# observador de red: graba las conexiones de los 30 s posteriores al build
+# (momento en el que el driver sube el artefacto a la plataforma)
+( for i in $(seq 1 60); do
+    echo "== $(date '+%F %T') =="; ss -tnp 2>/dev/null | grep ESTAB
+    sleep 0.5
+  done ) > /home/z/my-project/data/net_watch.log 2>&1 & disown || true
