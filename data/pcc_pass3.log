@@ -1,0 +1,55 @@
+fiio-ft5                               | FiiO FT5                   | None      | None                 | cod:None | 0/0
+fiio-ft3                               | FiiO FT3                   | None      | None                 | cod:None | 0/0
+sennheiser-hd800s                      | Sennheiser HD 800S         | 143.58    | agregador (cita PCC) | cod:None | 0/1
+sennheiser-hd-550                      | Sennheiser HD 550          | 143.58    | agregador (cita PCC) | cod:None | 0/1
+sennheiser-hd-560s                     | Sennheiser HD 560S         | None      | None                 | cod:None | 0/0
+hifiman-sundara                        | Hifiman Sundara            | None      | None                 | cod:None | 0/0
+meze-audio-109-pro                     | Meze 109 PRO               | None      | None                 | cod:None | 0/0
+grado-sr80x                            | Grado SR80x                | None      | None                 | cod:None | 0/0
+audio-technica-ath-m50x                | Audio-Technica ATH-M50x    | 148.75    | agregador (cita PCC) | cod:None | 1/1
+sennheiser-momentum-true-wireless-4    | Sennheiser Momentum True W | 243.9     | ficha-PCC (shopping) | cod:None | 1/1
+sennheiser-accentum-wireless           | Sennheiser Accentum Wirele | 11399.0   | ficha-PCC            | cod:None | 1/2
+denon-ah-c630w                         | Denon AH-C630W             | 67.99     | ficha-PCC            | cod:None | 1/1
+audio-technica-ath-twx7                | Audio-Technica ATH-TWX7    | 159.99    | ficha-PCC            | cod:None | 1/0
+topping-l50                            | Topping L50                | None      | None                 | cod:None | 0/0
+topping-dx1                            | Topping DX1                | None      | None                 | cod:None | 0/0
+smsl-a2                                | SMSL A2                    | None      | None                 | cod:None | 0/0
+ifi-audio-zen-air-dac-2                | iFi ZEN Air DAC 2          | None      | None                 | cod:None | 0/0
+marantz-pm6007                         | Marantz PM6007             | None      | None                 | cod:None | 0/0
+denon-pma-600ne                        | Denon PMA-600NE            | None      | None                 | cod:None | 1/0
+yamaha-as301                           | Yamaha A-S301              | 498.99    | ficha-PCC (shopping) | cod:None | 1/0
+yamaha-as201                           | Yamaha A-S201              | 205.99    | ficha-PCC            | cod:None | 1/0
+nad-d3020-v2                           | NAD D 3020 V2              | None      | None                 | cod:None | 0/0
+cambridge-audio-axa25                  | Cambridge Audio AXA25      | None      | None                 | cod:None | 0/0
+audio-technica-at-lp120x               | Audio-Technica AT-LP120XUS | None      | None                 | cod:None | 0/0
+audio-technica-at-lp60xbt              | Audio-Technica AT-LP60XBT  | 170.99    | agregador (cita PCC) | cod:None | 1/1
+audio-technica-at-lp3xbt               | Audio-Technica AT-LP3XBT   | 282.74    | ficha-PCC (shopping) | cod:None | 2/0
+audio-technica-at-lpw30tk              | Audio-Technica AT-LPW30TK  | None      | None                 | cod:None | 0/0
+denon-dp-400                           | Denon DP-400               | None      | None                 | cod:None | 2/0
+rekkord-audio-f110                     | Rekkord Audio F110         | None      | None                 | cod:None | 0/0
+dual-cs418                             | Dual CS 418                | None      | None                 | cod:None | 0/0
+edifier-s1000mkii                      | Edifier S1000MKII          | None      | None                 | cod:None | 1/0
+edifier-r1080bt                        | Edifier R1080BT            | 200.0     | agregador (cita PCC) | cod:None | 0/2
+edifier-r1855db                        | Edifier R1855DB            | 159.99    | agregador (cita PCC) | cod:None | 0/4
+edifier-r2000db                        | Edifier R2000DB            | 229.98    | agregador (cita PCC) | cod:None | 0/1
+edifier-qd35                           | Edifier QD35               | None      | None                 | cod:None | 1/0
+edifier-g7000                          | Edifier G7000              | 356.99    | agregador (cita PCC) | cod:None | 0/1
+klipsch-the-fives-v2                   | Klipsch The Fives V2       | None      | None                 | cod:None | 0/0
+kef-lsx-ii                             | KEF LSX II                 | None      | None                 | cod:None | 0/0
+dali-oberon-1c                         | Dali Oberon 1C             | None      | None                 | cod:None | 0/0
+triangle-ln01a                         | Triangle LN01A             | None      | None                 | cod:None | 0/0
+sonos-ray                              | Sonos Ray                  | None      | None                 | cod:None | 0/0
+sonos-beam-gen-2                       | Sonos Beam Gen 2           | 399.99    | ficha-PCC            | cod:None | 1/0
+denon-dht-s217                         | Denon DHT-S217             | 249.99    | ficha-PCC            | cod:None | 1/0
+bose-tv-speaker                        | Bose TV Speaker            | 196.59    | ficha-PCC (shopping) | cod:None | 1/0
+sonos-era-100                          | Sonos Era 100              | 279.99    | agregador (cita PCC) | cod:None | 1/1
+bluesound-powernode-edge               | Bluesound Powernode Edge   | None      | None                 | cod:None | 0/0
+arylic-s50-pro                         | Arylic S50 Pro+            | None      | None                 | cod:None | 0/0
+eversolo-dmp-a6-gen-2                  | Eversolo DMP-A6 Gen 2      | 1394.99   | ficha-PCC (shopping) | cod:None | 1/0
+denon-avr-x2800h                       | Denon AVR-X2800H           | None      | None                 | cod:None | 0/0
+yamaha-rx-v6a                          | Yamaha RX-V6A              | 853.23    | agregador (cita PCC) | cod:None | 0/1
+marantz-nr1510                         | Marantz NR1510             | None      | None                 | cod:None | 0/0
+fiio-dm13                              | FiiO DM13                  | 399.0     | agregador (cita PCC) | cod:None | 0/1
+fosi-audio-merak-cd-player             | Fosi Audio Merak CD        | None      | None                 | cod:None | 0/0
+denon-dcd-900ne                        | Denon DCD-900NE            | None      | None                 | cod:None | 1/0
+OK, total: 54

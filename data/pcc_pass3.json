@@ -1,0 +1,1103 @@
+{
+ "fiio-ft5": {
+  "query": "FiiO FT5 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "fiio-ft3": {
+  "query": "FiiO FT3 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "sennheiser-hd800s": {
+  "query": "Sennheiser HD 800S pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAES2QEBxCJF1wNgNtO3I80TKRfdZGlZ7WPUBIqIVgfzP8C3IhqoVcmADhfmfjccS1MB2o1V8sYMMs4c-AAkHsZQ2vR2PvIWSPZAKY1Hxsyc0pfIx8bsjfMrVXhaynU0",
+    "name": "Auriculares Sennheiser HD 25 Supraaurales Cerrados 1.5",
+    "snippet": "Sennheiser HD 25 Supraaurales Cerrados 1.5m Negros al mejor precio online. PcComponentes Artículos. Envío gratis. 143,58€ 5/5 2 opiniones 99€",
+    "prices": [
+     143.58,
+     99.0
+    ]
+   }
+  ],
+  "price": 143.58,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAES2QEBxCJF1wNgNtO3I80TKRfdZGlZ7WPUBIqIVgfzP8C3IhqoVcmADhfmfjccS1MB2o1V8sYMMs4c-AAkHsZQ2vR2PvIWSPZAKY1Hxsyc0pfIx8bsjfMrVXhaynU0",
+  "name": "Auriculares Sennheiser HD 25 Supraaurales Cerrados 1.5",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "sennheiser-hd-550": {
+  "query": "Sennheiser HD 550 pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAES2gEBxCJF11s2th-Wsla8cTxOuzdbS0xFKONTfzXkxEgs5BOrIT3byAJ3-ZX0_BJ1WYanaja--yTaTijkL2HKI1MOo6ibcYS9FrA32DoW37oFjVPN7nr_IcE1Tf1B",
+    "name": "Auriculares Sennheiser HD 25 Supraaurales Cerrados 1.5",
+    "snippet": "Sennheiser HD 25 Supraaurales Cerrados 1.5m Negros al mejor precio online. Vendido y enviado por PcComponentes Artículos. Envío gratis. 143,58€ 5/5 2 opiniones ...",
+    "prices": [
+     143.58
+    ]
+   }
+  ],
+  "price": 143.58,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAES2gEBxCJF11s2th-Wsla8cTxOuzdbS0xFKONTfzXkxEgs5BOrIT3byAJ3-ZX0_BJ1WYanaja--yTaTijkL2HKI1MOo6ibcYS9FrA32DoW37oFjVPN7nr_IcE1Tf1B",
+  "name": "Auriculares Sennheiser HD 25 Supraaurales Cerrados 1.5",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "sennheiser-hd-560s": {
+  "query": "Sennheiser HD 560S pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "hifiman-sundara": {
+  "query": "Hifiman Sundara pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "meze-audio-109-pro": {
+  "query": "Meze 109 PRO pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "grado-sr80x": {
+  "query": "Grado SR80x pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "audio-technica-ath-m50x": {
+  "query": "Audio-Technica ATH-M50x pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/audio-technica-ath-m50x-auriculares-de-estudio-cerrados",
+    "name": "Audio-Technica ATH-M50X Auriculares de Estudio Cerrados",
+    "snippet": "Los auriculares Audio Technica ATH - M50X te aíslan de forma eficiente gracias a su avanzado diseño y construcción de alta calidad. Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESfwHEIkXXxu2D9hZ8ONwUOFVd1Pr45I3kBKHA3Mc7ncuBvMiPs2LfmLym56jIVQWX4sRgzuQKfbffxlSz5NLPNrDSOAF01_1hgysuyDJ_RRa7wlh3gMciiSxOO-kC",
+    "name": "Audio Technica ATH-M50x desde 130,09 € - Idealo",
+    "snippet": "Technica ATH - M50x ・ 148,75 € mostrar. Reacondicionado & Usado desde 139,00 € Historial de precios 3 m. en pccomponentes .com ・ 212,99 € 217,98 € envío incl.",
+    "prices": [
+     148.75,
+     139.0,
+     212.99,
+     217.98
+    ]
+   }
+  ],
+  "price": 148.75,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESfwHEIkXXxu2D9hZ8ONwUOFVd1Pr45I3kBKHA3Mc7ncuBvMiPs2LfmLym56jIVQWX4sRgzuQKfbffxlSz5NLPNrDSOAF01_1hgysuyDJ_RRa7wlh3gMciiSxOO-kC",
+  "name": "Audio Technica ATH-M50x desde 130,09 € - Idealo",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "sennheiser-momentum-true-wireless-4": {
+  "query": "Sennheiser Momentum True Wireless 4 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/sennheiser-momentum-true-wireless-4-auriculares-bluetooth-con-cancelacion-de-ruido-plateado-claro",
+    "name": "Sennheiser Momentum True Wireless 4 Auriculares",
+    "snippet": "... de Ruido Violeta. 243,90€ 329€. ¡Precio mínimo histórico! 4,5/5. 2161 opiniones. Vendido y enviado por PcComponentes. Envío gratis. Entrega el domingo, 8 ... Read more",
+    "prices": [
+     243.9,
+     329.0
+    ],
+    "agotado": false,
+    "vendido_pcc": true,
+    "envio_gratis": true,
+    "entrega": false
+   }
+  ],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAES_QEBxCJF1y0JzjYI2RcmHS6NPHbHH9-tX8QXD7RpD-643lSY2D7pTRpmNZBsV2bm1v0kOctlJtUVBpNX-kVE1AZCpwtcW-xvURl6zec_IQjBkL-2iGsG_ZWIus5L",
+    "name": "Sennheiser Momentum True Wireless 4 Auriculares",
+    "snippet": "Sennheiser Momentum True Wireless 4 Auriculares Bluetooth con Cancelación de Ruido Grafito Negro ; 229€PVPR249€. 4,7/5. 447 opiniones · PcComponentes ; 299,99€479€. Read more",
+    "prices": [
+     229.0,
+     249.0,
+     299.99,
+     479.0
+    ]
+   }
+  ],
+  "price": 243.9,
+  "source": "ficha-PCC (shopping)",
+  "url": "https://www.pccomponentes.com/sennheiser-momentum-true-wireless-4-auriculares-bluetooth-con-cancelacion-de-ruido-plateado-claro",
+  "name": "Sennheiser Momentum True Wireless 4 Auriculares",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": true,
+   "envio_gratis": true,
+   "entrega": false
+  }
+ },
+ "sennheiser-accentum-wireless": {
+  "query": "Sennheiser Accentum Wireless pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/sennheiser-accentum-wireless-auriculares-inalambricos-bluetooth-con-cancelacion-de-ruido-blancos",
+    "name": "Sennheiser ACCENTUM Wireless Auriculares",
+    "snippet": "Sennheiser ACCENTUM Wireless Auriculares Inalámbricos Bluetooth con Cancelación de Ruido Blancos ; Precio. 11399€ . 15900€239.99€. 11999€. 12999€. 15900€. 15899€ ... Read more",
+    "prices": [
+     11399.0,
+     239.99,
+     11999.0,
+     12999.0
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAES4AEBxCJF13Z0ow0LfzSsJVbX4_bPc3_QT0YBWiD-NqJpzDzHJ9wfS9gQ0v5m6m1r4NbOWwU515o6jKTaI6cOol2Z6TMWvgoVPFqOp2KwkDvqt3E-31HPyPMxQsvK",
+    "name": "Sennheiser ACCENTUM Open Auriculares Bluetooth True",
+    "snippet": "... Ruido Activa Grises. 115,95€ 183,99€. ¡Precio mínimo histórico! 4,2/5. 2400 opiniones. Vendido y enviado por PcComponentes. Envío gratis. Entrega el viernes, 13 ... Read more",
+    "prices": [
+     115.95,
+     183.99
+    ]
+   },
+   {
+    "url": "https://www.google.com/goto?url=CAESZgHEIkXXa2BaEnG32-HmtJ9doaacVjV_uAZdNc0cW_u7-d5RMdAVLLjIbKBSwj6aOqnNHq5vvRplEedXMtpZR4tch_zFi2817bYq-RG-BRSJ5KHfLnFcq9vbSgDf",
+    "name": "Sennheiser AccentumPlus Auriculares - Headphones - Kelkoo",
+    "snippet": ": 221,41 €. Pccomponentes.com. Sennheiser Accentum Wireless - NEGRO From 87,95 € . Sennheiser Accentum Wireless - Blanco From 98,99 € … min: Pccomponentes.com",
+    "prices": [
+     221.41,
+     87.95,
+     98.99
+    ]
+   }
+  ],
+  "price": 11399.0,
+  "source": "ficha-PCC",
+  "url": "https://www.pccomponentes.com/sennheiser-accentum-wireless-auriculares-inalambricos-bluetooth-con-cancelacion-de-ruido-blancos",
+  "name": "Sennheiser ACCENTUM Wireless Auriculares",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "denon-ah-c630w": {
+  "query": "Denon AH-C630W pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/denon-ah-c630w-auriculares-bluetooth-negros",
+    "name": "Denon AH-C630W Auriculares Bluetooth Negros",
+    "snippet": "Denon AH-C630W Auriculares Bluetooth Negros al mejor precio online … 2) 67,99€ P/N: BLACKD1518|Cod. PcComponentes 67,99€",
+    "prices": [
+     67.99,
+     67.99
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESyAEBxCJF15Bo-cCyfylWuTCtTbT7fhKc_qdSR6OGJLAcngTWaj8gmKotYsMfnENBzxfwm41qzX1ZvqMzVF5IJftg733WU_qpcUDsu9qNvzv5AlzmP0-gCWeRxLg7",
+    "name": "Denon AH-GC25W Auriculares Bluetooth Negros",
+    "snippet": "Denon AH-GC25W Auriculares Bluetooth Negros al mejor precio online … 249,01€ P/N: AH-GC25W NEGRO|Cod. PcComponentes.",
+    "prices": [
+     249.01
+    ]
+   }
+  ],
+  "price": 67.99,
+  "source": "ficha-PCC",
+  "url": "https://www.pccomponentes.com/denon-ah-c630w-auriculares-bluetooth-negros",
+  "name": "Denon AH-C630W Auriculares Bluetooth Negros",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "audio-technica-ath-twx7": {
+  "query": "Audio-Technica ATH-TWX7 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/audio-technica-ath-twx7-auriculares-inalambricos-con-estuche-de-carga-blancos",
+    "name": "Audio-Technica ATH-TWX7 Auriculares Inalámbricos con",
+    "snippet": "ATH-TWX7 Auriculares Inalámbricos . Black 159,99€219,99€. Respuesta en frecuencia: 10 - 40,000Hz Sensibilidad: 100dB/mW Impedancia: 16 ohms. Precio 14906€219€ ...",
+    "prices": [
+     159.99,
+     219.99,
+     14906.0,
+     219.0
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 159.99,
+  "source": "ficha-PCC",
+  "url": "https://www.pccomponentes.com/audio-technica-ath-twx7-auriculares-inalambricos-con-estuche-de-carga-blancos",
+  "name": "Audio-Technica ATH-TWX7 Auriculares Inalámbricos con",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "topping-l50": {
+  "query": "Topping L50 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "topping-dx1": {
+  "query": "Topping DX1 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "smsl-a2": {
+  "query": "SMSL A2 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "ifi-audio-zen-air-dac-2": {
+  "query": "iFi ZEN Air DAC 2 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "marantz-pm6007": {
+  "query": "Marantz PM6007 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "denon-pma-600ne": {
+  "query": "Denon PMA-600NE pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/denon-pma-600ne-amplificador-integrado-bluetooth-70w-20-canales-negro",
+    "name": "Denon PMA-600NE Amplificador Integrado Bluetooth 70W",
+    "snippet": "Denon PMA - 600NE Amplificador Integrado Bluetooth 70W 2.0 Canales Negro ; Precio . 39449€. 35984€. 46121€. 32501€. 53888€. 58930€. 64536€ ; Equipo de Audio ... Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "yamaha-as301": {
+  "query": "Yamaha A-S301 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/yamaha-a-s301-amplificador-hibrido-stereo-negro",
+    "name": "Yamaha A-S301 Amplificador Híbrido Stereo Negro",
+    "snippet": "... RS-232 IR USB Tipo A. 498,99€ . ¡Precio mínimo histórico! Vendido y enviado por PcComponentes. Envío gratis. Entrega el domingo, 15 de noviembre ... Read more",
+    "prices": [
+     498.99
+    ],
+    "agotado": false,
+    "vendido_pcc": true,
+    "envio_gratis": true,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 498.99,
+  "source": "ficha-PCC (shopping)",
+  "url": "https://www.pccomponentes.com/yamaha-a-s301-amplificador-hibrido-stereo-negro",
+  "name": "Yamaha A-S301 Amplificador Híbrido Stereo Negro",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": true,
+   "envio_gratis": true,
+   "entrega": false
+  }
+ },
+ "yamaha-as201": {
+  "query": "Yamaha A-S201 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/yamaha-a-s201-amplificador-hi-fi-negro",
+    "name": "Yamaha A-S201 Amplificador Hi-Fi Negro",
+    "snippet": "Yamaha A-S201 Amplificador Hi-Fi Negro al mejor precio online. PcComponentes 205,99€ . A-S201 es un amplificador HiFi … componentes de alta fidelidad.",
+    "prices": [
+     205.99
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 205.99,
+  "source": "ficha-PCC",
+  "url": "https://www.pccomponentes.com/yamaha-a-s201-amplificador-hi-fi-negro",
+  "name": "Yamaha A-S201 Amplificador Hi-Fi Negro",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "nad-d3020-v2": {
+  "query": "NAD D 3020 V2 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "cambridge-audio-axa25": {
+  "query": "Cambridge Audio AXA25 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "audio-technica-at-lp120x": {
+  "query": "Audio-Technica AT-LP120XUSB pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "audio-technica-at-lp60xbt": {
+  "query": "Audio-Technica AT-LP60XBT pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/audio-technica-lp60xbt-tocadiscos-bluetooth-negro",
+    "name": "Audio-Technica LP60XBT Tocadiscos Bluetooth Negro",
+    "snippet": "Audio-Technica LP60XBT Tocadiscos Bluetooth Negro al mejor precio online. Precio 17099€ 17000€ 16990€",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESgwEBxCJF107-VKaqOIITgPqFTwZUZ-herZ-woKZcarub8Kv8HJrQfR0y9G1EXxbxvpNh-z--s7o0lbyRbN3t-uH7sM3y1gJ2m9uOVs9s7dnwG6rJhpevzQ5HM1uq",
+    "name": "Audio Technica AT-LP60XBT Black desde 170,99€",
+    "snippet": "Jul 31, 2026 — Audio-Technica LP60XBT Tocadiscos Bluetooth Negro · 170,99€ . Precio total más barato: 170,99€ e.i.. Comprar en PcComponentes. Marketplace. Read more",
+    "prices": [
+     170.99,
+     170.99
+    ]
+   }
+  ],
+  "price": 170.99,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESgwEBxCJF107-VKaqOIITgPqFTwZUZ-herZ-woKZcarub8Kv8HJrQfR0y9G1EXxbxvpNh-z--s7o0lbyRbN3t-uH7sM3y1gJ2m9uOVs9s7dnwG6rJhpevzQ5HM1uq",
+  "name": "Audio Technica AT-LP60XBT Black desde 170,99€",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "audio-technica-at-lp3xbt": {
+  "query": "Audio-Technica AT-LP3XBT pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/audio-technica-at-lp3xbtbk-plato-dj-bluetooth-traccion-por-correa-negro",
+    "name": "Audio-Technica AT-LP3XBTBK Plato DJ Bluetooth",
+    "snippet": "282,74€ P/N: 282,55€ Vendido y enviado por PcComponentes Envío gratis. Precio 28274€ 28255€ 28108€ 27900€",
+    "prices": [
+     282.74,
+     282.55
+    ],
+    "agotado": false,
+    "vendido_pcc": true,
+    "envio_gratis": true,
+    "entrega": false
+   },
+   {
+    "url": "https://www.pccomponentes.com/tocadiscos-audio-technica-at-lp3xbtwh-blanco-bluetooth-automatico-plato-aluminio-33-45-rpm",
+    "name": "Tocadiscos Audio-Technica AT-LP3XBTWH Bluetooth",
+    "snippet": "Audio-Technica AT-LP3XBTWH Bluetooth automático, 413,46€ P/N: AT-LP3XBT. Vendido y enviado por PcComponentes",
+    "prices": [
+     413.46
+    ],
+    "agotado": false,
+    "vendido_pcc": true,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 282.74,
+  "source": "ficha-PCC (shopping)",
+  "url": "https://www.pccomponentes.com/audio-technica-at-lp3xbtbk-plato-dj-bluetooth-traccion-por-correa-negro",
+  "name": "Audio-Technica AT-LP3XBTBK Plato DJ Bluetooth",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": true,
+   "envio_gratis": true,
+   "entrega": false
+  }
+ },
+ "audio-technica-at-lpw30tk": {
+  "query": "Audio-Technica AT-LPW30TK pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "denon-dp-400": {
+  "query": "Denon DP-400 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/denon-dp-400-giradiscos-negro",
+    "name": "Tocadiscos Denon DP-400 con previo de phono, tracción",
+    "snippet": "Preguntas y respuestas ; Precio. 53899€ . 46052€. 64834€ ; Rating. (9). (0). (0) ; Color, Negro, Marrón, Negro, Blanco. Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   },
+   {
+    "url": "https://www.pccomponentes.com/marcas/denon",
+    "name": "Denon | Black Friday 2026",
+    "snippet": "Compra tus productos Denon online baratos en PcComponentes . El catálogo de Denon al mejor precio gracias a nuestras atractivas ofertas y descuentos.",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "rekkord-audio-f110": {
+  "query": "Rekkord Audio F110 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "dual-cs418": {
+  "query": "Dual CS 418 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "edifier-s1000mkii": {
+  "query": "Edifier S1000MKII pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/edifier-s1000-mkii-altavoces-hifi-20-madera",
+    "name": "Edifier S1000 MKII Altavoces HiFi 2.0 Madera",
+    "snippet": "Entrega rápida y eficiente. Sonido Hi-Fi de bastante buena calidad y muchas posibilidades de conexión. El producto merece la pena por su precio. Lo recomiendo! Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "edifier-r1080bt": {
+  "query": "Edifier R1080BT pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESygEBxCJF183a-8GBymd1NzK-zp4jgG9-xxhMyIhwSCdwcwtan0ksxZCooAcr62JyDxkNFFsYIijknB24Wbesu4UdB3Kcm_C9A1Wwe7A5VrLsvlsHoWnYjC5Faln1",
+    "name": "Edifier MR4 Altavoces Activos 21W+21W Blancos",
+    "snippet": "Edifier MR4 Altavoces Activos 21W+21W Blancos al mejor precio online … por menos de 200€ , PcComponentes Envío gratis.",
+    "prices": [
+     200.0
+    ]
+   },
+   {
+    "url": "https://www.google.com/goto?url=CAESzgEBxCJF17RYJVk5uIPXJTLRxNnky5rDNG9h7HS1E15c_DrI8Iks0yC_nH3oi3w3fE_S_RNNp8TjF7StIYpmRC9OeKHiAA3N-q8q6KH_LV6IJsyu7dEdbuObneTQ",
+    "name": "Edifier R1280DB Altavoces Bluetooth 21W RMS Negro",
+    "snippet": "... h batería negro. 92,47€ 149€. ¡Precio mínimo histórico! 5/5. 7 opiniones. Vendido y enviado por PcComponentes. Envío gratis. Entrega el lunes, 16 de noviembre ... Read more",
+    "prices": [
+     92.47,
+     149.0
+    ]
+   }
+  ],
+  "price": 200.0,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESygEBxCJF183a-8GBymd1NzK-zp4jgG9-xxhMyIhwSCdwcwtan0ksxZCooAcr62JyDxkNFFsYIijknB24Wbesu4UdB3Kcm_C9A1Wwe7A5VrLsvlsHoWnYjC5Faln1",
+  "name": "Edifier MR4 Altavoces Activos 21W+21W Blancos",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "edifier-r1855db": {
+  "query": "Edifier R1855DB pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESygEBxCJF15bPG2YYH8jg9SHe4QuxpHTkbyxTzDErBIbAITbf4inatGvDfkyEK365D8s41VKP_y0NJRoX76c0L79V-dyKmLe9p5B_2gLrKxbFVUdCMaWM-Gqr8Okj",
+    "name": "Edifier R1855DB Altavoces 2.0 Bluetooth Negros",
+    "snippet": "... 5.3 100 W con LED y ruedas. 159,99€ . ¡Precio mínimo histórico! Vendido y enviado por PcComponentes. Envío gratis. Entrega el lunes, 16 de noviembre ... Read more",
+    "prices": [
+     159.99
+    ]
+   },
+   {
+    "url": "https://www.google.com/goto?url=CAESqgEBxCJF14BNN06xful_R9RQNNx5ukidoEvs4bDzF4HFctIRXHH7GkyLdnmKzXj2K7KHIgQLQXQwuuW-nbhFKrGVlj2zBpLxreSRj4T29gyab940YSRuZIJqKzqK",
+    "name": "Edifier | Black Friday 2026",
+    "snippet": "Edifier R1855DB Altavoces 2.0 Bluetooth Negros 159,99€ 4,6/5 117 opiniones Vendido y enviado por PcComponentes Envío gratis. Blancos 279,99€299,99€",
+    "prices": [
+     159.99,
+     279.99,
+     299.99
+    ]
+   },
+   {
+    "url": "https://www.google.com/goto?url=CAEScwHEIkXXiDg-_On1UzgUcIdUYTr4kDxHAvP1_f_2y7GLwclwC2tW_rICqC3rTzEKKFDSc8_C9rgISwVfokoO81lSJl_TAsfV7dYl_r9mx26VKcqXpLEyhe4mWQGs",
+    "name": "Edifier R1855DB desde 159,99",
+    "snippet": "Mejor Precio desde PcComponentes , Carrefour 3 Ofertas ; Edifier R1855DB 2 vías Negro Con cable e inalámbrico 70 W - Nuevo Negro · 195,28€ e.i. ; Avisar de error. Read more",
+    "prices": [
+     195.28
+    ]
+   },
+   {
+    "url": "https://www.google.com/goto?url=CAESzgEBxCJF1wbhnDZkiXLfpvsAxMyC4zX6QjqDIX2Wn_cSE1-Da6tG6XP3uKROIsR6FwpfdpXCMtdDz8e_-Mu6SZznceUtufq_MFwxofjKIiTo9j-IodIRbE7Qg73U",
+    "name": "Edifier R1280DB Altavoces Bluetooth 21W RMS Negro",
+    "snippet": "... h batería negro. 92,47€ 149€. ¡Precio mínimo histórico! 5/5. 7 opiniones. Vendido y enviado por PcComponentes. Envío gratis. Entrega el lunes, 16 de noviembre ... Read more",
+    "prices": [
+     92.47,
+     149.0
+    ]
+   }
+  ],
+  "price": 159.99,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESygEBxCJF15bPG2YYH8jg9SHe4QuxpHTkbyxTzDErBIbAITbf4inatGvDfkyEK365D8s41VKP_y0NJRoX76c0L79V-dyKmLe9p5B_2gLrKxbFVUdCMaWM-Gqr8Okj",
+  "name": "Edifier R1855DB Altavoces 2.0 Bluetooth Negros",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "edifier-r2000db": {
+  "query": "Edifier R2000DB pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESzwEBxCJF15nld8Y8IZnTM9P5CCKT9o0YRLG9d8P1-IJ1GdZ6ROdGi1uqi-TY88kWsJ-1UCbALxnKpU1hmQ79ELIcx62CplHykjLglvXbU-K8uOpxSDD2EN5i7Sjy",
+    "name": "Edifier R2000DB Altavoces Bluetooth 120W RMS Negro",
+    "snippet": "... 800W con USB, karaoke e iluminación. 229,98€ . ¡Precio mínimo histórico! Vendido y enviado por PcComponentes. Envío gratis. Entrega el viernes, 13 de noviembre. Read more",
+    "prices": [
+     229.98
+    ]
+   }
+  ],
+  "price": 229.98,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESzwEBxCJF15nld8Y8IZnTM9P5CCKT9o0YRLG9d8P1-IJ1GdZ6ROdGi1uqi-TY88kWsJ-1UCbALxnKpU1hmQ79ELIcx62CplHykjLglvXbU-K8uOpxSDD2EN5i7Sjy",
+  "name": "Edifier R2000DB Altavoces Bluetooth 120W RMS Negro",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "edifier-qd35": {
+  "query": "Edifier QD35 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/edifier-qd35-altavoz-inalambrico-bluetooth-de-mesa-40w-negro",
+    "name": "Edifier QD35 Altavoz Inalámbrico Bluetooth de Mesa 40W",
+    "snippet": "El Edifier QD35 es un altavoz de sobremesa con conexión bluetooth y diversos modos de customización sonora y visual. Destacan por sus 40W de potencia de ... Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "edifier-g7000": {
+  "query": "Edifier G7000 pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESxgEBxCJF13EdpNTdDA8tsYaPv0mOB53x9WNqww0lQ5OD6R3ivx2Z02koFeqNt4S59J2wEQMeHwfpGSQug_k9qPuMBhhsIr45oRxrGWpDjwfeQk9GKk3Ja_Wn-JGf",
+    "name": "Edifier G7000 Barra de Sonido Bluetooth 7.1",
+    "snippet": "Bluetooth Dolby Atmos 356,99€ 599€. Vendido y enviado por PcComponentes Envío gratis. Respuesta de frecuencia: 160Hz-20KHz / subwoofer: 40Hz-160Hz. Peso: 8.5",
+    "prices": [
+     356.99,
+     599.0
+    ]
+   }
+  ],
+  "price": 356.99,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESxgEBxCJF13EdpNTdDA8tsYaPv0mOB53x9WNqww0lQ5OD6R3ivx2Z02koFeqNt4S59J2wEQMeHwfpGSQug_k9qPuMBhhsIr45oRxrGWpDjwfeQk9GKk3Ja_Wn-JGf",
+  "name": "Edifier G7000 Barra de Sonido Bluetooth 7.1",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "klipsch-the-fives-v2": {
+  "query": "Klipsch The Fives V2 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "kef-lsx-ii": {
+  "query": "KEF LSX II pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "dali-oberon-1c": {
+  "query": "Dali Oberon 1C pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "triangle-ln01a": {
+  "query": "Triangle LN01A pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "sonos-ray": {
+  "query": "Sonos Ray pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "sonos-beam-gen-2": {
+  "query": "Sonos Beam Gen 2 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/sonos-beam-gen2-barra-de-sonido-multiroom-wi-fi-negra",
+    "name": "Sonos Beam Gen2 Barra de Sonido Multiroom Wi-Fi Negra",
+    "snippet": "Sonos Beam Gen2 Barra de Sonido Multiroom Wi-Fi Negra ; Precio. 52722€. 28999€399.99€. 29900€369€. 27426€. 27120€. 27099€. 26999€499.99€. 26999€499.99€. 26999€ ... Read more",
+    "prices": [
+     399.99,
+     369.0,
+     499.99,
+     499.99
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 399.99,
+  "source": "ficha-PCC",
+  "url": "https://www.pccomponentes.com/sonos-beam-gen2-barra-de-sonido-multiroom-wi-fi-negra",
+  "name": "Sonos Beam Gen2 Barra de Sonido Multiroom Wi-Fi Negra",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "denon-dht-s217": {
+  "query": "Denon DHT-S217 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/denon-dht-s217-barra-de-sonido-dolby-atmos-21",
+    "name": "Barra de Sonido Denon DHT-S217 2.1 120W Bluetooth",
+    "snippet": "Dolby Atmos Soundbar & Wireless Subwoofer, 2 Up-Firing Drivers, App Control, 312W Precio 21499€ 17587€ 16999€249.99€",
+    "prices": [
+     249.99
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 249.99,
+  "source": "ficha-PCC",
+  "url": "https://www.pccomponentes.com/denon-dht-s217-barra-de-sonido-dolby-atmos-21",
+  "name": "Barra de Sonido Denon DHT-S217 2.1 120W Bluetooth",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "bose-tv-speaker": {
+  "query": "Bose TV Speaker pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/bose-tv-speaker-barra-de-sonido-con-conectividad-bluetooth",
+    "name": "Bose TV Speaker Barra de Sonido con Conectividad",
+    "snippet": "Bose TV Speaker Barra de Sonido con Conectividad Bluetooth ; Precio total196,59€ ; Compacta y Discreta. Diseño slim que encaja bajo cualquier TV. Gran sonido sin ... Read more",
+    "prices": [
+     196.59
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 196.59,
+  "source": "ficha-PCC (shopping)",
+  "url": "https://www.pccomponentes.com/bose-tv-speaker-barra-de-sonido-con-conectividad-bluetooth",
+  "name": "Bose TV Speaker Barra de Sonido con Conectividad",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "sonos-era-100": {
+  "query": "Sonos Era 100 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/sonos-era-100-altavoz-bluetooth-negro",
+    "name": "Sonos Era 100 Altavoz Bluetooth Negro - PcComponentes",
+    "snippet": "Especificaciones Sonos Era 100 : · Tecnología de conectividad: Inalámbrico · Wifi: Si · Bluetooth: Si · Versión de Bluetooth: 5.0 · Alcance de frecuencia: 2,4 - 5 GHz ... Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESwwEBxCJF17otJuv2lucHI6ZUP_iwz7N8-V7QA2-epSeUCZyXTArp3e8zZOCTtHvn39SVE1M4oRQERMc-9gW1ko2FiSgUgHyxYu3vIz7af4NB-Ity2VVsgKGQRwzt",
+    "name": "Sonos Era 100 Altavoz Bluetooth Blanco - PcComponentes",
+    "snippet": "Sonos Era 100 Altavoz Bluetooth Blanco al mejor precio online. Audio Blancos 279,99€299,99€. Precio 27900€ 27899€",
+    "prices": [
+     279.99,
+     299.99
+    ]
+   }
+  ],
+  "price": 279.99,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESwwEBxCJF17otJuv2lucHI6ZUP_iwz7N8-V7QA2-epSeUCZyXTArp3e8zZOCTtHvn39SVE1M4oRQERMc-9gW1ko2FiSgUgHyxYu3vIz7af4NB-Ity2VVsgKGQRwzt",
+  "name": "Sonos Era 100 Altavoz Bluetooth Blanco - PcComponentes",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "bluesound-powernode-edge": {
+  "query": "Bluesound Powernode Edge pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "arylic-s50-pro": {
+  "query": "Arylic S50 Pro+ pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "eversolo-dmp-a6-gen-2": {
+  "query": "Eversolo DMP-A6 Gen 2 pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/amplificadores-amplificador-eversolo-dmp-a6-master-edition-gen-2-doble-dac-wi-fi",
+    "name": "Amplificadores Amplificador EverSolo DMP-A6 Master",
+    "snippet": "Comprar tu Amplificadores Amplificador EverSolo DMP - A6 Master Edition Gen 2 ... Vendido por PcComponentes . Precio total1.394,99€. Añadir al carrito. 1299,00 ... Read more",
+    "prices": [
+     1394.99
+    ],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": 1394.99,
+  "source": "ficha-PCC (shopping)",
+  "url": "https://www.pccomponentes.com/amplificadores-amplificador-eversolo-dmp-a6-master-edition-gen-2-doble-dac-wi-fi",
+  "name": "Amplificadores Amplificador EverSolo DMP-A6 Master",
+  "pcc_code": null,
+  "flags": {
+   "agotado": false,
+   "vendido_pcc": false,
+   "envio_gratis": false,
+   "entrega": false
+  }
+ },
+ "denon-avr-x2800h": {
+  "query": "Denon AVR-X2800H pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "yamaha-rx-v6a": {
+  "query": "Yamaha RX-V6A pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAESoAEBxCJF13ezITBohmZVwUp6mVDUklrVTVd0hxCWrKg-h47S9RAum1L2pIead3hL1xiFErFTHnOXTqve_0T5qKQsXgDRT_gVkIoe_qOS1JNKOnhP77e4O9ev-p1D",
+    "name": "Yamaha RX-V6A Receptor AV 4K 7.2 - Precios",
+    "snippet": "Sep 7, 2026 — El precio actual de Yamaha RX-V6A Receptor AV 4K 7.2 Canales WiFi/Bluetooth Negro en PcComponentes es de 853.23€ . Este producto se encuentra un ... Read more",
+    "prices": [
+     853.23
+    ]
+   }
+  ],
+  "price": 853.23,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAESoAEBxCJF13ezITBohmZVwUp6mVDUklrVTVd0hxCWrKg-h47S9RAum1L2pIead3hL1xiFErFTHnOXTqve_0T5qKQsXgDRT_gVkIoe_qOS1JNKOnhP77e4O9ev-p1D",
+  "name": "Yamaha RX-V6A Receptor AV 4K 7.2 - Precios",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "marantz-nr1510": {
+  "query": "Marantz NR1510 pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "fiio-dm13": {
+  "query": "FiiO DM13 pccomponentes precio",
+  "pcc": [],
+  "agg": [
+   {
+    "url": "https://www.google.com/goto?url=CAEScwHEIkXXeRNQOcx5pU7Kda4YykUKqNmmcPNVlBGuil8UQsWYSYZ86ShVfek-h88nYTyhrJv9wEcE457VqJan18k00lywGHxilMrt6zQAOHOnBnkaqWgj6wfkk5rz",
+    "name": "FiiO DM13 desde 163,02 € | Black Friday 2026",
+    "snippet": "FiiO M21 Black desde 399,00 €. FiiO DM13 . WhiteSky 163,02 € Precio total más barato 163,02 € envío incl. 174,99 € 174,99 € envío … en pccomponentes .com",
+    "prices": [
+     399.0,
+     163.02,
+     163.02,
+     174.99,
+     174.99
+    ]
+   }
+  ],
+  "price": 399.0,
+  "source": "agregador (cita PCC)",
+  "url": "https://www.google.com/goto?url=CAEScwHEIkXXeRNQOcx5pU7Kda4YykUKqNmmcPNVlBGuil8UQsWYSYZ86ShVfek-h88nYTyhrJv9wEcE457VqJan18k00lywGHxilMrt6zQAOHOnBnkaqWgj6wfkk5rz",
+  "name": "FiiO DM13 desde 163,02 € | Black Friday 2026",
+  "pcc_code": null,
+  "flags": {}
+ },
+ "fosi-audio-merak-cd-player": {
+  "query": "Fosi Audio Merak CD pccomponentes precio",
+  "pcc": [],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ },
+ "denon-dcd-900ne": {
+  "query": "Denon DCD-900NE pccomponentes precio",
+  "pcc": [
+   {
+    "url": "https://www.pccomponentes.com/denon-dcd900-reproductor-cd-hifi-negro",
+    "name": "Reproductor CD Denon DCD-900NE USB FLAC DSD 24-",
+    "snippet": "Reproductor CD Denon DCD-900NE USB FLAC DSD 24-bit 192 kHz Negro ; Precio. 40899€ . 36999€. 46586€. 34082€. 33600€. 65900€ ; Color, Negro, Plata, Plata, Plata, --- ... Read more",
+    "prices": [],
+    "agotado": false,
+    "vendido_pcc": false,
+    "envio_gratis": false,
+    "entrega": false
+   }
+  ],
+  "agg": [],
+  "price": null,
+  "source": null,
+  "url": null,
+  "name": null,
+  "pcc_code": null,
+  "flags": {}
+ }
+}
