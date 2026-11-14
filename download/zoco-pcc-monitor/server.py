@@ -79,7 +79,11 @@ class Handler(BaseHTTPRequestHandler):
     protocol_version = 'HTTP/1.1'
 
     def log_message(self, fmt, *args):
-        pass
+        # registro de accesos a stderr (server3000.log): diagnóstico del deployer
+        try:
+            print(f'[access] {self.address_string()} "{fmt % args}"', file=sys.stderr, flush=True)
+        except Exception:
+            pass
 
     def _send(self, code, body, ctype='application/json; charset=utf-8', extra=None):
         if isinstance(body, str):
