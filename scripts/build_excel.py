@@ -20,7 +20,7 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.formatting.rule import CellIsRule
 from openpyxl.utils import get_column_letter
 
-DATA = '/home/z/my-project/data/final_dataset.json'
+DATA = '/home/z/my-project/data/final_dataset_v2.json'
 OUT = '/home/z/my-project/download/Comparativa_Zococity_vs_PCComponentes.xlsx'
 HOY = '14/11/2026'
 
@@ -44,18 +44,30 @@ def disp_pcc(rec):
         if rec.get('note_pcc'):
             txt += f" · {rec['note_pcc']}"
         return txt
-    f = rec.get('pcc_flags') or {}
     parts = []
-    if f.get('agotado'):
-        parts.append('Agotado (según índice)')
-    if f.get('vendido_pcc'):
-        parts.append('Vendido y enviado por PCComponentes')
+    seller = rec.get('seller_pcc')
+    av = rec.get('pcc_avail')
+    if seller:
+        tag = 'PCComponentes (propio)' if 'pccomponentes' in seller.lower() else seller
+        av_txt = {'InStock': 'en stock', 'OutOfStock': 'agotado'}.get(av, '')
+        parts.append(f'Vendido por {tag}' + (f' · {av_txt}' if av_txt else ''))
+    else:
+        f = rec.get('pcc_flags') or {}
+        if f.get('agotado'):
+            parts.append('Agotado (según índice)')
+        if f.get('vendido_pcc'):
+            parts.append('Vendido y enviado por PCComponentes')
+    if not parts:
+        parts.append('En venta (ver ficha)')
+    if rec.get('pcc_own_avail') and seller and 'pccomponentes' not in seller.lower():
+        own_txt = {'InStock': 'en stock', 'OutOfStock': 'agotado'}.get(rec['pcc_own_avail'])
+        if own_txt:
+            parts.append(f'oferta propia PCC: {own_txt}')
+    f = rec.get('pcc_flags') or {}
     if f.get('envio_gratis'):
         parts.append('Envío gratis')
     if f.get('entrega'):
         parts.append('Entrega rápida')
-    if not parts:
-        parts.append('En venta (ver ficha)')
     txt = ' · '.join(parts)
     if rec.get('note_pcc'):
         txt += f" · {rec['note_pcc']}"
@@ -86,10 +98,10 @@ def main():
                'Dif. € (Zoco − PCC)', 'Dif. %', 'Más barato en',
                'Disponibilidad PCC', 'Fuente del dato PCC', 'Ficha PCC', 'Ficha Zococity']
     last_col = len(headers) + 1  # B.. => 2..19
-    setup_sheet(ws, title='Comparativa de precios · Zococity vs PCComponentes · Catálogo de audio', last_col=last_col)
+    setup_sheet(ws, title='Comparativa de precios · Zococity vs PCComponentes · Catálogo de audio (precios PCC en directo)', last_col=last_col)
     ws.row_dimensions[3].height = 14
     c3 = ws.cell(row=3, column=2,
-                 value=f'Consulta realizada el {HOY} · Precios con IVA · PCComponentes obtenido del índice de búsqueda (fichas y Google Shopping, últimos 90 días) · Ver hoja «Metodología»')
+                 value=f'Consulta realizada el {HOY} · Precios con IVA · PCComponentes leído EN DIRECTO de sus fichas oficiales (navegador automatizado que supera Cloudflare); 28 fichas + verificación por buscador interno · Ver hoja «Metodología»')
     c3.font = font_caption()
     ws.merge_cells(start_row=3, start_column=2, end_row=3, end_column=last_col)
 
@@ -287,17 +299,23 @@ def main():
         ('', f'Obtenidos directamente de la tienda el {HOY}: catálogo JSON de Shopify por colección (título, marca, precio, disponibilidad) '
              'y ficha individual de cada producto para extraer la referencia interna (SKU) y el código EAN. '
              'Todos los precios incluyen IVA; la disponibilidad es la que muestra la propia web.'),
-        ('Datos de PCComponentes', ''),
-        ('', f'PCComponentes bloquea el acceso directo automatizado (Cloudflare), por lo que los precios se obtuvieron el {HOY} del índice de búsqueda '
-             '(fichas oficiales de PCComponentes y tarjetas de Google Shopping que muestran «Vendido y enviado por PCComponentes»). '
-             'Cada precio conserva la fuente en la columna «Fuente del dato PCC» y la ficha enlazada en la columna «Ficha PCC».'),
+        ('Datos de PCComponentes (lectura EN DIRECTO)', ''),
+        ('', f'PCComponentes protege su web con Cloudflare, que bloquea las descargas automatizadas convencionales. Para obtener los precios EN DIRECTO '
+             f'se automatizó un navegador Chrome real (librería nodriver sobre Xvfb) capaz de superar el reto de Cloudflare, y se abrió la ficha oficial '
+             f'de cada producto en pccomponentes.com el {HOY}. De cada ficha se leyó en vivo su JSON-LD: precio con IVA, disponibilidad, vendedor '
+             '(PCComponentes propio o marketplace), SKU interno (columna «Cod. art. PCC») y EAN. La ausencia de ficha de los demás productos se verificó '
+             'con el buscador interno de PCComponentes en directo.'),
+        ('Excepciones', ''),
+        ('', 'Sennheiser Momentum TW4: la ficha no fue accesible en directo en el momento de la consulta (protección reforzada sobre esa URL) y su precio '
+             'procede del índice de búsqueda; se marca como tal en la columna «Fuente del dato PCC». Sennheiser HD 550: precio tomado de la tarjeta del '
+             'buscador interno de PCComponentes (en directo), sin SKU visible en la tarjeta.'),
         ('Advertencias', ''),
-        ('', '1) Los precios de PCComponentes proceden de la última indexación de Google y pueden diferir del precio vigente en la web '
-             '(ofertas relámpago, cupones, precios de marketplace de otros vendedores). Verifica el precio final en la ficha enlazada antes de comprar.'),
-        ('', '2) No se incluyen gastos de envío ni promociones por puntos o financiación de ninguna de las dos tiendas.'),
-        ('', '3) El «Cod. art. PCC» es la referencia interna de PCComponentes y solo se muestra cuando el índice la publica; '
-             'el EAN sirve como referencia exacta común a ambas tiendas.'),
-        ('', '4) «Solo Zococity» significa que el producto no se localizó en PCComponentes el día de la consulta (puede existir en otras tiendas).'),
+        ('', '1) Los precios se leyen en directo en el momento de la consulta pero pueden cambiar a lo largo del día (ofertas relámpago, cupones). '
+             'Verifica el precio final en la ficha enlazada antes de comprar.'),
+        ('', '2) No se incluyen gastos de envío ni promociones por puntos o financiación de ninguna de las dos tiendas. En PCComponentes, productos de '
+             'marketplace pueden tener envío o plazos distintos a los de PCC propio.'),
+        ('', '3) El «Cod. art. PCC» es la referencia interna (SKU) de PCComponentes, leída de la propia ficha; el EAN es la referencia exacta común a ambas tiendas.'),
+        ('', '4) «No disponible en PCComponentes» significa que no existe ficha del producto en su catálogo el día de la consulta (verificado con su buscador interno).'),
         ('Significado de las columnas', ''),
         ('', 'Dif. € = Precio Zococity − Precio PCC. Dif. % = Dif. € / Precio PCC. '
              'Positivo: PCComponentes es más barato. Negativo: Zococity es más barato. '

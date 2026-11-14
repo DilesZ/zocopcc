@@ -1,0 +1,2311 @@
+{
+ "fiio-ft3": {
+  "url": "https://www.pccomponentes.com/fiio-ft3-32-ohm-auriculares-hifi-negros",
+  "title": "FiiO FT3 32 Ohm Auriculares Hifi Negros | Black Friday 2026",
+  "lds": [
+   {
+    "name": "FiiO FT3 32 Ohm Auriculares Hifi Negros",
+    "sku": "10862165",
+    "brand": "Fiio",
+    "gtin": "6953175741046",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/fiio-ft3-32-ohm-auriculares-hifi-negros",
+     "price": "310.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": null
+ },
+ "sennheiser-hd-560s": {
+  "url": "https://www.pccomponentes.com/sennheiser-hd-560s-auriculares-gaming-con-cable-jack-3-5-negro",
+  "title": "Sennheiser HD 560S Auriculares Gaming con Cable Jack 3.5 Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Sennheiser HD 560S Auriculares Gaming con Cable Jack 3.5 Negro",
+    "sku": "10811201",
+    "brand": "SENNHEISER",
+    "gtin": "4044155257267",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/sennheiser-hd-560s-auriculares-gaming-con-cable-jack-3-5-negro",
+     "price": "162.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Mueblecenter"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Mueblecenter"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "42,08"
+ },
+ "audio-technica-ath-m50x": {
+  "url": "https://www.pccomponentes.com/audio-technica-ath-m50x-auriculares-de-estudio-cerrados",
+  "title": "Audio-Technica ATH-M50X Auriculares de Estudio Cerrados | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Audio-Technica ATH-M50X Auriculares de Estudio Cerrados",
+    "sku": "99460",
+    "brand": "Audio-technica",
+    "gtin": "6940548415765",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/audio-technica-ath-m50x-auriculares-de-estudio-cerrados",
+     "price": "145.00",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Zococity"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Zococity"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "37,44"
+ },
+ "sennheiser-accentum-wireless": {
+  "url": "https://www.pccomponentes.com/sennheiser-accentum-wireless-auriculares-inalambricos-bluetooth-con-cancelacion-de-ruido-negros",
+  "title": "Sennheiser ACCENTUM Wireless Auriculares Inalámbricos Bluetooth con Cancelación de Ruido Negros | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Sennheiser ACCENTUM Wireless Auriculares Inalámbricos Bluetooth con Cancelación de Ruido Blancos",
+    "sku": "10791819",
+    "brand": "SENNHEISER",
+    "gtin": null,
+    "offers": {
+     "@type": "Offer",
+     "priceCurrency": "EUR",
+     "price": "113.99",
+     "priceValidUntil": "2026-11-15",
+     "availability": "https://schema.org/InStock",
+     "url": "https://www.pccomponentes.com/sennheiser-accentum-wireless-auriculares-inalambricos-bluetooth-con-cancelacion-de-ruido-blancos",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Mueblecenter"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Mueblecenter"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   },
+   {
+    "name": "Sennheiser ACCENTUM Wireless Auriculares Inalámbricos Bluetooth con Cancelación de Ruido Negros",
+    "sku": "10791820",
+    "brand": "SENNHEISER",
+    "gtin": "4260752330558",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/sennheiser-accentum-wireless-auriculares-inalambricos-bluetooth-con-cancelacion-de-ruido-negros",
+     "price": "113.23",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Mueblecenter"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Mueblecenter"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "113,99"
+ },
+ "denon-ah-c630w": {
+  "url": "https://www.pccomponentes.com/denon-ah-c630w-auriculares-bluetooth-negros",
+  "title": "Denon AH-C630W Auriculares Bluetooth Negros | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Denon AH-C630W Auriculares Bluetooth Negros",
+    "sku": "10733096",
+    "brand": "Denon",
+    "gtin": "0747192136178",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/denon-ah-c630w-auriculares-bluetooth-negros",
+     "price": "67.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": null
+ },
+ "audio-technica-ath-twx7": {
+  "url": "https://www.pccomponentes.com/audio-technica-ath-twx7-auriculares-inalambricos-con-estuche-de-carga-blancos",
+  "lds": [
+   {
+    "name": "Audio-Technica ATH-TWX7 Auriculares Inalámbricos con Estuche de Carga Blancos",
+    "sku": "10814116",
+    "gtin": "4961310161255",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/audio-technica-ath-twx7-auriculares-inalambricos-con-estuche-de-carga-blancos",
+     "price": "149.06",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "title": "Audio-Technica ATH-TWX7 Auriculares Inalámbricos con Estuche de Carga Blancos | Black Friday 2026"
+ },
+ "denon-pma-600ne": {
+  "url": "https://www.pccomponentes.com/denon-pma-600ne-amplificador-integrado-bluetooth-70w-20-canales-negro",
+  "title": "Denon PMA-600NE Amplificador Integrado Bluetooth 70W 2.0 Canales Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Denon PMA-600NE Amplificador Integrado Bluetooth 70W 2.0 Canales Negro",
+    "sku": "10756803",
+    "brand": "Denon",
+    "gtin": "4951035070956",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/denon-pma-600ne-amplificador-integrado-bluetooth-70w-20-canales-negro",
+     "price": "394.40",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "OCASIONIA"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "OCASIONIA"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "394,40"
+ },
+ "yamaha-as301": {
+  "url": "https://www.pccomponentes.com/yamaha-a-s301-amplificador-hibrido-stereo-negro",
+  "title": "Yamaha A-S301 Amplificador Híbrido Stereo Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Yamaha A-S301 Amplificador Híbrido Stereo Negro",
+    "sku": "333098",
+    "brand": "Yamaha",
+    "gtin": "4957812573580",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/yamaha-a-s301-amplificador-hibrido-stereo-negro",
+     "price": "498.33",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "eWeki"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "eWeki"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "128,69"
+ },
+ "yamaha-as201": {
+  "url": "https://www.pccomponentes.com/yamaha-a-s201-amplificador-hi-fi-negro",
+  "title": "Yamaha A-S201 Amplificador Hi-Fi Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Yamaha A-S201 Amplificador Hi-Fi Negro",
+    "sku": "347437",
+    "brand": "Yamaha",
+    "gtin": "4957812542234",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/yamaha-a-s201-amplificador-hi-fi-negro",
+     "price": "205.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "199,18"
+ },
+ "audio-technica-at-lp120x": {
+  "url": "https://www.pccomponentes.com/audio-technica-lp120x-tocadiscos-usb-negro",
+  "title": "Audio-Technica LP120X Tocadiscos USB Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Audio-Technica LP120X Tocadiscos USB Negro",
+    "sku": "219370",
+    "brand": "Audio-technica",
+    "gtin": "4961310148775",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/audio-technica-lp120x-tocadiscos-usb-negro",
+     "price": "309.00",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "307,99"
+ },
+ "audio-technica-at-lp60xbt": {
+  "url": "https://www.pccomponentes.com/audio-technica-lp60xbt-tocadiscos-bluetooth-negro",
+  "title": "Audio-Technica LP60XBT Tocadiscos Bluetooth Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Audio-Technica LP60XBT Tocadiscos Bluetooth Negro",
+    "sku": "219376",
+    "brand": "Audio-technica",
+    "gtin": "4961310147280",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/audio-technica-lp60xbt-tocadiscos-bluetooth-negro",
+     "price": "170.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "171,93"
+ },
+ "audio-technica-at-lp3xbt": {
+  "url": "https://www.pccomponentes.com/audio-technica-at-lp3xbtbk-plato-dj-bluetooth-traccion-por-correa-negro",
+  "title": "Audio-Technica AT-LP3XBTBK Plato DJ Bluetooth Tracción por Correa Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Audio-Technica AT-LP3XBTBK Plato DJ Bluetooth Tracción por Correa Negro",
+    "sku": "10655449",
+    "brand": "Audio-technica",
+    "gtin": "4961310156794",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/audio-technica-at-lp3xbtbk-plato-dj-bluetooth-traccion-por-correa-negro",
+     "price": "282.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "299,20"
+ },
+ "audio-technica-at-lpw30tk": {
+  "url": "https://www.pccomponentes.com/tocadiscos-audio-technica-at-lpw30tk-manual-madera-preamplificador-integrado",
+  "title": "Tocadiscos Audio-Technica AT-LPW30TK manual madera preamplificador integrado | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Tocadiscos Audio-Technica AT-LPW30TK manual madera preamplificador integrado",
+    "sku": "11030209",
+    "brand": "Audio-technica",
+    "gtin": "4961310149451",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/tocadiscos-audio-technica-at-lpw30tk-manual-madera-preamplificador-integrado",
+     "price": "353.27",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Digital Bay FR"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Digital Bay FR"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "91,22"
+ },
+ "denon-dp-400": {
+  "url": "https://www.pccomponentes.com/denon-dp-400-giradiscos-negro",
+  "title": "Tocadiscos Denon DP-400 con previo de phono, tracción por correa, negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Tocadiscos Denon DP-400 con previo de phono, tracción por correa, negro",
+    "sku": "332272",
+    "brand": "Denon",
+    "gtin": "4951035065532",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/denon-dp-400-giradiscos-negro",
+     "price": "538.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "460,52"
+ },
+ "edifier-s1000mkii": {
+  "url": "https://www.pccomponentes.com/edifier-s1000-mkii-altavoces-hifi-20-madera",
+  "title": "Edifier S1000 MKII Altavoces HiFi 2.0 Madera | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Edifier S1000 MKII Altavoces HiFi 2.0 Madera",
+    "sku": "284818",
+    "brand": "Edifier",
+    "gtin": "6923520268177",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/edifier-s1000-mkii-altavoces-hifi-20-madera",
+     "price": "298.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "10,93"
+ },
+ "edifier-r1280db": {
+  "url": "https://www.pccomponentes.com/edifier-r1280db-altavoces-bluetooth-21w-rms-negro",
+  "title": "Edifier R1280DB Altavoces Bluetooth 21W RMS Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Edifier R1280DB Altavoces Bluetooth 21W RMS Negro",
+    "sku": "182965",
+    "brand": "Edifier",
+    "gtin": "6923520265688",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/edifier-r1280db-altavoces-bluetooth-21w-rms-negro",
+     "price": "92.65",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "109,99"
+ },
+ "edifier-r2000db": {
+  "url": "https://www.pccomponentes.com/edifier-r2000db-altavoces-bluetooth-120w-rms-negro",
+  "title": "Edifier R2000DB Altavoces Bluetooth 120W RMS Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Edifier R2000DB Altavoces Bluetooth 120W RMS Negro",
+    "sku": "10658024",
+    "brand": "Edifier",
+    "gtin": "6923520264346",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/edifier-r2000db-altavoces-bluetooth-120w-rms-negro",
+     "price": "229.98",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "229,98"
+ },
+ "edifier-qd35": {
+  "url": "https://www.pccomponentes.com/edifier-qd35-altavoz-inalambrico-bluetooth-de-mesa-40w-negro",
+  "title": "Edifier QD35 Altavoz Inalámbrico Bluetooth de Mesa 40W Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Edifier QD35 Altavoz Inalámbrico Bluetooth de Mesa 40W Blanco",
+    "sku": "10789981",
+    "brand": "Edifier",
+    "gtin": null,
+    "offers": {
+     "@type": "Offer",
+     "priceCurrency": "EUR",
+     "price": "99.99",
+     "priceValidUntil": "2026-11-15",
+     "availability": "https://schema.org/InStock",
+     "url": "https://www.pccomponentes.com/edifier-qd35-altavoz-inalambrico-bluetooth-de-mesa-40w-blanco",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Zococity"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Zococity"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   },
+   {
+    "name": "Edifier QD35 Altavoz Inalámbrico Bluetooth de Mesa 40W Negro",
+    "sku": "10789982",
+    "brand": "Edifier",
+    "gtin": "6923520269990",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/edifier-qd35-altavoz-inalambrico-bluetooth-de-mesa-40w-negro",
+     "price": "99.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Zococity"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Zococity"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "99,99"
+ },
+ "edifier-g7000": {
+  "url": "https://www.pccomponentes.com/edifier-g7000-barra-de-sonido-bluetooth-71",
+  "title": "Edifier G7000 Barra de Sonido Bluetooth 7.1 | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Edifier G7000 Barra de Sonido Bluetooth 7.1",
+    "sku": "285545",
+    "brand": "Edifier",
+    "gtin": "6923520240180",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/edifier-g7000-barra-de-sonido-bluetooth-71",
+     "price": "363.00",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "362,99"
+ },
+ "sonos-ray": {
+  "url": "https://www.pccomponentes.com/sonos-ray-barra-de-sonido-wifi-negra",
+  "title": "Sonos Ray Barra de Sonido Wifi Negra | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Sonos Ray Barra de Sonido Wifi Negra",
+    "sku": "10370312",
+    "brand": "Sonos",
+    "gtin": "8717755778512",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/sonos-ray-barra-de-sonido-wifi-negra",
+     "price": "299.00",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "295,42"
+ },
+ "sonos-beam-gen-2": {
+  "url": "https://www.pccomponentes.com/sonos-beam-gen2-barra-de-sonido-multiroom-wi-fi-negra",
+  "title": "Sonos Beam Gen2 Barra de Sonido Multiroom Wi-Fi Negra | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Sonos Beam Gen2 Barra de Sonido Multiroom Wi-Fi Negra",
+    "sku": "602940",
+    "brand": "Sonos",
+    "gtin": "0840136802365",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/sonos-beam-gen2-barra-de-sonido-multiroom-wi-fi-negra",
+     "price": "527.22",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "289,99"
+ },
+ "denon-dht-s217": {
+  "url": "https://www.pccomponentes.com/denon-dht-s217-barra-de-sonido-dolby-atmos-21",
+  "title": "Barra de Sonido Denon DHT-S217 2.1 120W Bluetooth HDMI eARC Dolby Atmos Negra | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Barra de Sonido Denon DHT-S217 2.1 120W Bluetooth HDMI eARC Dolby Atmos Negra",
+    "sku": "10650088",
+    "brand": "Denon",
+    "gtin": "0747192137359",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/denon-dht-s217-barra-de-sonido-dolby-atmos-21",
+     "price": "214.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "175,87"
+ },
+ "bose-tv-speaker": {
+  "url": "https://www.pccomponentes.com/bose-tv-speaker-barra-de-sonido-con-conectividad-bluetooth",
+  "title": "Bose TV Speaker Barra de Sonido con Conectividad Bluetooth | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Bose TV Speaker Barra de Sonido con Conectividad Bluetooth",
+    "sku": "309352",
+    "brand": "Bose",
+    "gtin": "0017817808651",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/bose-tv-speaker-barra-de-sonido-con-conectividad-bluetooth",
+     "price": "189.00",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "7,59"
+ },
+ "sonos-era-100": {
+  "url": "https://www.pccomponentes.com/sonos-era-100-altavoz-bluetooth-negro",
+  "title": "Sonos Era 100 Altavoz Bluetooth Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Sonos Era 100 Altavoz Bluetooth Negro",
+    "sku": "10674202",
+    "brand": "Sonos",
+    "gtin": "8717755779656",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/sonos-era-100-altavoz-bluetooth-negro",
+     "price": "299.43",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "Video Proyector"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "Video Proyector"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "77,32"
+ },
+ "denon-avr-x2800h": {
+  "url": "https://www.pccomponentes.com/denon-avr-x2800h-receptor-av-72-canales-dolby-atmos-8k-bluetooth",
+  "title": "Denon AVR-X2800H Receptor AV 7.2 Canales Dolby Atmos/8K/Bluetooth | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Denon AVR-X2800H Receptor AV 7.2 Canales Dolby Atmos/8K/Bluetooth",
+    "sku": "10643990",
+    "brand": "Denon",
+    "gtin": "0747192138479",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/denon-avr-x2800h-receptor-av-72-canales-dolby-atmos-8k-bluetooth",
+     "price": "718.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "729,70"
+ },
+ "yamaha-rx-v6a": {
+  "url": "https://www.pccomponentes.com/yamaha-rx-v6a-receptor-av-4k-72-canales-wifi-bluetooth-negro",
+  "title": "Yamaha RX-V6A Receptor AV 4K 7.2 Canales WiFi/Bluetooth Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Yamaha RX-V6A Receptor AV 4K 7.2 Canales WiFi/Bluetooth Negro",
+    "sku": "347436",
+    "brand": "Yamaha",
+    "gtin": "4957812660471",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/InStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/yamaha-rx-v6a-receptor-av-4k-72-canales-wifi-bluetooth-negro",
+     "price": "1359.15",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "MEGA STORE"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "MEGA STORE"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "350,99"
+ },
+ "denon-dcd-900ne": {
+  "url": "https://www.pccomponentes.com/denon-dcd900-reproductor-cd-hifi-negro",
+  "title": "Reproductor CD Denon DCD-900NE USB FLAC DSD 24-bit 192 kHz Negro | Black Friday 2026",
+  "lds": [
+   {
+    "name": "Reproductor CD Denon DCD-900NE USB FLAC DSD 24-bit 192 kHz Negro",
+    "sku": "10643984",
+    "brand": "Denon",
+    "gtin": "0747192136758",
+    "offers": {
+     "@type": "Offer",
+     "availability": "https://schema.org/OutOfStock",
+     "priceCurrency": "EUR",
+     "url": "https://www.pccomponentes.com/denon-dcd900-reproductor-cd-hifi-negro",
+     "price": "408.99",
+     "priceValidUntil": "2026-11-15",
+     "offeredBy": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "seller": {
+      "@type": "Organization",
+      "name": "PcComponentes"
+     },
+     "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+       "@type": "MonetaryAmount",
+       "value": "0.00",
+       "currency": "EUR"
+      },
+      "shippingDestination": {
+       "@type": "DefinedRegion",
+       "addressCountry": "ES",
+       "postalCodeRange": {
+        "@type": "PostalCodeRangeSpecification",
+        "postalCodeBegin": "01000",
+        "postalCodeEnd": "52999"
+       }
+      },
+      "deliveryTime": {
+       "@type": "ShippingDeliveryTime",
+       "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 1,
+        "maxValue": 1,
+        "unitCode": "DAY"
+       },
+       "businessDays": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+         "https://schema.org/Monday",
+         "https://schema.org/Tuesday",
+         "https://schema.org/Wednesday",
+         "https://schema.org/Thursday",
+         "https://schema.org/Friday"
+        ]
+       },
+       "cutoffTime": "20:00:00+01:00"
+      }
+     },
+     "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "ES",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+     }
+    }
+   }
+  ],
+  "firstPrice": "369,99"
+ },
+ "sennheiser-momentum-true-wireless-4": {
+  "url": "https://www.pccomponentes.com/sennheiser-momentum-true-wireless-4-auriculares-bluetooth-con-cancelacion-de-ruido-grafito-negro",
+  "title": "RETO_NO_SUPERADO",
+  "lds": []
+ }
+}
