@@ -3,11 +3,14 @@ node_modules/
 .next/
 out/
 .env
+.env*
 data/
 upload/
 __pycache__/
 *.pyc
 *.log
 logs/
+# .vercel: se ignoran todos los ficheros salvo project.json (identifica el
+# proyecto y no contiene secretos; lo necesita el workflow de CI).
 .vercel/*
 !.vercel/project.json
