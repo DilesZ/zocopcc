@@ -139,6 +139,20 @@ async def _wait_clear(tab, max_s):
     return False, ''
 
 
+async def _read_ldp_when_ready(tab, attempts=4, interval=0.5):
+    """Lee el JSON-LD enseguida; espera brevemente solo si la ficha aún no lo expone."""
+    data = {'lds': []}
+    for attempt in range(attempts):
+        raw = await tab.evaluate(LDP_JS)
+        data = json.loads(raw)
+        if isinstance(data, str):
+            data = json.loads(data)
+        if data.get('lds') or attempt == attempts - 1:
+            return data
+        await tab.sleep(interval)
+    return data
+
+
 async def _run_fichas(url_by_handle, results, on_progress, cancel, max_wait, gap):
     first = True
     items = list(url_by_handle.items())
@@ -157,20 +171,16 @@ async def _run_fichas(url_by_handle, results, on_progress, cancel, max_wait, gap
             if not ok:
                 results[handle] = {'url': url, 'title': 'RETO_NO_SUPERADO', 'lds': []}
             else:
-                await tab.sleep(2)
-                raw = await tab.evaluate(LDP_JS)
-                data = json.loads(raw)
-                if isinstance(data, str):
-                    data = json.loads(data)
-                results[handle] = data
+                results[handle] = await _read_ldp_when_ready(tab)
         except Exception as e:
             results[handle] = {'url': url, 'title': 'ERROR ' + str(e)[:80], 'lds': []}
         if on_progress:
             on_progress('pcc_fichas', n, len(items), handle)
-        try:
-            await tab.sleep(gap)
-        except Exception:
-            pass
+        if n < len(items):
+            try:
+                await tab.sleep(gap)
+            except Exception:
+                pass
     try:
         await browser.stop()
     except Exception:
@@ -215,10 +225,11 @@ async def _run_search(queries_by_handle, results, on_progress, cancel, max_wait=
         results[handle] = {'query': q, 'items': cards}
         if on_progress:
             on_progress('pcc_buscar', n, len(items_list), handle)
-        try:
-            await tab.sleep(3)
-        except Exception:
-            pass
+        if n < len(items_list):
+            try:
+                await tab.sleep(3)
+            except Exception:
+                pass
     try:
         await browser.stop()
     except Exception:
