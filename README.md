@@ -20,7 +20,7 @@ tecnología: precio, stock, vendedor y código de artículo en ambas tiendas.
 └──────────────────────┘
 ```
 
-1. **Scraping** (GitHub Actions, diario a las 08:17 hora peninsular): un runner
+1. **Scraping** (GitHub Actions, cada 15 minutos): un runner
    `ubuntu-24.04` arranca Chrome real con `nodriver` sobre un display virtual
    (`Xvfb`) y lee las 54 fichas de ambas tiendas.
 2. **Generación**: `scripts/build_public.py` convierte la instantánea en
@@ -43,7 +43,7 @@ comparador/
 │  └─ data.json                 ← la instantánea (generada)
 ├─ download/zoco-pcc-monitor/   ← scraper + app local con backend y Excel
 ├─ scripts/                     ← generación del sitio y utilidades de investigación
-├─ .github/workflows/refresh.yml← scraping diario
+├─ .github/workflows/refresh-precios.yml← actualización automática y manual
 ├─ vercel.json                  ← outputDirectory: public, sin build
 └─ .vercelignore                ← el scraper no viaja a Vercel
 ```
@@ -73,7 +73,7 @@ La función `api/refresh.js` valida el origen del sitio, evita duplicar una ejec
 
 ### Alternativas
 
-El scraping automático diario sigue ejecutándose a las 08:17 hora peninsular. También se puede iniciar desde **GitHub → Actions → Refrescar precios → Run workflow**.
+La actualización automática está programada cada 15 minutos. También se puede iniciar desde **GitHub → Actions → Refrescar precios → Run workflow**.
 
 Para hacerlo manualmente desde el ordenador:
 
@@ -94,7 +94,7 @@ git add public/ && git commit -m "datos: instantánea" && git push
 
 ## Limitaciones conocidas
 
-- El sitio publicado sirve una **instantánea**. El scraping diario o el botón online la actualizan; Vercel publica los datos cuando termina el workflow.
+- El sitio publicado sirve una **instantánea**. El scraping automático o el botón online la actualizan; Vercel publica los datos cuando termina el workflow.
 - La lectura de PCComponentes depende de que Cloudflare no endurezca el reto
   contra las IP del runner. Si endurece, el scraper conserva los datos
   anteriores en caché y lo marca en la columna «Fuente».

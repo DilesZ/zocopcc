@@ -1,6 +1,6 @@
 const OWNER = 'DilesZ';
 const REPO = 'zocopcc';
-const WORKFLOW = 'refresh.yml';
+const WORKFLOW = 'refresh-precios.yml';
 const API = 'https://api.github.com';
 const API_VERSION = '2026-03-10';
 
