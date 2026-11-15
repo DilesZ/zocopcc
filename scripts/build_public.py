@@ -79,8 +79,8 @@ rep('''function detectEnv(){}''', '''function detectEnv(){}''', 'detectEnv')
 
 # 6) subtítulo con letra de copia pública
 rep('''  $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
-    ' · '+p.length+' productos · Zococity vía Shopify JSON · PCComponentes vía fichas oficiales (nodriver + Cloudflare)';''',
-    '''  $('meta').textContent = 'Instantánea pública · Generado: '+ formatMadridDate(DATA.generated_at) +
+    ' · '+p.length+' productos';''',
+    '''  $('meta').textContent = 'Generado: '+ formatMadridDate(DATA.generated_at) +
     ' · '+p.length+' productos';''', 'meta')
 
 # 7) iniciar y supervisar el scraping remoto
