@@ -6,4 +6,8 @@ out/
 data/
 upload/
 __pycache__/
+*.pyc
 *.log
+logs/
+.vercel/*
+!.vercel/project.json

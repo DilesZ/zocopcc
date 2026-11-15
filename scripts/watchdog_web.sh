@@ -1,11 +1,14 @@
 #!/bin/bash
 # Watchdog de la web pública: mantiene el backend (server.py) vivo en :3000
 # y sincroniza la instantánea actualizada hacia public/ (versión estática de respaldo).
-# Uso: nohup /home/z/my-project/scripts/watchdog_web.sh >> /home/z/my-project/data/watchdog.log 2>&1 &
+# Uso: nohup scripts/watchdog_web.sh >> data/watchdog.log 2>&1 &
 
-APP=/home/z/my-project/download/zoco-pcc-monitor
-LOCK=/home/z/my-project/data/watchdog.lock
-LOG=/home/z/my-project/data/server3000.log
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+APP="$ROOT/download/zoco-pcc-monitor"
+DATA_DIR="${DATA_DIR:-$ROOT/data}"
+LOCK="$DATA_DIR/watchdog.lock"
+LOG="$DATA_DIR/server3000.log"
+mkdir -p "$DATA_DIR"
 
 # lockfile: evita instancias duplicadas
 if [ -f "$LOCK" ] && kill -0 "$(cat "$LOCK")" 2>/dev/null; then
@@ -20,7 +23,7 @@ while true; do
     # tras un reciclaje del sandbox, los paquetes pip se pierden: reinstalarlos
     if ! python3 -c "import nodriver, openpyxl" 2>/dev/null; then
       echo "$(date '+%F %T') reinstalando paquetes (nodriver, openpyxl)..."
-      pip install -q nodriver openpyxl >> /home/z/my-project/data/watchdog.log 2>&1
+      pip install -q nodriver openpyxl >> "$DATA_DIR/watchdog.log" 2>&1
     fi
     echo "$(date '+%F %T') servidor caído; relanzando..."
     cd "$APP" && PORT=3000 AUTO_OPEN=0 nohup python3 server.py >> "$LOG" 2>&1 &
@@ -34,7 +37,7 @@ while true; do
   fi
   # la copia estática de public/ siempre refleja la última instantánea
   if [ "$APP/data.json" -nt "$APP/../../public/data.json" ]; then
-    cp "$APP/data.json" /home/z/my-project/public/data.json
+    cp "$APP/data.json" "$ROOT/public/data.json"
     echo "$(date '+%F %T') public/data.json sincronizado"
   fi
   # refresco automático diario a las 10:00 (hora del servidor) si no hay proceso activo

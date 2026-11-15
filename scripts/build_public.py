@@ -5,7 +5,7 @@ import json
 import pathlib
 import sys
 
-BASE = pathlib.Path('/home/z/my-project')
+BASE = pathlib.Path(__file__).resolve().parents[1]
 SRC = BASE / 'download/zoco-pcc-monitor/index.html'
 OUT = BASE / 'public/index.html'
 DATA_SRC = BASE / 'download/zoco-pcc-monitor/data.json'
@@ -82,7 +82,7 @@ rep('''async function detectEnv(){
     if(!j || j.running===undefined) showEnv();
   }catch(e){ showEnv(); }
 }''', '''function detectEnv(){
-  if(location.protocol==='file:') showEnv();
+  showEnv();
 }''', 'detectEnv')
 
 # 6) subtítulo con letra de copia pública
@@ -120,6 +120,26 @@ $('fCat').addEventListener('change', renderTable); $('fAvail').addEventListener(
 
 loadData();
 detectEnv();''', 'listeners')
+
+# 9) quitar el poll() muerto: la app local sí lo tiene, pero aquí no hay backend
+#    que lo atienda (la app local lo define en el bloque de progreso). Se sustituye
+#    por un refresco silencioso que relee la instantánea publicada cada 5 min.
+rep('poll(); setInterval(()=>{ poll(); }, 5000);',
+    '''// refresco silencioso cada 5 min: relee la instantánea publicada (sin backend no hay proceso)
+setInterval(()=>{ loadData(); }, 300000);''', 'poll muerto -> refresco silencioso')
+
+# 10) metadatos para buscadores y redes (la metadata de Next desaparece con el export)
+rep('<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+    '''<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Comparativa de precios entre Zococity y PCComponentes: 54 productos de audio y tecnología con precio, stock y vendedor en ambas tiendas.">
+<meta name="theme-color" content="#0d1117">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Zococity vs PCComponentes · Precios en directo">
+<meta property="og:description" content="Comparativa de precios entre Zococity y PCComponentes con precio, stock y vendedor en ambas tiendas.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Ctext x='16' y='23' font-size='18' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%234f8cff'%3EZ%3C/text%3E%3C/svg%3E">''',
+    'metadatos (description, Open Graph, favicon)')
 
 # 9) pie
 rep('''  $('foot').textContent = 'Precios con IVA sin gastos de envío · lectura en directo significa que el dato se tomó de la web oficial en el momento de la actualización · herramientas: nodriver + Chrome';''',
