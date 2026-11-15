@@ -71,6 +71,28 @@ El token vive solo en las variables de entorno de Vercel; nunca en el repositori
 
 La función `api/refresh.js` valida el origen del sitio, evita duplicar una ejecución activa y aplica una espera de 10 minutos entre solicitudes manuales. No expone el token al cliente.
 
+### Respaldo si GitHub no dispara el cron
+
+GitHub Actions puede retrasar o descartar ejecuciones programadas. Para mantener
+la actualización cada 15 minutos, se puede usar [cron-job.org](https://cron-job.org/)
+como disparador externo; el scraping y la publicación siguen ejecutándose en
+GitHub Actions. La API exige una clave propia para estas llamadas automáticas:
+
+1. Genera una clave aleatoria localmente, por ejemplo en PowerShell:
+   `-join ((1..48 | ForEach-Object { '{0:x2}' -f (Get-Random -Maximum 256) }))`.
+2. En Vercel → proyecto `zocopcc` → **Settings → Environment Variables**, crea
+   `PRICE_CRON_SECRET` para **Production** con esa clave y vuelve a desplegar.
+3. En cron-job.org crea una tarea **POST** cada 15 minutos con zona horaria
+   `Europe/Madrid` y URL:
+   `https://zocopcc.vercel.app/api/refresh?skip_search=1&source=automatic`
+4. En sus cabeceras HTTP añade
+   `Authorization: Bearer <la misma clave>`.
+
+Una respuesta HTTP **202** significa que la solicitud quedó aceptada por GitHub;
+la tarea completa y actualiza la web al terminar. Las llamadas automáticas se
+guardan en `last_automatic_update`. Conserva también el `schedule` de GitHub como
+respaldo adicional; la concurrencia impide que se ejecuten dos scrapeos a la vez.
+
 ### Alternativas
 
 La actualización automática está programada cada 15 minutos. También se puede iniciar desde **GitHub → Actions → Refrescar precios → Run workflow**.

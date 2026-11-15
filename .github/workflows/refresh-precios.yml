@@ -20,6 +20,14 @@ on:
         description: '1 = omitir la verificacion con el buscador de PCC (mas rapido, ~10 min)'
         required: false
         default: '1'
+      trigger_type:
+        description: 'manual o automatic: origen de la actualizacion'
+        type: choice
+        options:
+          - manual
+          - automatic
+        required: false
+        default: manual
 
 # Nunca dos scrapings a la vez: el segundo esperaria al primero.
 concurrency:
@@ -61,6 +69,7 @@ jobs:
         env:
           LIMIT: ${{ inputs.limit }}
           SKIP_SEARCH: ${{ inputs.skip_search }}
+          TRIGGER_TYPE: ${{ inputs.trigger_type }}
           # En CI el sandbox de Chrome no arranca (nodriver: "Failed to connect
           # to browser"). Con esto se desactiva solo en el runner; en el PC
           # local el sandbox sigue activo.

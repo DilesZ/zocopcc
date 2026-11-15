@@ -1,3 +1,5 @@
+const { timingSafeEqual } = require('node:crypto');
+
 const OWNER = 'DilesZ';
 const REPO = 'zocopcc';
 const WORKFLOW = 'refresh-precios.yml';
@@ -27,6 +29,16 @@ function allowedOrigin(req) {
   } catch {
     return false;
   }
+}
+
+function validCronSecret(req) {
+  const expected = process.env.PRICE_CRON_SECRET || '';
+  const authorization = req.headers.authorization || '';
+  const prefix = 'Bearer ';
+  if (!expected || !authorization.startsWith(prefix)) return false;
+  const provided = Buffer.from(authorization.slice(prefix.length));
+  const configured = Buffer.from(expected);
+  return provided.length === configured.length && timingSafeEqual(provided, configured);
 }
 
 async function github(path, init = {}) {
@@ -70,7 +82,15 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST');
     return reply(res, 405, { error: 'Método no permitido.' });
   }
-  if (!allowedOrigin(req)) return reply(res, 403, { error: 'Origen no permitido.' });
+  const isAutomatic = req.method === 'POST' && req.query?.source === 'automatic';
+  if (isAutomatic) {
+    if (!process.env.PRICE_CRON_SECRET) {
+      return reply(res, 503, { error: 'Falta configurar PRICE_CRON_SECRET en Vercel.' });
+    }
+    if (!validCronSecret(req)) return reply(res, 403, { error: 'Clave del programador no válida.' });
+  } else if (!allowedOrigin(req)) {
+    return reply(res, 403, { error: 'Origen no permitido.' });
+  }
 
   try {
     if (req.method === 'POST') {
@@ -91,6 +111,7 @@ module.exports = async function handler(req, res) {
       }
 
       const skipSearch = req.query?.skip_search === '1' ? '1' : '0';
+      const triggerType = req.query?.source === 'automatic' ? 'automatic' : 'manual';
       const requestedAt = new Date().toISOString();
       const { data } = await github(
         `/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,
@@ -98,7 +119,7 @@ module.exports = async function handler(req, res) {
           method: 'POST',
           body: JSON.stringify({
             ref: 'main',
-            inputs: { limit: '0', skip_search: skipSearch },
+            inputs: { limit: '0', skip_search: skipSearch, trigger_type: triggerType },
           }),
         },
       );

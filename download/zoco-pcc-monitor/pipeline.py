@@ -162,10 +162,11 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
     records = merge(products, zoco, fichas, buscador, prev)
     generated_at = datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds')
     event_name = os.environ.get('GITHUB_EVENT_NAME', 'manual')
+    trigger_type = os.environ.get('TRIGGER_TYPE') or ('automatic' if event_name == 'schedule' else 'manual')
     last_manual_update = previous_meta.get('last_manual_update')
     last_automatic_update = previous_meta.get('last_automatic_update')
     if not limit:
-        if event_name == 'schedule':
+        if trigger_type == 'automatic':
             last_automatic_update = generated_at
         else:
             last_manual_update = generated_at
@@ -181,6 +182,7 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
             'n_buscador': len(buscador),
             'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
             'workflow_event': event_name,
+            'trigger_type': trigger_type,
             'last_manual_update': last_manual_update,
             'last_automatic_update': last_automatic_update,
         },
