@@ -25,6 +25,9 @@ import asyncio, json, re
 from zoco_fetcher import find_chrome, ensure_display, chrome_args, chrome_sandbox, start_browser
 
 PCC_BASE = 'https://www.pccomponentes.com/'
+# Evita que una ficha bloqueada por Cloudflare deje colgado todo el workflow.
+NAV_TIMEOUT = 45
+CHALLENGE_TIMEOUT = 60
 
 # Extracción de TODAS las ofertas Product del JSON-LD (recursivo, soporta @graph y arrays)
 LDP_JS = """
@@ -125,7 +128,7 @@ async def _session(start_url):
 
 
 async def _wait_clear(tab, max_s):
-    for _ in range(max_s // 2):
+    for _ in range((max_s + 1) // 2):
         await tab.sleep(2)
         try:
             t = await tab.evaluate('document.title')
@@ -146,10 +149,10 @@ async def _run_fichas(url_by_handle, results, on_progress, cancel, max_wait, gap
             if first:
                 import nodriver as uc
                 browser = await start_browser()
-                tab = await browser.get(url)
+                tab = await asyncio.wait_for(browser.get(url), timeout=NAV_TIMEOUT)
                 first = False
             else:
-                await tab.get(url)
+                await asyncio.wait_for(tab.get(url), timeout=NAV_TIMEOUT)
             ok, title = await _wait_clear(tab, max_wait)
             if not ok:
                 results[handle] = {'url': url, 'title': 'RETO_NO_SUPERADO', 'lds': []}
@@ -179,7 +182,10 @@ async def _run_search(queries_by_handle, results, on_progress, cancel, max_wait=
     kwargs = ensure_display()
     browser = await start_browser()
     first_q = next(iter(queries_by_handle.values()), 'audio')
-    tab = await browser.get(PCC_BASE + 'buscar/?query=' + first_q.replace(' ', '+'))
+    tab = await asyncio.wait_for(
+        browser.get(PCC_BASE + 'buscar/?query=' + first_q.replace(' ', '+')),
+        timeout=NAV_TIMEOUT,
+    )
     ok, _ = await _wait_clear(tab, max_wait)
     items_list = list(queries_by_handle.items())
     for n, (handle, q) in enumerate(items_list, 1):
@@ -188,7 +194,10 @@ async def _run_search(queries_by_handle, results, on_progress, cancel, max_wait=
         if not ok:
             results[handle] = {'query': q, 'items': [], 'error': 'RETO'}
             continue
-        await tab.get(PCC_BASE + 'buscar/?query=' + q.replace(' ', '+'))
+        await asyncio.wait_for(
+            tab.get(PCC_BASE + 'buscar/?query=' + q.replace(' ', '+')),
+            timeout=NAV_TIMEOUT,
+        )
         ok2, _ = await _wait_clear(tab, max_wait)
         cards = []
         if ok2:
@@ -216,7 +225,8 @@ async def _run_search(queries_by_handle, results, on_progress, cancel, max_wait=
         pass
 
 
-def fetch_fichas(url_by_handle, on_progress=None, cancel=None, max_wait=120, gap=5):
+def fetch_fichas(url_by_handle, on_progress=None, cancel=None,
+                 max_wait=CHALLENGE_TIMEOUT, gap=5):
     """Lee fichas de producto en directo. Devuelve {handle: {url, title, lds:[...]}}."""
     cancel = cancel or {}
     out = {}
@@ -225,12 +235,13 @@ def fetch_fichas(url_by_handle, on_progress=None, cancel=None, max_wait=120, gap
     return out
 
 
-def verify_search(queries_by_handle, on_progress=None, cancel=None):
+def verify_search(queries_by_handle, on_progress=None, cancel=None,
+                  max_wait=CHALLENGE_TIMEOUT):
     """Busca en el buscador interno de PCC y devuelve tarjetas {handle: {query, items}}."""
     cancel = cancel or {}
     out = {}
     if queries_by_handle:
-        asyncio.run(_run_search(dict(queries_by_handle), out, on_progress, cancel))
+        asyncio.run(_run_search(dict(queries_by_handle), out, on_progress, cancel, max_wait))
     return out
 
 
