@@ -1,0 +1,89 @@
+name: Refrescar precios
+
+# Lee el catalogo de Zococity y las fichas de PCComponentes con Chrome real
+# (nodriver), genera la instantanea y la publica. El push a main dispara el
+# redespliegue automatico de Vercel (integracion Git), asi que no hace falta
+# ningun token de Vercel ni secreto en este repositorio.
+
+on:
+  schedule:
+    # 07:17 UTC = 08:17 hora peninsular (invierno) / 09:17 (verano).
+    # Minuto 17 y no 0: GitHub retrasa los cron que caen en hora en punto.
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Productos a leer (0 = los 54)'
+        required: false
+        default: '0'
+      skip_search:
+        description: '1 = omitir la verificacion con el buscador de PCC (mas rapido, ~10 min)'
+        required: false
+        default: '1'
+
+# Nunca dos scrapings a la vez: el segundo esperaria al primero.
+concurrency:
+  group: refresh-precios
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    name: Zococity + PCComponentes -> public/data.json
+    # 24.04 fijo a proposito: la imagen esta verificada (Chrome 157, xvfb 2:21,
+    # Python 3.12). 'ubuntu-latest' cambiara a Ubuntu 26.04 en noviembre 2026.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Dependencias
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python -m pip install --quiet -r download/zoco-pcc-monitor/requirements.txt
+          # Chrome y Xvfb ya vienen en la imagen del runner; solo se verifican.
+          google-chrome --version
+          command -v Xvfb >/dev/null && echo "Xvfb OK"
+
+      - name: Scraping en directo
+        env:
+          LIMIT: ${{ inputs.limit }}
+          SKIP_SEARCH: ${{ inputs.skip_search }}
+        run: |
+          set -euo pipefail
+          cd download/zoco-pcc-monitor
+          LIMIT="${LIMIT:-0}"
+          SKIP="${SKIP_SEARCH:-1}"
+          ARGS=()
+          if [ "$SKIP" = "1" ]; then ARGS+=(--skip-search); fi
+          if [ "$LIMIT" != "0" ]; then ARGS+=(--limit "$LIMIT"); fi
+          echo "argumentos: ${ARGS[*]:-(todos)}"
+          # Chrome real headed + Xvfb (lo arranca zoco_fetcher.ensure_display):
+          # es lo unico que supera el reto de Cloudflare de PCComponentes.
+          python3 pipeline.py "${ARGS[@]}"
+
+      - name: Regenerar el sitio estatico
+        run: python3 scripts/build_public.py
+
+      - name: Publicar la instantanea
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data.json public/index.html
+          if git diff --cached --quiet; then
+            echo "Sin cambios: el sitio publicado sigue vigente."
+            exit 0
+          fi
+          git commit -m "datos: instantanea $(date -u +%FT%TZ) [skip ci]"
+          # El push dispara el redespliegue automatico de Vercel.
+          git push
