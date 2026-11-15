@@ -22,6 +22,23 @@ def rep(old, new, what):
     print(f'ok: {what}')
 
 
+# Los sellos de tiempo del scraper usan Europe/Madrid y los anteriores sin zona
+# se interpretan como UTC (así los genera el runner de GitHub Actions).
+rep("const PCC_BASE='https://www.pccomponentes.com/', ZOCO_BASE='https://zococity.es/products/';",
+'''function formatMadridDate(value){
+  const raw=String(value||'');
+  if(!raw) return '—';
+  const iso=/(Z|[+-]\\d{2}:?\\d{2})$/i.test(raw)?raw:raw+'Z';
+  const date=new Date(iso);
+  if(Number.isNaN(date.getTime())) return raw.replace('T',' ');
+  const parts=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(date);
+  const fields={};
+  for(const part of parts) fields[part.type]=part.value;
+  return `${fields.year}-${fields.month}-${fields.day} ${fields.hour}:${fields.minute}:${fields.second}`;
+}
+const PCC_BASE='https://www.pccomponentes.com/', ZOCO_BASE='https://zococity.es/products/';''', 'hora peninsular con cambio estacional')
+
+
 # 1) botón que dispara el workflow remoto
 rep('''    <button id="btnRefresh">🔄 Actualizar precios</button>
     <button id="btnExcel">⬇ Descargar Excel</button>
@@ -82,7 +99,7 @@ rep('''async function detectEnv(){
 # 6) subtítulo con letra de copia pública
 rep('''  $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
     ' · '+p.length+' productos · Zococity vía Shopify JSON · PCComponentes vía fichas oficiales (nodriver + Cloudflare)';''',
-    '''  $('meta').textContent = 'Instantánea pública · Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
+    '''  $('meta').textContent = 'Instantánea pública · Generado: '+ formatMadridDate(DATA.generated_at) +
     ' · '+p.length+' productos';''', 'meta')
 
 # 7) iniciar y supervisar el scraping remoto
@@ -195,6 +212,9 @@ print('ok: sin referencias a APIs locales')
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(html, encoding='utf-8')
-snap = json.loads(DATA_SRC.read_text(encoding='utf-8'))
-DATA_OUT.write_text(json.dumps(snap, ensure_ascii=False), encoding='utf-8')
-print(f'escrito: {OUT} ({OUT.stat().st_size} b) · {DATA_OUT} ({len(snap["products"])} productos)')
+if '--html-only' in sys.argv:
+    print(f'escrito: {OUT} ({OUT.stat().st_size} b); instantánea conservada')
+else:
+    snap = json.loads(DATA_SRC.read_text(encoding='utf-8'))
+    DATA_OUT.write_text(json.dumps(snap, ensure_ascii=False), encoding='utf-8')
+    print(f'escrito: {OUT} ({OUT.stat().st_size} b) · {DATA_OUT} ({len(snap["products"])} productos)')

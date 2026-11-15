@@ -8,6 +8,7 @@ Modo de uso:
 """
 import json, os, re, sys, threading, time
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS = os.path.join(BASE, 'products.json')
@@ -71,7 +72,7 @@ def merge(products, zoco, fichas, buscador, prev):
                 rec['ean_pcc'] = str(gtin)
             own = [x for x in lds if 'pccomponentes' in seller_of(x.get('offers') or {}).lower()]
             rec['pcc_own_avail'] = avail_of(own[0]['offers']) if own else None
-            rec['source_pcc'] = f'Ficha PCC en directo · {datetime.now().strftime("%d/%m/%Y %H:%M")}'
+            rec['source_pcc'] = f'Ficha PCC en directo · {datetime.now(ZoneInfo("Europe/Madrid")).strftime("%d/%m/%Y %H:%M")}'
             rec['url_pcc'] = f.get('url') or p.get('url_pcc')
             rec['pcc_live'] = True
         elif (f or {}).get('lds') is not None and f.get('title') == 'Página no encontrada':
@@ -108,7 +109,7 @@ def merge(products, zoco, fichas, buscador, prev):
                 rec['in_pcc'] = True
                 rec['title_pcc'] = best.get('text', '')[:90]
                 rec['price_pcc'] = pr
-                rec['source_pcc'] = f'Buscador interno PCC (tarjeta) · {datetime.now().strftime("%d/%m/%Y %H:%M")}'
+                rec['source_pcc'] = f'Buscador interno PCC (tarjeta) · {datetime.now(ZoneInfo("Europe/Madrid")).strftime("%d/%m/%Y %H:%M")}'
                 rec['url_pcc'] = 'https://www.pccomponentes.com/' + best.get('path')
                 rec['pcc_live'] = True
             elif not ok_match and not rec.get('in_pcc') and p.get('verified_no_pcc'):
@@ -158,7 +159,7 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
     # 4) Fusión y escritura
     records = merge(products, zoco, fichas, buscador, prev)
     snapshot = {
-        'generated_at': datetime.now().isoformat(timespec='seconds'),
+        'generated_at': datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds'),
         'meta': {
             'zoco_source': 'Catálogo Shopify de zococity.es leído en directo (XHR /products/<handle>.js vía nodriver)',
             'pcc_source': 'Fichas oficiales de pccomponentes.com leídas en directo (JSON-LD vía nodriver, supera Cloudflare)',
