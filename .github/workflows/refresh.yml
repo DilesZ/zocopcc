@@ -7,9 +7,8 @@ name: Refrescar precios
 
 on:
   schedule:
-    # 07:17 UTC = 08:17 hora peninsular (invierno) / 09:17 (verano).
-    # Minuto 17 y no 0: GitHub retrasa los cron que caen en hora en punto.
-    - cron: '17 7 * * *'
+    # Cada 15 minutos, empezando en el minuto 7 para evitar la hora en punto.
+    - cron: '7/15 * * * *'
   workflow_dispatch:
     inputs:
       limit:
