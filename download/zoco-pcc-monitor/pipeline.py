@@ -133,7 +133,9 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
     products = load_json(PRODUCTS, [])
     if limit:
         products = products[:limit]
-    prev = {r.get('handle'): r for r in load_json(DATA, {}).get('products') or []}
+    previous_snapshot = load_json(DATA, {})
+    previous_meta = previous_snapshot.get('meta') or {}
+    prev = {r.get('handle'): r for r in previous_snapshot.get('products') or []}
 
     def cb(phase, n, total, current):
         if on_progress:
@@ -158,8 +160,18 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
 
     # 4) Fusión y escritura
     records = merge(products, zoco, fichas, buscador, prev)
+    generated_at = datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds')
+    event_name = os.environ.get('GITHUB_EVENT_NAME', 'manual')
+    last_manual_update = previous_meta.get('last_manual_update')
+    last_automatic_update = previous_meta.get('last_automatic_update')
+    if not limit:
+        if event_name == 'schedule':
+            last_automatic_update = generated_at
+        else:
+            last_manual_update = generated_at
+
     snapshot = {
-        'generated_at': datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds'),
+        'generated_at': generated_at,
         'meta': {
             'zoco_source': 'Catálogo Shopify de zococity.es leído en directo (XHR /products/<handle>.js vía nodriver)',
             'pcc_source': 'Fichas oficiales de pccomponentes.com leídas en directo (JSON-LD vía nodriver, supera Cloudflare)',
@@ -168,6 +180,9 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),
             'n_buscador': len(buscador),
             'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
+            'workflow_event': event_name,
+            'last_manual_update': last_manual_update,
+            'last_automatic_update': last_automatic_update,
         },
         'products': records,
     }

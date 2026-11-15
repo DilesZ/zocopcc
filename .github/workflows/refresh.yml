@@ -7,8 +7,8 @@ name: Refrescar precios
 
 on:
   schedule:
-    # Cada 15 minutos, empezando en el minuto 7 para evitar la hora en punto.
-    - cron: '7/15 * * * *'
+    # Cada 15 minutos; evitamos el minuto 0 para reducir retrasos del planificador.
+    - cron: '5,20,35,50 * * * *'
   workflow_dispatch:
     inputs:
       limit:
@@ -39,6 +39,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Recuperar la instantanea publicada anterior
+        run: cp public/data.json download/zoco-pcc-monitor/data.json
 
       - name: Python 3.12
         uses: actions/setup-python@v5

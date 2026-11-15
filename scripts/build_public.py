@@ -79,9 +79,13 @@ rep('''function detectEnv(){}''', '''function detectEnv(){}''', 'detectEnv')
 
 # 6) subtítulo con letra de copia pública
 rep('''  $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
-    ' · '+p.length+' productos';''',
+    ' · '+p.length+' productos';
+  $('lastAutomatic').textContent=(meta.last_automatic_update||'—').replace('T',' ');
+  $('lastManual').textContent=(meta.last_manual_update||'—').replace('T',' ');''',
     '''  $('meta').textContent = 'Generado: '+ formatMadridDate(DATA.generated_at) +
-    ' · '+p.length+' productos';''', 'meta')
+    ' · '+p.length+' productos';
+  $('lastAutomatic').textContent=formatMadridDate(meta.last_automatic_update);
+  $('lastManual').textContent=formatMadridDate(meta.last_manual_update);''', 'meta')
 
 # 7) iniciar y supervisar el scraping remoto
 block_start = html.index('/* ---- progreso ---- */')

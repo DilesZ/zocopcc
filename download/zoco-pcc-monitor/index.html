@@ -125,6 +125,7 @@
     .head-actions{grid-column:1;grid-row:auto;justify-self:stretch;justify-content:space-between;gap:8px}
     .head-actions #btnRefresh{flex:1}
     .last-updated{grid-column:1;grid-row:auto}
+    .update-history{display:grid;gap:1px;white-space:normal;font-size:9px}
     .progress-panel,.err{padding-left:16px;padding-right:16px}
     .main{padding:27px 14px 36px}
     .stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:15px}
@@ -160,6 +161,9 @@
   .brand-name{font-size:14px;letter-spacing:0}
   .brand-sub{font-size:11px;color:var(--muted)}
   .last-updated{gap:9px;padding-left:21px}
+  .update-summary{min-width:0}
+  .update-history{display:flex;gap:12px;margin-top:3px;color:var(--muted);font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .update-history time{color:var(--ink-soft)}
   .status-dot{width:7px;height:7px;background:#55816c;box-shadow:none}
   .status-label{font-size:11px;font-weight:650;letter-spacing:0;text-transform:none;color:var(--ink-soft)}
   #meta{font-size:11px;font-variant-numeric:tabular-nums;color:var(--muted)}
@@ -233,6 +237,7 @@
     .head-actions #btnRefresh{flex:1}
     .head-actions .chk{max-width:145px}
     .last-updated{grid-column:1;grid-row:auto}
+    .update-history{display:grid;gap:1px;white-space:normal;font-size:9px}
     .main{padding:18px 12px 30px}
     .stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:14px}
     .stat{padding:10px 10px 11px;row-gap:2px}
@@ -279,7 +284,11 @@
       </a>
       <div class="last-updated">
         <span class="status-dot" aria-hidden="true"></span>
-        <div><div class="status-label">Última actualización</div><div id="meta">Cargando datos…</div></div>
+        <div class="update-summary">
+          <div class="status-label">Última actualización</div>
+          <div id="meta">Cargando datos…</div>
+          <div class="update-history"><span>Automática <time id="lastAutomatic">—</time></span><span>Manual <time id="lastManual">—</time></span></div>
+        </div>
       </div>
       <div class="head-actions">
         <label class="chk" title="No buscar en el catálogo de PCComponentes los productos sin ficha enlazada"><input type="checkbox" id="skipSearch"> Omitir búsqueda extra en PCComponentes</label>
@@ -357,6 +366,8 @@ function render(){
   const p=DATA.products||[], meta=DATA.meta||{};
   $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
     ' · '+p.length+' productos';
+  $('lastAutomatic').textContent=(meta.last_automatic_update||'—').replace('T',' ');
+  $('lastManual').textContent=(meta.last_manual_update||'—').replace('T',' ');
   const both=p.filter(x=>x.in_pcc).length;
   const zocoWins=p.filter(x=>x.price_zoco!=null&&x.price_pcc!=null&&x.price_zoco<x.price_pcc).length;
   const pccWins=p.filter(x=>x.price_zoco!=null&&x.price_pcc!=null&&x.price_pcc<x.price_zoco).length;
