@@ -1,0 +1,8 @@
+# Lo único que se despliega es public/ (index.html + data.json).
+# El resto es el scraper local y utilidades: no debe viajar a Vercel.
+.git
+.github
+download
+scripts
+logs
+data

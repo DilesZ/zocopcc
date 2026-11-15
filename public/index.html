@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Comparativa de precios entre Zococity y PCComponentes: 54 productos de audio y tecnología con precio, stock y vendedor en ambas tiendas.">
+<meta name="theme-color" content="#0d1117">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Zococity vs PCComponentes · Precios en directo">
+<meta property="og:description" content="Comparativa de precios entre Zococity y PCComponentes con precio, stock y vendedor en ambas tiendas.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Ctext x='16' y='23' font-size='18' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%234f8cff'%3EZ%3C/text%3E%3C/svg%3E">
 <title>Zococity vs PCComponentes · Precios en directo</title>
 <style>
   :root{
@@ -134,7 +142,7 @@ function hideErr(){ $('errBox').style.display='none'; }
 function showEnv(){ $('envBox').style.display='block'; }
 
 function detectEnv(){
-  if(location.protocol==='file:') showEnv();
+  showEnv();
 }
 
 function render(){
@@ -246,7 +254,8 @@ $('fCat').addEventListener('change', renderTable); $('fAvail').addEventListener(
 
 loadData();
 detectEnv();
-poll(); setInterval(()=>{ poll(); }, 5000);
+// refresco silencioso cada 5 min: relee la instantánea publicada (sin backend no hay proceso)
+setInterval(()=>{ loadData(); }, 300000);
 </script>
 </body>
 </html>
