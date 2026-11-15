@@ -42,6 +42,30 @@ def find_chrome():
 _XVFB_PROC = None
 
 
+def chrome_sandbox():
+    """¿Chrome puede arrancar con su sandbox?
+
+    En CI (GitHub Actions) el sandbox de Chrome no arranca y nodriver falla con
+    'Failed to connect to browser'. Se desactiva solo con ZOCO_NO_SANDBOX=1,
+    que es lo que hace el workflow; en el uso local del PC el sandbox sigue
+    activo (no conviene debilitarlo a mano).
+    """
+    return os.environ.get('ZOCO_NO_SANDBOX') != '1'
+
+
+def chrome_extra_args():
+    """Argumentos de Chrome que solo aplican en CI."""
+    if os.environ.get('ZOCO_NO_SANDBOX') == '1':
+        # /dev/shm es pequeño en los runners: sin esto Chrome puede caer.
+        return ['--disable-dev-shm-usage']
+    return []
+
+
+def chrome_args():
+    """browser_args comun a todas las sesiones de Chrome."""
+    return ['--lang=es-ES', '--window-size=1300,850'] + chrome_extra_args()
+
+
 def ensure_display():
     """En Linux sin pantalla gráfica, arranca Xvfb :99. Devuelve kwargs para nodriver."""
     global _XVFB_PROC
@@ -77,7 +101,7 @@ async def _fetch(handles, out, on_progress, cancel):
     import nodriver as uc
     kwargs = ensure_display()
     browser = await uc.start(browser_executable_path=find_chrome(), headless=False,
-                             browser_args=['--lang=es-ES', '--window-size=1300,850'], **kwargs)
+                             browser_args=chrome_args(), sandbox=chrome_sandbox(), **kwargs)
     tab = await browser.get(ZOCO_BASE)
     for _ in range(20):                       # espera a que la home cargue (hasta 40 s)
         await tab.sleep(2)

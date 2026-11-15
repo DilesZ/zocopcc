@@ -58,6 +58,10 @@ jobs:
         env:
           LIMIT: ${{ inputs.limit }}
           SKIP_SEARCH: ${{ inputs.skip_search }}
+          # En CI el sandbox de Chrome no arranca (nodriver: "Failed to connect
+          # to browser"). Con esto se desactiva solo en el runner; en el PC
+          # local el sandbox sigue activo.
+          ZOCO_NO_SANDBOX: '1'
         run: |
           set -euo pipefail
           cd download/zoco-pcc-monitor

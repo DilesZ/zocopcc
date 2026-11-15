@@ -22,7 +22,7 @@ REGLAS DE ORO (descubiertas a golpe de fallo — no las rompas):
 """
 import asyncio, json, re
 
-from zoco_fetcher import find_chrome, ensure_display
+from zoco_fetcher import find_chrome, ensure_display, chrome_args, chrome_sandbox
 
 PCC_BASE = 'https://www.pccomponentes.com/'
 
@@ -120,7 +120,7 @@ async def _session(start_url):
     import nodriver as uc
     kwargs = ensure_display()
     browser = await uc.start(browser_executable_path=find_chrome(), headless=False,
-                             browser_args=['--lang=es-ES', '--window-size=1300,850'], **kwargs)
+                             browser_args=chrome_args(), sandbox=chrome_sandbox(), **kwargs)
     tab = await browser.get(start_url)
     return browser, tab
 
@@ -148,7 +148,7 @@ async def _run_fichas(url_by_handle, results, on_progress, cancel, max_wait, gap
                 import nodriver as uc
                 kwargs = ensure_display()
                 browser = await uc.start(browser_executable_path=find_chrome(), headless=False,
-                                         browser_args=['--lang=es-ES', '--window-size=1300,850'], **kwargs)
+                                         browser_args=chrome_args(), sandbox=chrome_sandbox(), **kwargs)
                 tab = await browser.get(url)
                 first = False
             else:
@@ -181,7 +181,7 @@ async def _run_search(queries_by_handle, results, on_progress, cancel, max_wait=
     import nodriver as uc
     kwargs = ensure_display()
     browser = await uc.start(browser_executable_path=find_chrome(), headless=False,
-                             browser_args=['--lang=es-ES', '--window-size=1300,850'], **kwargs)
+                             browser_args=chrome_args(), sandbox=chrome_sandbox(), **kwargs)
     first_q = next(iter(queries_by_handle.values()), 'audio')
     tab = await browser.get(PCC_BASE + 'buscar/?query=' + first_q.replace(' ', '+'))
     ok, _ = await _wait_clear(tab, max_wait)
