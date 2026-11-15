@@ -26,8 +26,8 @@ from zoco_fetcher import find_chrome, ensure_display, chrome_args, chrome_sandbo
 
 PCC_BASE = 'https://www.pccomponentes.com/'
 # Evita que una ficha bloqueada por Cloudflare deje colgado todo el workflow.
-NAV_TIMEOUT = 45
-CHALLENGE_TIMEOUT = 60
+NAV_TIMEOUT = 30
+CHALLENGE_TIMEOUT = 45
 
 # Extracción de TODAS las ofertas Product del JSON-LD (recursivo, soporta @graph y arrays)
 LDP_JS = """
