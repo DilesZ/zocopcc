@@ -10,6 +10,7 @@ __pycache__/
 *.pyc
 *.log
 logs/
+data_test.json
 # .vercel: se ignoran todos los ficheros salvo project.json (identifica el
 # proyecto y no contiene secretos; lo necesita el workflow de CI).
 .vercel/*
