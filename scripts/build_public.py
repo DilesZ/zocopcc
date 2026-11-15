@@ -40,9 +40,9 @@ const PCC_BASE='https://www.pccomponentes.com/', ZOCO_BASE='https://zococity.es/
 
 
 # 1) botón que dispara el workflow remoto
-rep('''    <button id="btnRefresh">🔄 Actualizar precios</button>
-    <button id="btnExcel">⬇ Descargar Excel</button>
-''', '''    <button id="btnRefresh">🚀 Actualizar precios online</button>
+rep('''        <button id="btnRefresh">↻ Actualizar precios</button>
+        <button id="btnExcel">Descargar Excel</button>
+''', '''        <button id="btnRefresh">🚀 Actualizar precios online</button>
 ''', 'botones online')
 
 rep('''<input type="checkbox" id="skipSearch">''', '''<input type="checkbox" id="skipSearch" checked>''', 'opcion de busqueda remota')
@@ -191,13 +191,13 @@ setInterval(()=>{ loadData(); }, 300000);''', 'poll muerto -> refresco silencios
 rep('<meta name="viewport" content="width=device-width, initial-scale=1.0">',
     '''<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Comparativa de precios entre Zococity y PCComponentes: 54 productos de audio y tecnología con precio, stock y vendedor en ambas tiendas.">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#f4f5f2">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Zococity vs PCComponentes · Precios en directo">
 <meta property="og:description" content="Comparativa de precios entre Zococity y PCComponentes con precio, stock y vendedor en ambas tiendas.">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Ctext x='16' y='23' font-size='18' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%234f8cff'%3EZ%3C/text%3E%3C/svg%3E">''',
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e5b4b'/%3E%3Ctext x='16' y='23' font-size='18' font-family='Georgia' font-weight='bold' text-anchor='middle' fill='%23ffffff'%3EZ%3C/text%3E%3C/svg%3E">''',
     'metadatos (description, Open Graph, favicon)')
 
 # 9) pie
