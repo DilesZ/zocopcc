@@ -1,4 +1,6 @@
 skills/
+!.claude/skills/
+!.claude/skills/**
 node_modules/
 .next/
 out/
@@ -11,7 +13,5 @@ __pycache__/
 *.log
 logs/
 data_test.json
-# .vercel: se ignoran todos los ficheros salvo project.json (identifica el
-# proyecto y no contiene secretos; lo necesita el workflow de CI).
-.vercel/*
-!.vercel/project.json
+# Enlace local a un proyecto concreto de Vercel; no compartir entre copias.
+.vercel/

@@ -153,24 +153,12 @@ ausencia. No hace falta tocar código.
   `POST /api/cancel`, `GET /api/excel`.
 - El Excel replica la comparativa con reglas de color (verde = Zococity más barato).
 
-## Instalación de la skill en otras máquinas
+## Uso con asistentes de código
 
-Claude Code:
-```bash
-# proyecto (solo ese repo):
-cp -r zoco-pcc-monitor <repo>/.claude/skills/zoco-pcc-monitor
-# global (todos los proyectos):
-cp -r zoco-pcc-monitor ~/.claude/skills/zoco-pcc-monitor
-```
-OpenCode:
-```bash
-# proyecto:
-cp -r zoco-pcc-monitor <repo>/.opencode/skills/zoco-pcc-monitor
-# global:
-cp -r zoco-pcc-monitor ~/.config/opencode/skills/zoco-pcc-monitor
-```
-(El nombre de la carpeta = nombre de la skill. Verifica las rutas globales en la doc de
-tu versión: opencode.ai/docs/skills · code.claude.com/docs/en/skills.)
+Esta carpeta contiene el scraper y su documentación técnica; no copies toda la
+aplicación dentro de una carpeta de skills. Para Claude Code, abre el repositorio
+desde su raíz: lee `CLAUDE.md` y usa `.claude/skills/price-monitor/`. La guía de
+portabilidad está en `docs/claude-code.md`.
 
 ## Límites éticos y legales
 

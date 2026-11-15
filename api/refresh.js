@@ -1,7 +1,9 @@
 const { timingSafeEqual } = require('node:crypto');
 
-const OWNER = 'DilesZ';
-const REPO = 'zocopcc';
+// Defaults preserve the original deployment. A copied project sets its own
+// repository coordinates in Vercel Production.
+const OWNER = process.env.GITHUB_OWNER || 'DilesZ';
+const REPO = process.env.GITHUB_REPO || 'zocopcc';
 const WORKFLOW = 'refresh-precios.yml';
 const API = 'https://api.github.com';
 const API_VERSION = '2026-03-10';
@@ -13,19 +15,20 @@ function reply(res, status, body) {
 }
 
 function allowedOrigin(req) {
+  const host = String(req.headers.host || '').toLowerCase();
+  if (!host) return false;
   const origin = req.headers.origin;
+  const isLocal = process.env.NODE_ENV !== 'production' &&
+    ['http://localhost:3000', 'http://localhost:4173'].includes(origin);
+  if (isLocal) return true;
   if (!origin) {
-    const host = req.headers.host;
-    const fetchSite = req.headers['sec-fetch-site'];
-    const referer = req.headers.referer || '';
-    return host === 'zocopcc.vercel.app' &&
-      (fetchSite === 'same-origin' || referer.startsWith('https://zocopcc.vercel.app/'));
+    if (req.headers['sec-fetch-site'] === 'same-origin') return true;
+    try { return new URL(req.headers.referer || '').host.toLowerCase() === host; }
+    catch { return false; }
   }
   try {
     const url = new URL(origin);
-    if (url.origin === 'https://zocopcc.vercel.app') return true;
-    return process.env.NODE_ENV !== 'production' &&
-      ['http://localhost:3000', 'http://localhost:4173'].includes(url.origin);
+    return url.protocol === 'https:' && url.host.toLowerCase() === host;
   } catch {
     return false;
   }
