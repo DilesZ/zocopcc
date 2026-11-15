@@ -7,8 +7,9 @@ name: Refrescar precios
 
 on:
   schedule:
-    # Cada 15 minutos. GitHub Actions interpreta el cron en UTC.
-    - cron: '*/15 * * * *'
+    # Cada 15 minutos, desplazado del inicio de hora para reducir retrasos.
+    # GitHub Actions interpreta el cron en UTC.
+    - cron: '3,18,33,48 * * * *'
   workflow_dispatch:
     inputs:
       limit:
