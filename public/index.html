@@ -79,7 +79,7 @@
   <h1><span class="z">Zococity</span> vs <span class="p">PCComponentes</span> · seguimiento de precios en directo</h1>
   <div class="sub" id="meta">Cargando…</div>
   <div class="bar">
-    <button id="btnRefresh">🔄 Recargar instantánea</button>
+    <button id="btnRefresh">🚀 Actualizar precios online</button>
     <input type="search" id="q" placeholder="Filtrar productos…">
     <select id="fCat"><option value="">Todas las categorías</option></select>
     <select id="fAvail">
@@ -88,17 +88,22 @@
       <option value="only">Solo Zococity</option>
       <option value="live">Solo con lectura en directo</option>
     </select>
+    <label class="chk"><input type="checkbox" id="skipSearch" checked> Saltar verificación del buscador (más rápido)</label>
   </div>
-</div>
+  <div class="prog" id="prog">
+    <div class="row"><span id="progPhase">—</span><span id="progCount">0/0</span></div>
+    <div class="track"><div class="fill" id="progFill"></div></div>
+    <div class="cur" id="progCur"></div>
+    <div class="log" id="progLog"></div>
+  </div>
   <div class="err" id="errBox"></div>
 </header>
 
 <div class="warn" id="envBox">
-  <b>Modo consulta pública.</b><br>
-  Esta página pública muestra la <b>última instantánea</b> del monitor. La actualización
-  en directo (lectura de ambas tiendas con navegador real) corre en la app local del
-  propietario (<code>python3 server.py</code>); aquí el botón «Recargar instantánea»
-  vuelve a leer los datos publicados.
+  <b>Actualización online.</b><br>
+  El botón ejecuta el scraping en un navegador real de GitHub Actions. Lee los 54 productos,
+  publica una nueva instantánea y la web se actualiza al terminar el redespliegue de Vercel.
+  La actualización puede tardar varios minutos.
 </div>
 
 <div class="kpis" id="kpis"></div>
@@ -126,14 +131,13 @@ let DATA=null, TIMER=null;
 
 async function api(path, opts){ const r=await fetch(path, opts); const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||('HTTP '+r.status)); return j; }
 
-async function loadData(){
+async function loadData(quiet=false){
   try{
-    DATA = await api('./data.json?ts='+Date.now());
-    render();
-    hideErr();
+    DATA = await api('./data.json?ts='+Date.now(), {cache:'no-store'});
+    render(); hideErr(); return true;
   }catch(e){
-    showEnv();
-    showErr('No se pudo leer la instantánea de datos ('+e.message+').');
+    if(!quiet) showErr('No se pudo cargar la instantánea: '+e.message);
+    return false;
   }
 }
 
@@ -234,17 +238,65 @@ function renderTable(){
     </tr>`;
   }).join('');
   // las notas se muestran bajo la fila mediante atributo title en la celda de disponibilidad
-  $('foot').textContent = 'Copia pública de consulta · precios con IVA sin gastos de envío · la actualización en directo (Zococity vía Shopify + PCComponentes con nodriver/Chrome) se ejecuta en la app local del propietario';
+  $('foot').textContent = 'Instantánea pública · precios con IVA sin gastos de envío · el botón Actualizar precios online lanza el scraping en GitHub Actions';
 }
 
+function wait(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
+function remoteProgress(message, percent){
+  $('prog').classList.add('on');
+  $('progPhase').textContent = message;
+  $('progCount').textContent = 'GitHub Actions';
+  $('progFill').style.width = percent+'%';
+}
+async function waitForPublishedSnapshot(runId, previous, timeoutMs){
+  const until = Date.now()+timeoutMs;
+  while(Date.now()<until){
+    await wait(10000);
+    await loadData(true);
+    if(DATA && DATA.meta && String(DATA.meta.workflow_run_id||'')===String(runId)) return true;
+    if(!runId && DATA && DATA.generated_at && DATA.generated_at!==previous) return true;
+    remoteProgress('Scraping terminado; esperando a que Vercel publique los datos...', 90);
+  }
+  return false;
+}
+async function followRun(runId, requestedAt, previousSnapshot){
+  const until = Date.now()+55*60*1000;
+  let id = runId;
+  while(Date.now()<until){
+    const query = id ? 'run_id='+encodeURIComponent(id) : 'since='+encodeURIComponent(requestedAt);
+    const state = await api('/api/refresh?'+query, {cache:'no-store'});
+    if(state.run_id) id = state.run_id;
+    if(state.status==='completed'){
+      if(state.conclusion!=='success') throw new Error('El scraping terminó con estado '+(state.conclusion||'desconocido')+'. Revisa '+(state.html_url||'GitHub Actions'));
+      remoteProgress('Scraping listo; esperando el redespliegue de Vercel...', 88);
+      if(await waitForPublishedSnapshot(state.run_id||id, previousSnapshot, 12*60*1000)) return;
+      throw new Error('GitHub terminó bien, pero Vercel aún no ha publicado la instantánea nueva. Revisa '+(state.html_url||'GitHub Actions'));
+    }
+    remoteProgress(state.status==='queued'?'Scraping en cola en GitHub Actions?':'Scrapeando Zococity y PCComponentes online...', state.status==='queued'?8:35);
+    await wait(8000);
+  }
+  throw new Error('El scraping sigue en marcha. Puedes consultar el progreso en GitHub Actions.');
+}
 async function refresh(){
   hideErr();
+  if(!DATA) await loadData(true);
+  if(!DATA) { showErr('No se pudo leer la instantánea publicada.'); return; }
+  const previous = DATA && DATA.generated_at;
   $('btnRefresh').disabled = true;
+  $('btnRefresh').classList.add('running');
+  remoteProgress('Solicitando scraping online...', 5);
   try{
-    await loadData();
-    $('meta').textContent += ' · recargada a las ' + new Date().toLocaleTimeString('es-ES');
+    const skip = $('skipSearch').checked ? '1':'0';
+    const startedAt = new Date().toISOString();
+    const run = await api('/api/refresh?skip_search='+skip, {method:'POST'});
+    remoteProgress(run.already_running?'Ya hay un scraping en marcha...':'Iniciando GitHub Actions...', 8);
+    await followRun(run.run_id, run.requested_at||startedAt, previous);
+    remoteProgress('Precios actualizados', 100);
+  }catch(e){
+    showErr('No se pudo completar la actualización: '+(e.message||e));
   }finally{
     $('btnRefresh').disabled = false;
+    $('btnRefresh').classList.remove('running');
   }
 }
 
@@ -254,7 +306,7 @@ $('fCat').addEventListener('change', renderTable); $('fAvail').addEventListener(
 
 loadData();
 detectEnv();
-// refresco silencioso cada 5 min: relee la instantánea publicada (sin backend no hay proceso)
+// refresco silencioso cada 5 min: carga la instantánea publicada
 setInterval(()=>{ loadData(); }, 300000);
 </script>
 </body>

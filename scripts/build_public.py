@@ -22,35 +22,30 @@ def rep(old, new, what):
     print(f'ok: {what}')
 
 
-# 1) barra de botones: quitar Excel y el checkbox de "saltar buscador"
+# 1) botón que dispara el workflow remoto
 rep('''    <button id="btnRefresh">🔄 Actualizar precios</button>
     <button id="btnExcel">⬇ Descargar Excel</button>
-''', '''    <button id="btnRefresh">🔄 Recargar instantánea</button>
-''', 'botones')
+''', '''    <button id="btnRefresh">🚀 Actualizar precios online</button>
+''', 'botones online')
 
-rep('''    <label class="chk"><input type="checkbox" id="skipSearch"> Saltar verificación del buscador (más rápido)</label>
-''', '', 'checkbox skipSearch')
+rep('''<input type="checkbox" id="skipSearch">''', '''<input type="checkbox" id="skipSearch" checked>''', 'opcion de busqueda remota')
 
-# 2) quitar botón Parar y bloque de progreso (sin backend no hay proceso)
+# 2) quitar solo el control local de cancelación
 rep('''    <button id="btnCancel" style="display:none">⏹ Parar</button>
 ''', '', 'boton cancelar')
 
-prog_start = html.index('  <div class="prog" id="prog">')
-prog_end = html.index('</div>', html.index('id="progLog"')) + len('</div>\n') + len('  ')
-html = html[:prog_start] + html[prog_end:]
-print('ok: bloque progreso')
 
-# 3) banner de entorno → texto de modo consulta pública
+
+# 3) explicar la actualización online
 b_start = html.index('<div class="warn" id="envBox">')
 b_end = html.index('</div>', b_start) + len('</div>')
 html = html[:b_start] + '''<div class="warn" id="envBox">
-  <b>Modo consulta pública.</b><br>
-  Esta página pública muestra la <b>última instantánea</b> del monitor. La actualización
-  en directo (lectura de ambas tiendas con navegador real) corre en la app local del
-  propietario (<code>python3 server.py</code>); aquí el botón «Recargar instantánea»
-  vuelve a leer los datos publicados.
+  <b>Actualización online.</b><br>
+  El botón ejecuta el scraping en un navegador real de GitHub Actions. Lee los 54 productos,
+  publica una nueva instantánea y la web se actualiza al terminar el redespliegue de Vercel.
+  La actualización puede tardar varios minutos.
 </div>''' + html[b_end:]
-print('ok: banner')
+print('ok: banner online')
 
 # 4) loadData: leer la instantánea relativa y avisar en modo banner si falla
 rep('''async function loadData(){
@@ -61,16 +56,15 @@ rep('''async function loadData(){
     if((e.message||'').includes('404')) return; // el banner de entorno lo explica
     showErr('No se pudieron cargar los datos: '+e.message);
   }
-}''', '''async function loadData(){
+}''', '''async function loadData(quiet=false){
   try{
-    DATA = await api('./data.json?ts='+Date.now());
-    render();
-    hideErr();
+    DATA = await api('./data.json?ts='+Date.now(), {cache:'no-store'});
+    render(); hideErr(); return true;
   }catch(e){
-    showEnv();
-    showErr('No se pudo leer la instantánea de datos ('+e.message+').');
+    if(!quiet) showErr('No se pudo cargar la instantánea: '+e.message);
+    return false;
   }
-}''', 'loadData')
+}''', 'loadData estático')
 
 # 5) detectEnv estático
 rep('''async function detectEnv(){
@@ -91,22 +85,70 @@ rep('''  $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replac
     '''  $('meta').textContent = 'Instantánea pública · Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
     ' · '+p.length+' productos';''', 'meta')
 
-# 7) poll/updateProg/refresh/cancelRun → recarga simple de la instantánea
+# 7) iniciar y supervisar el scraping remoto
 block_start = html.index('/* ---- progreso ---- */')
 block_end = html.index("['q','fCat','fAvail']")
-html = html[:block_start] + '''async function refresh(){
+html = html[:block_start] + '''function wait(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
+function remoteProgress(message, percent){
+  $('prog').classList.add('on');
+  $('progPhase').textContent = message;
+  $('progCount').textContent = 'GitHub Actions';
+  $('progFill').style.width = percent+'%';
+}
+async function waitForPublishedSnapshot(runId, previous, timeoutMs){
+  const until = Date.now()+timeoutMs;
+  while(Date.now()<until){
+    await wait(10000);
+    await loadData(true);
+    if(DATA && DATA.meta && String(DATA.meta.workflow_run_id||'')===String(runId)) return true;
+    if(!runId && DATA && DATA.generated_at && DATA.generated_at!==previous) return true;
+    remoteProgress('Scraping terminado; esperando a que Vercel publique los datos...', 90);
+  }
+  return false;
+}
+async function followRun(runId, requestedAt, previousSnapshot){
+  const until = Date.now()+55*60*1000;
+  let id = runId;
+  while(Date.now()<until){
+    const query = id ? 'run_id='+encodeURIComponent(id) : 'since='+encodeURIComponent(requestedAt);
+    const state = await api('/api/refresh?'+query, {cache:'no-store'});
+    if(state.run_id) id = state.run_id;
+    if(state.status==='completed'){
+      if(state.conclusion!=='success') throw new Error('El scraping terminó con estado '+(state.conclusion||'desconocido')+'. Revisa '+(state.html_url||'GitHub Actions'));
+      remoteProgress('Scraping listo; esperando el redespliegue de Vercel...', 88);
+      if(await waitForPublishedSnapshot(state.run_id||id, previousSnapshot, 12*60*1000)) return;
+      throw new Error('GitHub terminó bien, pero Vercel aún no ha publicado la instantánea nueva. Revisa '+(state.html_url||'GitHub Actions'));
+    }
+    remoteProgress(state.status==='queued'?'Scraping en cola en GitHub Actions?':'Scrapeando Zococity y PCComponentes online...', state.status==='queued'?8:35);
+    await wait(8000);
+  }
+  throw new Error('El scraping sigue en marcha. Puedes consultar el progreso en GitHub Actions.');
+}
+async function refresh(){
   hideErr();
+  if(!DATA) await loadData(true);
+  if(!DATA) { showErr('No se pudo leer la instantánea publicada.'); return; }
+  const previous = DATA && DATA.generated_at;
   $('btnRefresh').disabled = true;
+  $('btnRefresh').classList.add('running');
+  remoteProgress('Solicitando scraping online...', 5);
   try{
-    await loadData();
-    $('meta').textContent += ' · recargada a las ' + new Date().toLocaleTimeString('es-ES');
+    const skip = $('skipSearch').checked ? '1':'0';
+    const startedAt = new Date().toISOString();
+    const run = await api('/api/refresh?skip_search='+skip, {method:'POST'});
+    remoteProgress(run.already_running?'Ya hay un scraping en marcha...':'Iniciando GitHub Actions...', 8);
+    await followRun(run.run_id, run.requested_at||startedAt, previous);
+    remoteProgress('Precios actualizados', 100);
+  }catch(e){
+    showErr('No se pudo completar la actualización: '+(e.message||e));
   }finally{
     $('btnRefresh').disabled = false;
+    $('btnRefresh').classList.remove('running');
   }
 }
 
 ''' + html[block_end:]
-print('ok: bloque progreso JS')
+print('ok: scraping remoto y seguimiento de publicación')
 
 # 8) listeners y arranque (tras el paso 7, los tres listeners anteriores ya no existen)
 rep('''['q','fCat','fAvail'].forEach(id=>$(id).addEventListener('input', renderTable));
@@ -125,7 +167,7 @@ detectEnv();''', 'listeners')
 #    que lo atienda (la app local lo define en el bloque de progreso). Se sustituye
 #    por un refresco silencioso que relee la instantánea publicada cada 5 min.
 rep('poll(); setInterval(()=>{ poll(); }, 5000);',
-    '''// refresco silencioso cada 5 min: relee la instantánea publicada (sin backend no hay proceso)
+    '''// refresco silencioso cada 5 min: carga la instantánea publicada
 setInterval(()=>{ loadData(); }, 300000);''', 'poll muerto -> refresco silencioso')
 
 # 10) metadatos para buscadores y redes (la metadata de Next desaparece con el export)
@@ -142,13 +184,14 @@ rep('<meta name="viewport" content="width=device-width, initial-scale=1.0">',
     'metadatos (description, Open Graph, favicon)')
 
 # 9) pie
-rep('''  $('foot').textContent = 'Precios con IVA sin gastos de envío · lectura en directo significa que el dato se tomó de la web oficial en el momento de la actualización · herramientas: nodriver + Chrome';''',
-'''  $('foot').textContent = 'Copia pública de consulta · precios con IVA sin gastos de envío · la actualización en directo (Zococity vía Shopify + PCComponentes con nodriver/Chrome) se ejecuta en la app local del propietario';''', 'footer')
+old_footer = next(line for line in html.splitlines() if "$('foot').textContent = " in line)
+new_footer = "  $('foot').textContent = 'Instantánea pública · precios con IVA sin gastos de envío · el botón Actualizar precios online lanza el scraping en GitHub Actions';"
+rep(old_footer, new_footer, 'footer')
 
 # comprobaciones finales: nada debe llamar a la API del backend
-for bad in ('/api/data', '/api/status', '/api/refresh', '/api/excel', '/api/cancel'):
+for bad in ('/api/data', '/api/status', '/api/excel', '/api/cancel'):
     assert bad not in html, f'referencia residual a {bad}'
-print('ok: sin referencias a la API del backend')
+print('ok: sin referencias a APIs locales')
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(html, encoding='utf-8')

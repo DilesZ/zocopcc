@@ -166,6 +166,7 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
             'n_zoco': sum(1 for r in records if r.get('zoco_live')),
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),
             'n_buscador': len(buscador),
+            'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
         },
         'products': records,
     }

@@ -1,5 +1,6 @@
-# Lo único que se despliega es public/ (index.html + data.json).
-# El resto es el scraper local y utilidades: no debe viajar a Vercel.
+# public/ contiene el sitio y los datos estaticos.
+# api/refresh.js queda incluido como funcion serverless de Vercel.
+# El scraper y las utilidades locales no se despliegan.
 .git
 .github
 download
