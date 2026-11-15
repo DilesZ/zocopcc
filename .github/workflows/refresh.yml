@@ -91,5 +91,18 @@ jobs:
             exit 0
           fi
           git commit -m "datos: instantanea $(date -u +%FT%TZ) [skip ci]"
-          # El push dispara el redespliegue automatico de Vercel.
-          git push
+          # Otro commit a main puede entrar mientras dura el scraping (por
+          # ejemplo, una edición del cron). Reaplica nuestra instantánea sobre
+          # la punta actual y vuelve a intentar, conservando el resultado más
+          # reciente del scraping en caso de conflicto en data.json.
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "No se pudo publicar tras 3 intentos."
+              exit 1
+            fi
+            git fetch origin main
+            git rebase -X theirs origin/main
+          done
