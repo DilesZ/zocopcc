@@ -56,14 +56,51 @@ def chrome_sandbox():
 def chrome_extra_args():
     """Argumentos de Chrome que solo aplican en CI."""
     if os.environ.get('ZOCO_NO_SANDBOX') == '1':
-        # /dev/shm es pequeño en los runners: sin esto Chrome puede caer.
-        return ['--disable-dev-shm-usage']
+        # nodriver captura stdout/stderr de Chrome en tuberias que nadie lee:
+        # con el logging interno apagado la tuberia queda practically vacia.
+        return ['--disable-logging']
     return []
 
 
 def chrome_args():
     """browser_args comun a todas las sesiones de Chrome."""
     return ['--lang=es-ES', '--window-size=1300,850'] + chrome_extra_args()
+
+
+def _kill_stray_chrome():
+    """Mata los Chrome que hayan quedado vivos de un arranque fallido."""
+    if platform.system() != 'Linux':
+        return
+    try:
+        subprocess.run(['pkill', '-f', 'remote-debugging-port'],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+    except Exception:
+        pass
+
+
+async def start_browser(attempts=4, backoff=5):
+    """Arranca Chrome y devuelve la sesion de nodriver, con reintentos.
+
+    nodriver solo espera ~2,75 s a que Chrome abra su puerto de depuracion
+    (0,25 s + 5 intentos de 0,5 s). En un runner frio (primer arranque: binario
+    en cache, perfil nuevo) se queda corto y aborta con
+    'Failed to connect to browser'. El primer intento deja el sistema caliente,
+    asi que reintentando arranca a tiempo.
+    """
+    import nodriver as uc
+    last = None
+    for i in range(1, attempts + 1):
+        try:
+            return await uc.start(browser_executable_path=find_chrome(), headless=False,
+                                  browser_args=chrome_args(), sandbox=chrome_sandbox(),
+                                  **ensure_display())
+        except Exception as e:
+            last = e
+            print(f'[chrome] no se pudo arrancar (intento {i}/{attempts}): {e}', flush=True)
+            if i < attempts:
+                _kill_stray_chrome()
+                time.sleep(backoff * i)
+    raise last
 
 
 def ensure_display():
@@ -99,9 +136,7 @@ XHR_JS = """
 
 async def _fetch(handles, out, on_progress, cancel):
     import nodriver as uc
-    kwargs = ensure_display()
-    browser = await uc.start(browser_executable_path=find_chrome(), headless=False,
-                             browser_args=chrome_args(), sandbox=chrome_sandbox(), **kwargs)
+    browser = await start_browser()
     tab = await browser.get(ZOCO_BASE)
     for _ in range(20):                       # espera a que la home cargue (hasta 40 s)
         await tab.sleep(2)
