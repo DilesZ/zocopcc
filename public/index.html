@@ -59,16 +59,6 @@
   .log{margin-top:7px;font:10px/1.5 var(--mono);color:var(--muted);white-space:pre-wrap;max-height:70px;overflow:auto}
   .err{display:none;max-width:1408px;margin:0 auto;padding:0 36px 14px;color:var(--red);font-size:12px}
   .main{max-width:1480px;margin:0 auto;padding:40px 36px 60px}
-  .hero{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;padding:0 2px 30px}
-  .eyebrow{margin:0 0 10px;color:var(--pine);font-size:10px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
-  h1{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(32px,4vw,48px);line-height:1.04;font-weight:500;letter-spacing:-.045em;color:#17251f}
-  .hero-copy{max-width:540px;margin:13px 0 0;color:var(--muted);font-size:14px}
-  .hero-note{max-width:285px;padding:0 0 4px 17px;border-left:2px solid var(--mint);color:var(--muted);font-size:11px;line-height:1.65}
-  .hero-note strong{display:block;color:var(--ink-soft);font-size:11px;margin-bottom:3px}
-  .warn{display:none;align-items:center;gap:10px;margin:0 0 22px;padding:11px 14px;background:#f2f6f2;border:1px solid #dce8df;border-radius:7px;color:var(--ink-soft);font-size:11px;line-height:1.55}
-  .warn:before{content:'';width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#5a8c6c}
-  .warn b{color:var(--pine-dark)}
-  .warn code{font:10px var(--mono);background:#e8efe9;padding:2px 4px;border-radius:3px}
   .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:24px;overflow:hidden}
   .stat{padding:18px 21px;min-width:0}
   .stat+.stat{border-left:1px solid var(--line)}
@@ -145,10 +135,6 @@
     .last-updated{grid-column:1;grid-row:auto}
     .progress-panel,.err{padding-left:16px;padding-right:16px}
     .main{padding:27px 14px 36px}
-    .hero{display:block;padding:0 2px 22px}
-    h1{font-size:35px}
-    .hero-copy{font-size:13px;max-width:430px}
-    .hero-note{margin-top:18px;max-width:none}
     .stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:15px}
     .stat{padding:14px 15px}
     .stat:nth-child(3){border-left:0;border-top:1px solid var(--line)}
@@ -195,22 +181,6 @@
   </header>
 
   <main class="main" id="top">
-    <section class="hero">
-      <div>
-        <p class="eyebrow">Comparativa de precios · audio y alta fidelidad</p>
-        <h1>Compara precios de audio</h1>
-        <p class="hero-copy">Precio, disponibilidad y vendedor en dos tiendas especializadas. Una vista clara para comparar antes de comprar.</p>
-      </div>
-      <div class="hero-note"><strong>Cómo leer esta comparativa</strong>Los precios incluyen IVA y no incluyen gastos de envío. La disponibilidad puede variar entre actualizaciones.</div>
-    </section>
-
-    <div class="warn" id="envBox">
-  <b>Actualización online.</b><br>
-  El botón ejecuta el scraping en un navegador real de GitHub Actions. Lee los 54 productos,
-  publica una nueva instantánea y la web se actualiza al terminar el redespliegue de Vercel.
-  La actualización puede tardar varios minutos.
-</div>
-
     <section class="stats" id="kpis" aria-label="Resumen de la comparativa"></section>
 
     <section class="catalog" aria-labelledby="catalogTitle">
@@ -273,11 +243,7 @@ async function loadData(quiet=false){
 
 function showErr(m){ const b=$('errBox'); b.textContent=m; b.style.display='block'; }
 function hideErr(){ $('errBox').style.display='none'; }
-function showEnv(){ $('envBox').style.display='block'; }
-
-function detectEnv(){
-  showEnv();
-}
+function detectEnv(){}
 
 function render(){
   const p=DATA.products||[], meta=DATA.meta||{};

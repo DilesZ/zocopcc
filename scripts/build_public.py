@@ -53,16 +53,7 @@ rep('''    <button id="btnCancel" style="display:none">⏹ Parar</button>
 
 
 
-# 3) explicar la actualización online
-b_start = html.index('<div class="warn" id="envBox">')
-b_end = html.index('</div>', b_start) + len('</div>')
-html = html[:b_start] + '''<div class="warn" id="envBox">
-  <b>Actualización online.</b><br>
-  El botón ejecuta el scraping en un navegador real de GitHub Actions. Lee los 54 productos,
-  publica una nueva instantánea y la web se actualiza al terminar el redespliegue de Vercel.
-  La actualización puede tardar varios minutos.
-</div>''' + html[b_end:]
-print('ok: banner online')
+# 3) El bloque introductorio y el aviso de scraping se han retirado del sitio publico.
 
 # 4) loadData: leer la instantánea relativa y avisar en modo banner si falla
 rep('''async function loadData(){
@@ -83,18 +74,8 @@ rep('''async function loadData(){
   }
 }''', 'loadData estático')
 
-# 5) detectEnv estático
-rep('''async function detectEnv(){
-  if(location.protocol==='file:'){ showEnv(); return; }
-  try{
-    const r=await fetch('/api/status');
-    if(!r.ok){ showEnv(); return; }
-    const j=await r.json().catch(()=>null);
-    if(!j || j.running===undefined) showEnv();
-  }catch(e){ showEnv(); }
-}''', '''function detectEnv(){
-  showEnv();
-}''', 'detectEnv')
+# 5) detectEnv ya no muestra un aviso.
+rep('''function detectEnv(){}''', '''function detectEnv(){}''', 'detectEnv')
 
 # 6) subtítulo con letra de copia pública
 rep('''  $('meta').textContent = 'Generado: '+ (DATA.generated_at||'—').replace('T',' ') +
