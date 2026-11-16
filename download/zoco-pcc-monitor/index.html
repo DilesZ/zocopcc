@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zococity vs PCComponentes · Precios en directo</title>
+<title>Zococity, PCComponentes, Carrefour y Fnac · Comparador de precios</title>
 <style>
   :root{
     color-scheme:light;
@@ -280,7 +280,7 @@
     <div class="head-inner">
       <a class="brand" href="#top" aria-label="Comparador de precios, inicio">
         <span class="brand-mark" aria-hidden="true">Z/P</span>
-        <span><span class="brand-name">Comparador de precios</span><span class="brand-sub">Zococity · PCComponentes</span></span>
+        <span><span class="brand-name">Comparador de precios</span><span class="brand-sub">Zococity · PCComponentes · Carrefour · Fnac</span></span>
       </a>
       <div class="last-updated">
         <span class="status-dot" aria-hidden="true"></span>
@@ -499,7 +499,7 @@ function updateProg(st){
   $('prog').classList.toggle('on', !!(on || hasErr));
   if(hasErr && !on) showErr('Último proceso con error: ' + st.last_result.error);
   if(on){
-    const phases={zoco:'Leyendo catálogo de Zococity', pcc_fichas:'Abriendo fichas de PCComponentes en directo', pcc_buscar:'Verificando productos en el buscador de PCC', inicio:'Preparando'};
+    const phases={zoco:'Leyendo catálogo de Zococity', pcc_fichas:'Abriendo fichas de PCComponentes en directo', pcc_buscar:'Verificando productos en el buscador de PCC', carrefour:'Leyendo ofertas de Carrefour', fnac:'Leyendo ofertas de Fnac', inicio:'Preparando'};
     $('progPhase').textContent = phases[st.phase]||st.phase||'…';
     const total=st.total||0, done=st.done||0;
     $('progCount').textContent = done+'/'+total;
