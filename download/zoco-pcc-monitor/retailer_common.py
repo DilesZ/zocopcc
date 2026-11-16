@@ -259,6 +259,27 @@ def fetch_store_offers(products, previous, allowed_host, retailer,
     cancel = cancel or {}
     by_handle = {p['handle']: dict(p) for p in products}
     prev = previous or {}
+    # Una tienda bloqueada se pausa para no repetir peticiones denegadas cada
+    # 45 minutos. Solo se reanuda si el catálogo cambia la URL de producto.
+    previously_blocked = any(
+        (prev.get(handle) or {}).get(f'{retailer}_status') == 'blocked'
+        for handle in by_handle
+    )
+    changed_url = any(
+        _allowed_product_url(product.get(f'url_{retailer}'), allowed_host)
+        and product.get(f'url_{retailer}') != (prev.get(handle) or {}).get(f'url_{retailer}')
+        for handle, product in by_handle.items()
+    )
+    if previously_blocked and not changed_url:
+        return {
+            handle: {
+                'status': 'blocked',
+                'live': False,
+                'error': 'Lectura pausada tras una denegación anterior; cambia la URL de producto para reintentar.',
+                'url': (prev.get(handle) or {}).get(f'url_{retailer}'),
+            }
+            for handle in by_handle
+        }
     targets = {}
     for handle, product in by_handle.items():
         old = prev.get(handle) or {}
@@ -271,6 +292,9 @@ def fetch_store_offers(products, previous, allowed_host, retailer,
             targets[handle] = urls
 
     found = asyncio.run(_fetch_pages(targets, by_handle, retailer, on_progress, cancel))
+    for handle, result in found.items():
+        if result.get('status') in ('blocked', 'cancelled') and not result.get('url'):
+            result['url'] = (targets.get(handle) or [None])[0]
     for handle in by_handle:
         if handle not in found:
             found[handle] = {
