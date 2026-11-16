@@ -19,6 +19,7 @@ from zoco_fetcher import fetch_products
 from pcc_fetcher import fetch_fichas, verify_search, pick_offer, seller_of, avail_of, parse_card_price
 from fnac_fetcher import fetch_fnac
 from carrefour_fetcher import fetch_carrefour
+from awin_fetcher import fetch_awin_offers
 
 DATA_LOCK = threading.Lock()
 
@@ -44,7 +45,8 @@ def merge_store_offer(rec, store, offer, previous):
         rec[f'ean_{store}'] = offer.get('ean')
         rec[f'url_{store}'] = offer.get('url')
         observed = offer.get('observed_at') or datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds')
-        rec[f'source_{store}'] = f'Ficha {store.title()} en directo · {observed[:16].replace("T", " ")}'
+        source_label = offer.get('source') or f'Ficha {store.title()} en directo'
+        rec[f'source_{store}'] = f'{source_label} · {observed[:16].replace("T", " ")}'
         rec[f'{store}_live'] = True
         rec[f'{store}_status'] = 'matched'
         rec.pop(f'note_{store}', None)
@@ -205,10 +207,14 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         zp = zoco.get(p['handle']) or {}
         pp = prev.get(p['handle']) or {}
         retailer_products.append({**p, 'ean': zp.get('ean') or pp.get('ean')})
-    retailers = {
-        'carrefour': fetch_carrefour(retailer_products, prev, on_progress=cb, cancel=cancel),
-        'fnac': fetch_fnac(retailer_products, prev, on_progress=cb, cancel=cancel),
-    }
+    awin_retailers = fetch_awin_offers(retailer_products, on_progress=cb, cancel=cancel)
+    retailers = {}
+    fetchers = {'carrefour': fetch_carrefour, 'fnac': fetch_fnac}
+    for store, fetcher in fetchers.items():
+        if awin_retailers.get(store) is None:
+            retailers[store] = fetcher(retailer_products, prev, on_progress=cb, cancel=cancel)
+        else:
+            retailers[store] = awin_retailers[store]
 
     # 5) Fusión y escritura
     records = merge(products, zoco, fichas, buscador, retailers, prev)
@@ -228,8 +234,8 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         'meta': {
             'zoco_source': 'Catálogo Shopify de zococity.es leído en directo (XHR /products/<handle>.js vía nodriver)',
             'pcc_source': 'Fichas oficiales de pccomponentes.com leídas en directo (JSON-LD vía nodriver, supera Cloudflare)',
-            'carrefour_source': 'Fichas de producto del sitemap oficial y JSON-LD con EAN exacto',
-            'fnac_source': 'Fichas de producto del sitemap oficial y JSON-LD con EAN exacto',
+            'carrefour_source': 'Feed de producto autorizado de Awin, EAN exacto' if os.environ.get('AWIN_CARREFOUR_FEED_URL') else 'Fichas oficiales por URL de producto y EAN exacto',
+            'fnac_source': 'Feed de producto autorizado de Awin, EAN exacto' if os.environ.get('AWIN_FNAC_FEED_URL') else 'Fichas oficiales por URL de producto y EAN exacto',
             'limit': limit, 'skip_search': skip_search,
             'n_zoco': sum(1 for r in records if r.get('zoco_live')),
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),
