@@ -13,8 +13,10 @@ CAT_ORDER = ['Auriculares HiFi', 'Auriculares Bluetooth', 'DAC / Amplificador',
 
 HEADERS = ['Categoría', 'Marca', 'Producto (Zococity)', 'Ref. Zoco', 'EAN',
            'Precio Zococity (€)', 'Stock Zococity', '¿En PCC?', 'Producto PCC',
-           'Cod. art. PCC', 'Vendedor PCC', 'Precio PCC (€)', 'Dif. €', 'Dif. %',
-           'Más barato en', 'Disponibilidad PCC', 'Fuente del dato PCC', 'Ficha PCC', 'Ficha Zoco']
+           'Cod. art. PCC', 'Vendedor PCC', 'Precio PCC (€)', 'Precio Carrefour (€)', 'Vendedor Carrefour',
+           'Stock Carrefour', 'Fuente Carrefour', 'Ficha Carrefour', 'Precio Fnac (€)', 'Vendedor Fnac',
+           'Stock Fnac', 'Fuente Fnac', 'Ficha Fnac', 'Dif. €', 'Dif. %', 'Más barato en',
+           'Disponibilidad PCC', 'Fuente del dato PCC', 'Ficha PCC', 'Ficha Zoco']
 
 GREEN = 'C6EFCE'; GREEN_F = '006100'; BLUE = 'DDEBF7'; BLUE_F = '1F4E78'
 GRAY = 'F2F2F2'; DARK = '203864'; ORANGE = 'FFF2CC'
@@ -42,7 +44,7 @@ def build():
 
     # Título
     ws.merge_cells(start_row=1, start_column=2, end_row=1, end_column=len(HEADERS) + 1)
-    c = ws.cell(row=1, column=2, value='Comparativa de precios · Zococity vs PCComponentes · precios PCC leídos en directo')
+    c = ws.cell(row=1, column=2, value='Comparativa de precios · Zococity, PCComponentes, Carrefour y Fnac')
     c.font = Font(bold=True, size=14, color=DARK)
     ws.merge_cells(start_row=2, start_column=2, end_row=2, end_column=len(HEADERS) + 1)
     c2 = ws.cell(row=2, column=2, value=f'Generado el {gen} · Precios con IVA · Fuente: fichas oficiales de pccomponentes.com (navegador automatizado que supera Cloudflare)')
@@ -79,14 +81,19 @@ def build():
 
     row = r0 + 1
     for idx, r in enumerate(recs):
-        pz, pp = fmt_eur(r.get('price_zoco')), fmt_eur(r.get('price_pcc'))
-        dif = (pz - pp) if (pz is not None and pp is not None) else None
-        difp = (dif / pp) if dif is not None and pp else None
-        mejor = ('Empate' if dif == 0 else 'PCComponentes' if dif > 0 else 'Zococity') if dif is not None else None
+        pz = fmt_eur(r.get('price_zoco'))
+        competitors = [(name, fmt_eur(r.get('price_' + key))) for name, key in [('PCComponentes','pcc'),('Carrefour','carrefour'),('Fnac','fnac')]]
+        competitors = [(name, price) for name, price in competitors if price is not None]
+        best_name, best_price = min(competitors, key=lambda x: x[1]) if competitors else (None, None)
+        dif = (pz - best_price) if (pz is not None and best_price is not None) else None
+        difp = (dif / best_price) if dif is not None and best_price else None
+        mejor = ('Empate' if dif == 0 else best_name if dif > 0 else 'Zococity') if dif is not None else None
         vals = [r.get('cat'), r.get('brand'), r.get('title_zoco'), r.get('sku_zoco'), r.get('ean'),
                 pz, 'En stock' if r.get('stock_zoco') else ('Agotado' if r.get('stock_zoco') is False else '—'),
                 'Sí' if r.get('in_pcc') else 'No', r.get('title_pcc'), r.get('code_pcc'),
-                r.get('seller_pcc'), pp, dif, difp, mejor, disp_pcc(r),
+                r.get('seller_pcc'), fmt_eur(r.get('price_pcc')), fmt_eur(r.get('price_carrefour')), r.get('seller_carrefour'),
+                ('En stock' if r.get('stock_carrefour') is True else 'Agotado' if r.get('stock_carrefour') is False else '—'), r.get('source_carrefour') or '—', r.get('url_carrefour') or '—',
+                fmt_eur(r.get('price_fnac')), r.get('seller_fnac'), ('En stock' if r.get('stock_fnac') is True else 'Agotado' if r.get('stock_fnac') is False else '—'), r.get('source_fnac') or '—', r.get('url_fnac') or '—', dif, difp, mejor, disp_pcc(r),
                 r.get('source_pcc') or '—',
                 (r.get('url_pcc') or '—').replace('https://www.pccomponentes.com/', 'pccomponentes.com/'),
                 r.get('url_zoco', '').replace('https://zococity.es/', 'zococity.es/')]
@@ -155,7 +162,7 @@ def build():
         'PCComponentes: ficha oficial de cada producto abierta en directo con nodriver (Chrome real no detectable que supera el reto de Cloudflare); del JSON-LD se lee precio, stock, vendedor, SKU interno y EAN.',
         'Los productos sin ficha conocida se verifican con el buscador interno de PCComponentes en directo; «No disponible» significa ausencia comprobada el día de la consulta.',
         'Excepciones señaladas en la columna «Fuente del dato PCC» (índice de búsqueda o tarjeta del buscador cuando la ficha está blindada).',
-        'Dif. € = Zoco − PCC; positivo = PCComponentes más barato. No se incluyen gastos de envío ni promociones.',
+        'Carrefour y Fnac: fichas oficiales y asociación solo con EAN exacto; se conserva el último precio confirmado si una lectura falla. Dif. € = Zoco − oferta competidora más baja; positivo = esa tienda es más barata. No se incluyen gastos de envío ni promociones.',
     ]
     for ln in lines:
         c = ws.cell(row=row, column=2, value=ln)
@@ -174,7 +181,7 @@ def build():
 
     buf = io.BytesIO()
     wb.save(buf)
-    fname = 'Comparativa_Zococity_vs_PCComponentes.xlsx'
+    fname = 'Comparativa_Zococity_PCComponentes_Carrefour_Fnac.xlsx'
     return buf, fname
 
 
