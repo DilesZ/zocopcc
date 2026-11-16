@@ -530,7 +530,7 @@ async function followRun(runId, requestedAt, previousSnapshot){
       if(await waitForPublishedSnapshot(state.run_id||id, previousSnapshot, 12*60*1000)) return;
       throw new Error('GitHub terminó bien, pero Vercel aún no ha publicado la instantánea nueva. Revisa '+(state.html_url||'GitHub Actions'));
     }
-    remoteProgress(state.status==='queued'?'Scraping en cola en GitHub Actions?':'Scrapeando Zococity y PCComponentes online...', state.status==='queued'?8:35);
+    remoteProgress(state.status==='queued'?'Scraping en cola en GitHub Actions?':'Scrapeando Zococity, PCComponentes, Carrefour y Fnac online...', state.status==='queued'?8:35);
     await wait(8000);
   }
   throw new Error('El scraping sigue en marcha. Puedes consultar el progreso en GitHub Actions.');
