@@ -1,8 +1,6 @@
-# Zococity vs PCComponentes · comparador de precios
+# Comparador de precios · Zococity, PCComponentes, Carrefour y Fnac
 
-Comparativa de precios entre [Zococity](https://zococity.es) y
-[PCComponentes](https://www.pccomponentes.com) para 54 productos de audio y
-tecnología: precio, stock, vendedor y código de artículo en ambas tiendas.
+Comparativa de 54 productos de audio y tecnología entre [Zococity](https://zococity.es), [PCComponentes](https://www.pccomponentes.com), [Carrefour](https://www.carrefour.es) y [Fnac](https://www.fnac.es), con precio, stock y vendedor por tienda.
 
 **En producción:** <https://zocopcc.vercel.app>
 
@@ -20,7 +18,7 @@ tecnología: precio, stock, vendedor y código de artículo en ambas tiendas.
 │  runner ubuntu-24.04 │──push─>│  public/data.json │──push─>│  zocopcc     │
 │                      │        │  public/index.html│        │  .vercel.app │
 │  Chrome real + Xvfb  │        └───────────────────┘        └──────────────┘
-│  lee ambas tiendas   │
+│  lee las 4 tiendas   │
 └──────────────────────┘
 ```
 
@@ -29,7 +27,7 @@ tecnología: precio, stock, vendedor y código de artículo en ambas tiendas.
    como respaldo, aunque GitHub puede retrasar o perder eventos programados.
 2. **Scraping**: la API de Vercel inicia GitHub Actions. Un runner
    `ubuntu-24.04` arranca Chrome con `nodriver` sobre un display virtual (`Xvfb`)
-   y lee las fichas configuradas.
+   y lee las fichas configuradas para las cuatro tiendas.
 3. **Generación**: `scripts/build_public.py` convierte la instantánea en
    `public/index.html` y `public/data.json`.
 4. **Publicación**: un commit de datos a `main` dispara el redespliegue automático
@@ -42,7 +40,7 @@ tecnología: precio, stock, vendedor y código de artículo en ambas tiendas.
 > navegador real sin detectable (nodriver + Chrome headed) supera el reto. El
 > detalle completo está en `download/zoco-pcc-monitor/SKILL.md`.
 
-## Estructura
+## Fuentes de precios\n\nZococity se lee directamente y PCComponentes usa sus fichas configuradas. Carrefour y Fnac usan URLs de producto guardadas en `products.json`; esas URLs sirven solo para llegar a la ficha. El scraper acepta un precio únicamente si la ficha oficial publica el mismo EAN/GTIN en JSON-LD. Si no hay URL o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto.\n\n## Estructura
 
 ```
 comparador/
@@ -118,9 +116,7 @@ respaldo adicional; la concurrencia impide que se ejecuten dos scrapeos a la vez
 
 ### Alternativas
 
-La actualización automática operativa está configurada en cron-job.org cada 15
-minutos con zona horaria `Europe/Madrid`; el workflow también mantiene un
-`schedule` de GitHub. Para confirmar una ejecución, revisa el historial de
+cron-job.org mantiene tres jobs coordinados cada 45 minutos en zona horaria `Europe/Madrid`; el workflow también mantiene tres reglas cron equivalentes en GitHub. Para confirmar una ejecución, revisa el historial de
 cron-job.org, luego **GitHub → Actions → Refrescar precios**, y por último el sello
 de actualización publicado en la web. También se puede iniciar desde **Run workflow**.
 
@@ -148,8 +144,7 @@ git add public/ && git commit -m "datos: instantánea" && git push
 - La lectura de PCComponentes depende de que Cloudflare no endurezca el reto
   contra las IP del runner. Si endurece, el scraper conserva los datos
   anteriores en caché y lo marca en la columna «Fuente».
-- El scraping tarda ~10 min con `--skip-search` y ~15 min con la verificación
-  adicional en el buscador interno de PCComponentes.
+- El scraping recorre las URLs de producto configuradas en el catálogo; su duración depende de cuántas fichas haya que abrir y del tiempo que tarden las tiendas.
 - El cron de GitHub no es exacto: las ejecuciones se pueden retrasar unos
   minutos bajo carga.
 
@@ -169,5 +164,4 @@ local de Vercel del proyecto original.
 
 ## Créditos
 
-`nodriver` + Chrome real para superar Cloudflare; Zococity leído por su API
-pública de Shopify; PCComponentes leído del JSON-LD de cada ficha oficial.
+Zococity leído de su API pública de Shopify; PCComponentes, Carrefour y Fnac leídos de las fichas oficiales, con asociación exacta por EAN/GTIN.
