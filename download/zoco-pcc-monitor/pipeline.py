@@ -53,6 +53,8 @@ def merge_store_offer(rec, store, offer, previous):
     for field in fields:
         key = f'{field}_{store}'
         rec[key] = previous.get(key)
+        if field == 'url' and not rec[key]:
+            rec[key] = (offer or {}).get('url')
     rec[f'{store}_live'] = False
     rec[f'{store}_status'] = 'stale' if had_value else (offer or {}).get('status', 'unresolved')
     if (offer or {}).get('error'):
