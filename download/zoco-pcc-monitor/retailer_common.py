@@ -40,7 +40,7 @@ PRODUCTS_JS = r"""
   for (const s of document.querySelectorAll('script[type="application/ld+json"]')) {
     try { visit(JSON.parse(s.textContent)); } catch (_) {}
   }
-  return JSON.stringify({title: document.title, products: out});
+  return JSON.stringify({title: document.title, url: location.href, text: (document.body && document.body.innerText || '').slice(0, 30000), products: out});
 })()
 """
 
@@ -118,24 +118,50 @@ def _choose_offer(product, retailer):
     return min(offers, key=lambda x: x['price'])
 
 
-def _exact_product(data, expected_ean, retailer):
+def _normalized_text(value):
+    value = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+', ' ', value).strip()
+
+
+def _exact_product(data, expected_ean, retailer, product_hint=''):
     expected = re.sub(r'\D', '', str(expected_ean or ''))
     if not expected:
         return None
-    for product in data.get('products') or []:
-        if _gtin(product) != expected:
-            continue
-        offer = _choose_offer(product, retailer)
-        return {
-            'matched': True,
-            'title': product.get('name') or '',
-            'sku': product.get('sku') or '',
-            'ean': expected,
-            'price': offer.get('price') if offer else None,
-            'seller': offer.get('seller') if offer else '',
-            'availability': offer.get('availability') if offer else None,
-        }
-    return None
+    products = data.get('products') or []
+    match = next((p for p in products if _gtin(p) == expected), None)
+
+    # Algunas fichas publican el EAN visible en la página, pero no en su JSON-LD.
+    # Solo se usa esa evidencia si la etiqueta EAN/GTIN declara exactamente el
+    # valor esperado y el Product JSON-LD concuerda con el título y el modelo.
+    if match is None:
+        visible_eans = re.findall(
+            r'\b(?:EAN|GTIN(?:\s*\d+)?)\s*[:\r\n]*\s*([0-9][0-9 .-]{7,16})',
+            str(data.get('text') or ''),
+            re.IGNORECASE,
+        )
+        visible_eans = [re.sub(r'\D', '', value) for value in visible_eans]
+        title = _normalized_text(data.get('title'))
+        hint_tokens = [t for t in _normalized_text(product_hint).split() if len(t) >= 3 and t not in STOP]
+        if expected in visible_eans and hint_tokens and all(t in title for t in hint_tokens):
+            named = [p for p in products if p.get('name')]
+            title_matches = [p for p in named if _normalized_text(p.get('name')) in title]
+            if len(title_matches) == 1:
+                match = title_matches[0]
+            elif len(products) == 1 and named:
+                match = named[0]
+
+    if match is None:
+        return None
+    offer = _choose_offer(match, retailer)
+    return {
+        'matched': True,
+        'title': match.get('name') or '',
+        'sku': match.get('sku') or '',
+        'ean': expected,
+        'price': offer.get('price') if offer else None,
+        'seller': offer.get('seller') if offer else '',
+        'availability': offer.get('availability') if offer else None,
+    }
 
 
 async def _read_page(tab):
@@ -177,11 +203,11 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
                         result = {'status': 'blocked', 'url': url, 'error': 'La página requiere verificación; se detuvo la lectura.'}
                         stop_retailer = True
                         break
-                    exact = _exact_product(data, expected_ean, retailer)
+                    exact = _exact_product(data, expected_ean, retailer, product.get('query') or product.get('title_zoco'))
                     if exact:
                         result = {
                             **exact, 'status': 'matched', 'url': url,
-                            'source': 'JSON-LD de ficha oficial',
+                            'source': 'EAN visible y oferta JSON-LD en ficha oficial',
                             'observed_at': datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds'),
                             'live': True,
                         }
