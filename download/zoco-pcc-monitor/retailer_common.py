@@ -6,22 +6,15 @@ usan páginas de búsqueda, endpoints privados ni retos anti-bot. Una oferta se
 asigna al catálogo únicamente si la ficha declara el mismo EAN/GTIN.
 """
 import asyncio
-import gzip
 import json
 import re
-import time
 import unicodedata
-import urllib.request
-import xml.etree.ElementTree as ET
 from datetime import datetime
-from urllib.parse import unquote, urlparse
+from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 from zoco_fetcher import start_browser
 
-SITEMAP_MAX_FILES = 60
-SITEMAP_MAX_BYTES = 30 * 1024 * 1024
-PRODUCTS_PER_ITEM = 2
 PAGE_GAP_SECONDS = 2.0
 PAGE_TIMEOUT_SECONDS = 25
 
@@ -56,77 +49,6 @@ STOP = {
     'wireless', 'con', 'para', 'the', 'new', 'negro', 'negra', 'blanco',
     'blanca', 'silver', 'black', 'white', 'pro', 'mk', 'ii', 'iii', 'de',
 }
-
-
-def _tag(tag):
-    return tag.rsplit('}', 1)[-1].lower()
-
-
-def _read_url(url):
-    req = urllib.request.Request(
-        url, headers={'User-Agent': 'zocopcc-price-monitor/1.0 (+public sitemap reader)'}
-    )
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        data = resp.read(SITEMAP_MAX_BYTES + 1)
-        if len(data) > SITEMAP_MAX_BYTES:
-            raise ValueError('sitemap supera el límite de tamaño')
-        if url.lower().endswith('.gz') or resp.headers.get('Content-Encoding') == 'gzip':
-            data = gzip.decompress(data)
-        return data
-
-
-def sitemap_product_urls(sitemap_roots, allowed_host):
-    """Lee sitemaps declarados por robots.txt; devuelve URLs de páginas de producto."""
-    pending = list(sitemap_roots)
-    visited = set()
-    product_urls = []
-    complete = True
-    while pending and len(visited) < SITEMAP_MAX_FILES:
-        sitemap = pending.pop(0)
-        if sitemap in visited:
-            continue
-        visited.add(sitemap)
-        try:
-            root = ET.fromstring(_read_url(sitemap))
-        except Exception:
-            complete = False
-            continue
-        locs = [el.text.strip() for el in root.iter() if _tag(el.tag) == 'loc' and el.text]
-        if _tag(root.tag) == 'sitemapindex':
-            pending.extend(u for u in locs if u.startswith('https://') and (urlparse(u).hostname or '').lower().endswith(allowed_host))
-        else:
-            for url in locs:
-                parsed = urlparse(url)
-                if parsed.scheme == 'https' and parsed.hostname and parsed.hostname.lower().endswith(allowed_host):
-                    product_urls.append(url)
-    if pending:
-        complete = False
-    return list(dict.fromkeys(product_urls)), complete
-
-
-def _tokens(value):
-    normalized = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
-    return [t for t in re.findall(r'[a-z0-9]+', normalized) if len(t) >= 3 and t not in STOP]
-
-
-def candidate_urls(urls, product, limit=PRODUCTS_PER_ITEM):
-    query = product.get('query') or product.get('title_zoco') or ''
-    brand = product.get('brand') or ''
-    brand_tokens = _tokens(brand)
-    query_tokens = _tokens(query)
-    model_tokens = [t for t in query_tokens if t not in brand_tokens]
-    if not model_tokens:
-        model_tokens = query_tokens
-    if not model_tokens:
-        return []
-    ranked = []
-    for url in urls:
-        slug = unquote(urlparse(url).path).lower()
-        if all(token in slug for token in model_tokens):
-            brand_hits = sum(1 for token in brand_tokens if token in slug)
-            ranked.append((brand_hits, len(model_tokens), url))
-    ranked.sort(key=lambda row: (-row[0], -row[1], row[2]))
-    return [url for _, _, url in ranked[:limit]]
 
 
 def _gtin(product):
@@ -290,42 +212,45 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
     return results
 
 
-def fetch_store_offers(products, previous, sitemap_roots, allowed_host, retailer,
+def _allowed_product_url(url, allowed_host):
+    parsed = urlparse(str(url or ''))
+    host = (parsed.hostname or '').lower()
+    return (
+        parsed.scheme == 'https'
+        and (host == allowed_host or host.endswith('.' + allowed_host))
+        and parsed.path
+    )
+
+
+def fetch_store_offers(products, previous, allowed_host, retailer,
                        on_progress=None, cancel=None):
-    """Fetch exact-EAN offers; prior successful URLs bypass sitemap discovery."""
+    """Lee URLs de producto sembradas en el catálogo o validadas previamente.
+
+    La asociación nunca se basa solo en el texto del URL: la ficha debe exponer
+    el EAN/GTIN exacto en JSON-LD. Si el catálogo no trae URL, queda sin resolver
+    y no se consultan rutas de búsqueda ni sitemaps con acceso denegado.
+    """
     cancel = cancel or {}
     by_handle = {p['handle']: dict(p) for p in products}
     prev = previous or {}
-    saved_urls = {}
-    missing = []
+    targets = {}
     for handle, product in by_handle.items():
         old = prev.get(handle) or {}
-        url = old.get(f'url_{retailer}')
-        if url and (urlparse(url).hostname or '').lower().endswith(allowed_host):
-            saved_urls[handle] = [url]
-        else:
-            missing.append(handle)
-    sitemap_urls = []
-    sitemap_complete = True
-    if missing and not cancel.get('stop'):
-        try:
-            sitemap_urls, sitemap_complete = sitemap_product_urls(sitemap_roots, allowed_host)
-        except Exception:
-            sitemap_complete = False
-    for handle in missing:
-        product = by_handle[handle]
-        candidates = candidate_urls(sitemap_urls, product)
-        saved_urls[handle] = candidates
-        ean = product.get('ean')
-        if not ean:
-            saved_urls[handle] = []
-    targets = {h: urls for h, urls in saved_urls.items() if urls}
+        candidates = (old.get(f'url_{retailer}'), product.get(f'url_{retailer}'))
+        urls = []
+        for url in candidates:
+            if _allowed_product_url(url, allowed_host) and url not in urls:
+                urls.append(url)
+        if urls:
+            targets[handle] = urls
+
     found = asyncio.run(_fetch_pages(targets, by_handle, retailer, on_progress, cancel))
     for handle in by_handle:
         if handle not in found:
             found[handle] = {
-                'status': 'unresolved' if sitemap_complete else 'error',
+                'status': 'cancelled' if cancel.get('stop') else 'unresolved',
                 'live': False,
-                'error': None if sitemap_complete else 'No se pudo leer el sitemap oficial completo.',
+                'error': None if cancel.get('stop') else
+                    'Sin URL de producto confirmada en el catálogo para esta tienda.',
             }
     return found
