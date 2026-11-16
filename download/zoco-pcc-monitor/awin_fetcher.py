@@ -33,7 +33,7 @@ def _request(url):
 def _csv_records(data):
     text = data.decode("utf-8-sig", errors="replace")
     try:
-        dialect = csv.Sniffer().sniff(text[:8192], delimiters=",;|\\t")
+        dialect = csv.Sniffer().sniff(text[:8192], delimiters=",;|\t")
     except csv.Error:
         dialect = csv.excel
     return list(csv.DictReader(io.StringIO(text), dialect=dialect))
@@ -46,7 +46,7 @@ def _feed_rows(data):
             if not names:
                 return []
             data = archive.read(names[0])
-    elif data[:2] == b"\\x1f\\x8b":
+    elif data[:2] == b"\x1f\x8b":
         data = gzip.decompress(data)
 
     text = data.decode("utf-8-sig", errors="replace")
@@ -71,7 +71,7 @@ def _feed_rows(data):
 
 
 def _normal_gtin(value):
-    return re.sub(r"\\D", "", str(value or ""))
+    return re.sub(r"\D", "", str(value or ""))
 
 
 def _value(row, *names):
