@@ -17,6 +17,8 @@ DATA_PREV = os.path.join(BASE, 'data_prev.json')
 
 from zoco_fetcher import fetch_products
 from pcc_fetcher import fetch_fichas, verify_search, pick_offer, seller_of, avail_of, parse_card_price
+from fnac_fetcher import fetch_fnac
+from carrefour_fetcher import fetch_carrefour
 
 DATA_LOCK = threading.Lock()
 
@@ -28,7 +30,40 @@ def load_json(path, default):
         return default
 
 
-def merge(products, zoco, fichas, buscador, prev):
+
+
+def merge_store_offer(rec, store, offer, previous):
+    """Conserva el último dato confirmado si la lectura de una tienda falla."""
+    fields = ('title', 'price', 'seller', 'stock', 'sku', 'ean', 'url', 'source')
+    if offer and offer.get('status') == 'matched':
+        rec[f'title_{store}'] = offer.get('title')
+        rec[f'price_{store}'] = offer.get('price')
+        rec[f'seller_{store}'] = offer.get('seller') or None
+        rec[f'stock_{store}'] = offer.get('availability')
+        rec[f'sku_{store}'] = offer.get('sku') or None
+        rec[f'ean_{store}'] = offer.get('ean')
+        rec[f'url_{store}'] = offer.get('url')
+        observed = offer.get('observed_at') or datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds')
+        rec[f'source_{store}'] = f'Ficha {store.title()} en directo · {observed[:16].replace("T", " ")}'
+        rec[f'{store}_live'] = True
+        rec[f'{store}_status'] = 'matched'
+        rec.pop(f'note_{store}', None)
+        return
+    had_value = any(previous.get(f'price_{store}') is not None for _ in (0,))
+    for field in fields:
+        key = f'{field}_{store}'
+        rec[key] = previous.get(key)
+    rec[f'{store}_live'] = False
+    rec[f'{store}_status'] = 'stale' if had_value else (offer or {}).get('status', 'unresolved')
+    if (offer or {}).get('error'):
+        rec[f'note_{store}'] = offer['error']
+    elif had_value:
+        rec[f'note_{store}'] = 'Se conserva el último precio confirmado; la ficha no se verificó en esta actualización.'
+    else:
+        rec[f'note_{store}'] = 'Sin coincidencia exacta por EAN en una ficha de producto publicada.'
+
+
+def merge(products, zoco, fichas, buscador, retailers, prev):
     """Fusiona las lecturas en directo con la caché previa como respaldo."""
     out = []
     for p in products:
@@ -123,6 +158,10 @@ def merge(products, zoco, fichas, buscador, prev):
                 rec['in_pcc'] = False
         if not rec.get('in_pcc') and not rec.get('note_pcc') and p.get('note'):
             rec['note_pcc'] = p.get('note')
+
+        previous = prev.get(h) or {}
+        for store in ('carrefour', 'fnac'):
+            merge_store_offer(rec, store, (retailers.get(store) or {}).get(h), previous)
         out.append(rec)
     return out
 
@@ -158,8 +197,19 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         if queries:
             buscador = verify_search(queries, on_progress=cb, cancel=cancel)
 
-    # 4) Fusión y escritura
-    records = merge(products, zoco, fichas, buscador, prev)
+    # 4) Nuevas tiendas: resolver URLs desde sus sitemaps oficiales y validar el EAN exacto.
+    retailer_products = []
+    for p in products:
+        zp = zoco.get(p['handle']) or {}
+        pp = prev.get(p['handle']) or {}
+        retailer_products.append({**p, 'ean': zp.get('ean') or pp.get('ean')})
+    retailers = {
+        'carrefour': fetch_carrefour(retailer_products, prev, on_progress=cb, cancel=cancel),
+        'fnac': fetch_fnac(retailer_products, prev, on_progress=cb, cancel=cancel),
+    }
+
+    # 5) Fusión y escritura
+    records = merge(products, zoco, fichas, buscador, retailers, prev)
     generated_at = datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds')
     event_name = os.environ.get('GITHUB_EVENT_NAME', 'manual')
     trigger_type = os.environ.get('TRIGGER_TYPE') or ('automatic' if event_name == 'schedule' else 'manual')
@@ -176,10 +226,14 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         'meta': {
             'zoco_source': 'Catálogo Shopify de zococity.es leído en directo (XHR /products/<handle>.js vía nodriver)',
             'pcc_source': 'Fichas oficiales de pccomponentes.com leídas en directo (JSON-LD vía nodriver, supera Cloudflare)',
+            'carrefour_source': 'Fichas de producto del sitemap oficial y JSON-LD con EAN exacto',
+            'fnac_source': 'Fichas de producto del sitemap oficial y JSON-LD con EAN exacto',
             'limit': limit, 'skip_search': skip_search,
             'n_zoco': sum(1 for r in records if r.get('zoco_live')),
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),
             'n_buscador': len(buscador),
+            'n_carrefour': sum(1 for r in records if r.get('carrefour_live')),
+            'n_fnac': sum(1 for r in records if r.get('fnac_live')),
             'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
             'workflow_event': event_name,
             'trigger_type': trigger_type,
