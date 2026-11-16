@@ -44,6 +44,19 @@ Comparativa de 54 productos de audio y tecnología entre [Zococity](https://zoco
 
 Zococity se lee directamente y PCComponentes usa sus fichas configuradas. Carrefour y Fnac usan URLs de producto guardadas en `products.json`; esas URLs sirven solo para llegar a la ficha. El scraper acepta un precio únicamente si la ficha oficial publica el mismo EAN/GTIN en JSON-LD. Si no hay URL o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto.
 
+### Activar los feeds de Fnac y Carrefour
+
+La forma recomendada para esas dos tiendas es usar sus feeds de productos de Awin. El feed publica precios y enlaces a producto y puede incluir EAN/GTIN; el comparador solo acepta filas que coincidan con el EAN del producto de Zococity. La frecuencia de descarga del proyecto será cada 45 minutos, pero la antigüedad de cada precio depende de cuándo Fnac o Carrefour actualicen su feed.
+
+1. Crea una cuenta de partner en [Awin](https://ui.awin.com/) y solicita unirte a [Fnac ES (anunciante 77630)](https://ui.awin.com/merchant-profile/77630) y [Carrefour (anunciante 25399)](https://ui.awin.com/merchant-profile/25399). Ambos perfiles identifican a comparadores de precios como partners objetivo.
+2. En **Toolbox → Create-a-Feed**, elige cada anunciante, idioma español y formato CSV. Incluye al menos el EAN/GTIN, nombre, precio, moneda, stock y enlace profundo. El feed debe tener precios en EUR y ofrecer los EAN que usa el catálogo.
+3. Guarda la URL de descarga de cada feed como secreto de **GitHub → Settings → Secrets and variables → Actions**:
+   - `AWIN_FNAC_FEED_URL`
+   - `AWIN_CARREFOUR_FEED_URL`
+4. Al activar ambos secretos, el siguiente workflow leerá las ofertas Awin. Las URLs incluyen una clave privada: no las publiques ni las pegues en el código. El importador conserva el enlace de afiliación tal como lo entrega Awin.
+
+Awin puede exigir revisión antes de habilitar un programa o feed. Si no hay feed disponible para una tienda, la lectura directa existente sigue siendo el respaldo; una denegación se deja indicada y no se interpreta como ausencia de producto.
+
 ## Estructura
 
 ```
