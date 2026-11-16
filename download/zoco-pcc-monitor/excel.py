@@ -134,12 +134,27 @@ def build():
         pz, pp = fmt_eur(r.get('price_zoco')), fmt_eur(r.get('price_pcc'))
         if pz and pp:
             difp_list.append((pz - pp) / pp)
+    zoco_cheaper = 0
+    rival_cheaper = 0
+    same = 0
+    with_comparison = 0
+    for r in recs:
+        z = fmt_eur(r.get('price_zoco'))
+        rival_prices = [fmt_eur(r.get('price_' + key)) for key in ('pcc', 'carrefour', 'fnac')]
+        rival_prices = [value for value in rival_prices if value is not None]
+        if z is not None and rival_prices:
+            with_comparison += 1
+            rival = min(rival_prices)
+            zoco_cheaper += z < rival
+            rival_cheaper += z > rival
+            same += z == rival
     kpis = [
         ('Productos analizados', len(recs), '#,##0'),
-        ('En ambas tiendas', sum(1 for r in recs if r.get('in_pcc')), '#,##0'),
-        ('Solo Zococity', sum(1 for r in recs if not r.get('in_pcc')), '#,##0'),
-        ('Zococity más barato', sum(1 for r in recs if (fmt_eur(r.get('price_zoco')) or 0) > (fmt_eur(r.get('price_pcc')) or 1e9)), '#,##0'),
-        ('PCComponentes más barato', sum(1 for r in recs if (fmt_eur(r.get('price_zoco')) or 1e9) > (fmt_eur(r.get('price_pcc')) or 0) and r.get('price_pcc')), '#,##0'),
+        ('Con comparación entre tiendas', with_comparison, '#,##0'),
+        ('Solo Zococity con precio', sum(1 for r in recs if r.get('price_zoco') is not None and not any(r.get('price_' + k) is not None for k in ('pcc', 'carrefour', 'fnac'))), '#,##0'),
+        ('Zococity más barato', zoco_cheaper, '#,##0'),
+        ('Tienda competidora más barata', rival_cheaper, '#,##0'),
+        ('Empate con la oferta más baja', same, '#,##0'),
         ('Diferencia media (PCC sobre Zoco)', statistics.mean(difp_list) if difp_list else None, '+0.0%;-0.0%;0.0%'),
         ('Precio medio Zococity', statistics.mean([x for x in pz_list if x]) if pz_list else None, '€#,##0.00'),
         ('Precio medio PCComponentes', statistics.mean([x for x in pp_list if x]) if pp_list else None, '€#,##0.00'),
@@ -173,8 +188,9 @@ def build():
         row += 1
 
     widths = {'A': 2, 'B': 16, 'C': 13, 'D': 34, 'E': 15, 'F': 15, 'G': 12, 'H': 12,
-              'I': 8, 'J': 34, 'K': 12, 'L': 16, 'M': 12, 'N': 9, 'O': 9, 'P': 14,
-              'Q': 46, 'R': 30, 'S': 38, 'T': 30}
+              'I': 8, 'J': 34, 'K': 12, 'L': 16, 'M': 16, 'N': 19, 'O': 16,
+              'P': 30, 'Q': 38, 'R': 16, 'S': 19, 'T': 16, 'U': 30, 'V': 38,
+              'W': 14, 'X': 46, 'Y': 30, 'Z': 38, 'AA': 30}
     for col, w in widths.items():
         ws.column_dimensions[col].width = w
     ws.freeze_panes = f'D{r0 + 1}'
