@@ -93,7 +93,7 @@ def sitemap_product_urls(sitemap_roots, allowed_host):
             continue
         locs = [el.text.strip() for el in root.iter() if _tag(el.tag) == 'loc' and el.text]
         if _tag(root.tag) == 'sitemapindex':
-            pending.extend(u for u in locs if u.startswith('https://'))
+            pending.extend(u for u in locs if u.startswith('https://') and (urlparse(u).hostname or '').lower().endswith(allowed_host))
         else:
             for url in locs:
                 parsed = urlparse(url)
@@ -232,6 +232,7 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
     tab = None
     count = sum(len(urls) for _, urls in items)
     completed = 0
+    stop_retailer = False
     try:
         for handle, urls in items:
             product = products[handle]
@@ -252,6 +253,7 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
                     low = title.lower()
                     if any(word in low for word in ('captcha', 'access denied', 'just a moment', 'verify you are human')):
                         result = {'status': 'blocked', 'url': url, 'error': 'La página requiere verificación; se detuvo la lectura.'}
+                        stop_retailer = True
                         break
                     exact = _exact_product(data, expected_ean, retailer)
                     if exact:
@@ -261,6 +263,9 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
                             'observed_at': datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds'),
                             'live': True,
                         }
+                        completed += 1
+                        if on_progress:
+                            on_progress(retailer, completed, count, handle)
                         break
                 except Exception as exc:
                     result = {'status': 'error', 'url': url, 'error': str(exc)[:160]}
@@ -272,7 +277,7 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
             if result is None:
                 result = {'status': 'unresolved', 'live': False}
             results[handle] = result
-            if cancel.get('stop'):
+            if cancel.get('stop') or stop_retailer:
                 break
         for handle, _ in items:
             results.setdefault(handle, {'status': 'cancelled', 'live': False})
