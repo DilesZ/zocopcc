@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Resolución conservadora de productos en sitemaps y lectura de ofertas JSON-LD.
+"""Lectura conservadora de páginas de producto directas y ofertas JSON-LD.
 
-Solo se visitan páginas de producto publicadas en los sitemaps oficiales. No se
-usan páginas de búsqueda, endpoints privados ni retos anti-bot. Una oferta se
-asigna al catálogo únicamente si la ficha declara el mismo EAN/GTIN.
+Las URLs se guardan en el catálogo y solo generan candidatos; la asociación
+requiere que la ficha oficial publique el mismo EAN/GTIN. No se usan rutas de
+búsqueda ni se sortean controles de acceso.
 """
 import asyncio
 import json
