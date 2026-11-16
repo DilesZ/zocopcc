@@ -1,7 +1,6 @@
 name: Refrescar precios
 
-# Lee el catalogo de Zococity y las fichas de PCComponentes con Chrome real
-# (nodriver), genera la instantanea y la publica. El push a main dispara el
+# Lee Zococity, PCComponentes, Carrefour y Fnac, genera la instantanea y la publica. El push a main dispara el
 # redespliegue automatico de Vercel (integracion Git), asi que no hace falta
 # ningun token de Vercel ni secreto en este repositorio.
 
@@ -41,7 +40,7 @@ permissions:
 
 jobs:
   scrape:
-    name: Zococity + PCComponentes -> public/data.json
+    name: Zococity + PCComponentes + Carrefour + Fnac -> public/data.json
     # 24.04 fijo a proposito: la imagen esta verificada (Chrome 157, xvfb 2:21,
     # Python 3.12). 'ubuntu-latest' cambiara a Ubuntu 26.04 en noviembre 2026.
     runs-on: ubuntu-24.04
