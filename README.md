@@ -40,7 +40,11 @@ Comparativa de 54 productos de audio y tecnología entre [Zococity](https://zoco
 > navegador real sin detectable (nodriver + Chrome headed) supera el reto. El
 > detalle completo está en `download/zoco-pcc-monitor/SKILL.md`.
 
-## Fuentes de precios\n\nZococity se lee directamente y PCComponentes usa sus fichas configuradas. Carrefour y Fnac usan URLs de producto guardadas en `products.json`; esas URLs sirven solo para llegar a la ficha. El scraper acepta un precio únicamente si la ficha oficial publica el mismo EAN/GTIN en JSON-LD. Si no hay URL o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto.\n\n## Estructura
+## Fuentes de precios
+
+Zococity se lee directamente y PCComponentes usa sus fichas configuradas. Carrefour y Fnac usan URLs de producto guardadas en `products.json`; esas URLs sirven solo para llegar a la ficha. El scraper acepta un precio únicamente si la ficha oficial publica el mismo EAN/GTIN en JSON-LD. Si no hay URL o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto.
+
+## Estructura
 
 ```
 comparador/
