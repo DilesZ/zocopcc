@@ -51,12 +51,13 @@ datos ni romper el sitio existente.
 
 ## Automatización y seguridad
 
-- La actualización externa vigente usa cron-job.org cada 15 minutos, en
+- La actualización externa vigente usa tres jobs coordinados de cron-job.org para mantener una cadencia de 45 minutos, en
   `Europe/Madrid`, con POST a `/api/refresh?skip_search=1&source=automatic` y
   `Authorization: Bearer …`. El secreto compartido se llama
   `PRICE_CRON_SECRET` y vive en Vercel Production y en la cabecera de cron-job.org.
-- El workflow de GitHub conserva además su evento `schedule`. No asumas que se
-  ejecutó: comprueba Actions y la hora de la instantánea. La concurrencia del
+- El workflow de GitHub conserva tres reglas `schedule` que mantienen la misma
+  cadencia de 45 minutos. No asumas que se ejecutaron: comprueba Actions y la hora
+  de la instantánea. La concurrencia del
   workflow evita scrapes simultáneos y el endpoint devuelve `already_running`
   si ya hay uno activo.
 - `GITHUB_ACTIONS_TOKEN` y `PRICE_CRON_SECRET` son secretos de producción. No

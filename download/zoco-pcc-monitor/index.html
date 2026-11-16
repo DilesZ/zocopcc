@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zococity vs PCComponentes · Precios en directo</title>
+<title>Zococity, PCComponentes, Carrefour y Fnac · Comparador de precios</title>
 <style>
   :root{
     color-scheme:light;
@@ -280,7 +280,7 @@
     <div class="head-inner">
       <a class="brand" href="#top" aria-label="Comparador de precios, inicio">
         <span class="brand-mark" aria-hidden="true">Z/P</span>
-        <span><span class="brand-name">Comparador de precios</span><span class="brand-sub">Zococity · PCComponentes</span></span>
+        <span><span class="brand-name">Comparador de precios</span><span class="brand-sub">Zococity · PCComponentes · Carrefour · Fnac</span></span>
       </a>
       <div class="last-updated">
         <span class="status-dot" aria-hidden="true"></span>
@@ -321,18 +321,18 @@
         <div class="filter"><label for="fCat">Categoría</label><select id="fCat"><option value="">Todas las categorías</option></select></div>
         <div class="filter"><label for="fAvail">Disponibilidad</label><select id="fAvail">
           <option value="">Todos los productos</option>
-          <option value="both">Con oferta en ambas tiendas</option>
+          <option value="both">Con oferta en 2 o más tiendas</option>
           <option value="only">Solo en Zococity</option>
-          <option value="live">Con lectura directa de PCC</option>
+          <option value="live">Con lectura directa en Carrefour o Fnac</option>
         </select></div>
       </div>
       <div class="table-wrap" role="region" aria-label="Comparativa de precios, vendedor y disponibilidad por producto" tabindex="0">
         <table>
-          <thead><tr><th>Producto</th><th>Zococity</th><th>PCComponentes</th><th>Diferencia</th><th>Tiendas</th></tr></thead>
-          <tbody id="tbody"><tr><td colspan="5" class="empty-state">Cargando productos…</td></tr></tbody>
+          <thead><tr><th>Producto</th><th>Zococity</th><th>PCComponentes</th><th>Carrefour</th><th>Fnac</th><th>Mejor precio vs Zococity</th><th>Tiendas</th></tr></thead>
+          <tbody id="tbody"><tr><td colspan="7" class="empty-state">Cargando productos…</td></tr></tbody>
         </table>
       </div>
-      <div class="footnote">Las ofertas de PCComponentes pueden proceder de la tienda oficial o de vendedores del marketplace; el vendedor se indica en cada fila.</div>
+      <div class="footnote">Las ofertas de PCComponentes, Carrefour y Fnac pueden proceder de vendedores del marketplace; el vendedor se indica cuando la ficha oficial lo publica.</div>
     </section>
     <footer id="foot"></footer>
   </main>
@@ -368,16 +368,23 @@ function render(){
     ' · '+p.length+' productos';
   $('lastAutomatic').textContent=(meta.last_automatic_update||'—').replace('T',' ');
   $('lastManual').textContent=(meta.last_manual_update||'—').replace('T',' ');
-  const both=p.filter(x=>x.in_pcc).length;
-  const zocoWins=p.filter(x=>x.price_zoco!=null&&x.price_pcc!=null&&x.price_zoco<x.price_pcc).length;
-  const pccWins=p.filter(x=>x.price_zoco!=null&&x.price_pcc!=null&&x.price_pcc<x.price_zoco).length;
-  const live=p.filter(x=>x.pcc_live).length;
-  const pccLeader=zocoWins>pccWins?'Zococity':pccWins>zocoWins?'PCComponentes':'Empate';
+  const offerFields=[
+    ['Zococity','price_zoco'],['PCComponentes','price_pcc'],
+    ['Carrefour','price_carrefour'],['Fnac','price_fnac']
+  ];
+  const wins=Object.fromEntries(offerFields.map(([name])=>[name,0]));
+  for(const r of p){
+    const offers=offerFields.map(([name,key])=>({name,price:r[key]})).filter(x=>x.price!=null);
+    if(offers.length) wins[offers.reduce((a,b)=>b.price<a.price?b:a).name]++;
+  }
+  const leader=Object.entries(wins).sort((a,b)=>b[1]-a[1])[0]?.[0]||'—';
+  const multi=p.filter(r=>[r.price_zoco,r.price_pcc,r.price_carrefour,r.price_fnac].filter(v=>v!=null).length>=2).length;
+  const newStoreLive=p.filter(r=>r.carrefour_live||r.fnac_live).length;
   $('kpis').innerHTML=[
-    ['Productos monitorizados',p.length,'En el catálogo actual',''],
-    ['Con oferta en ambas tiendas',both,'Coincidencia de producto',''],
-    ['Lecturas directas de PCC',live,'En la última actualización',''],
-    ['Mejor precio más frecuente',pccLeader,`${zocoWins} Zococity · ${pccWins} PCComponentes`,'is-pine'],
+    ['Productos monitorizados',p.length,'Catálogo de Zococity',''],
+    ['Con oferta en 2 o más tiendas',multi,'Coincidencia exacta por EAN',''],
+    ['Lecturas directas Carrefour/Fnac',newStoreLive,'En la última actualización',''],
+    ['Mejor precio más frecuente',leader,`${wins.Zococity} Zococity · ${wins.PCComponentes} PCComponentes · ${wins.Carrefour} Carrefour · ${wins.Fnac} Fnac`,'is-pine'],
   ].map(k=>`<article class="stat ${k[3]}"><span class="stat-label">${k[0]}</span><strong class="stat-value">${k[1]}</strong><span class="stat-note">${k[2]}</span></article>`).join('');
   const cats=[...new Set(p.map(x=>x.cat).filter(Boolean))].sort();
   const sel=$('fCat'),cur=sel.value;
@@ -390,11 +397,12 @@ function filtered(){
   const q=$('q').value.trim().toLowerCase(), cat=$('fCat').value, av=$('fAvail').value;
   return (DATA.products||[]).filter(x=>{
     if(cat && x.cat!==cat) return false;
-    if(av==='both' && !x.in_pcc) return false;
-    if(av==='only' && x.in_pcc) return false;
-    if(av==='live' && !(x.source_pcc||'').includes('en directo')) return false;
+    const otherPrices=[x.price_pcc,x.price_carrefour,x.price_fnac].filter(v=>v!=null);
+    if(av==='both' && (x.price_zoco==null || !otherPrices.length)) return false;
+    if(av==='only' && (x.price_zoco==null || otherPrices.length)) return false;
+    if(av==='live' && !(x.carrefour_live||x.fnac_live)) return false;
     if(q){
-      const s=[x.title_zoco,x.title_pcc,x.brand,x.cat,x.sku_zoco,x.ean,x.code_pcc].filter(Boolean).join(' ').toLowerCase();
+      const s=[x.title_zoco,x.title_pcc,x.title_carrefour,x.title_fnac,x.brand,x.cat,x.sku_zoco,x.ean,x.code_pcc,x.sku_carrefour,x.sku_fnac].filter(Boolean).join(' ').toLowerCase();
       if(!s.includes(q)) return false;
     }
     return true;
@@ -417,37 +425,65 @@ function availBadge(r){
   return '';
 }
 
+function retailerCell(r, store, label){
+  const price=r['price_'+store], seller=r['seller_'+store], stock=r['stock_'+store];
+  const status=r[store+'_status']||'unresolved', live=!!r[store+'_live'];
+  const note=r['note_'+store], source=r['source_'+store];
+  let detail='';
+  if(price!=null){
+    const availability=stock===true?'<span class="badge b-ok">en stock</span>':stock===false?'<span class="badge b-out">agotado</span>':'';
+    const sellerText=seller?`<span class="seller-name">${esc(seller)}</span>`:'<span class="muted">Vendedor no indicado</span>';
+    detail=`<div class="seller-line">${sellerText}${availability}${live?'':'<span class="badge b-no">dato anterior</span>'}</div>`;
+  }else{
+    const messages={matched:'Producto encontrado; sin precio publicado',unresolved:'Sin coincidencia exacta verificada',blocked:'Lectura detenida por protección de la tienda',error:'No se pudo leer la ficha',stale:'Sin lectura directa; se conserva el dato anterior'};
+    detail=`<div class="pcc-empty">${messages[status]||'Sin oferta confirmada'}</div>`;
+  }
+  return `<td class="price-cell" data-label="${label}">${price!=null?`<div class="price-value">${eur(price)}</div>`:''}${detail}${r['title_'+store]?`<div class="pcc-title">${esc(r['title_'+store])}</div>`:''}${note?`<div class="pcc-note">${esc(note)}</div>`:''}${source?`<div class="pcc-source">${esc(source)}</div>`:''}</td>`;
+}
+
 function renderTable(){
   const rows=filtered();
   const tb=$('tbody');
   const total=(DATA.products||[]).length;
   $('resultsMeta').textContent=rows.length===total?`${total} productos`:`${rows.length} de ${total} productos`;
-  if(!rows.length){ tb.innerHTML='<tr><td colspan="5" class="empty-state">No hay productos que coincidan con estos filtros.</td></tr>'; return; }
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="7" class="empty-state">No hay productos que coincidan con estos filtros.</td></tr>'; return; }
   tb.innerHTML=rows.map(r=>{
-    const hasZoco=r.price_zoco!=null;
-    const hasPcc=r.price_pcc!=null;
-    const dif=hasZoco&&hasPcc?r.price_zoco-r.price_pcc:null;
-    const difp=dif!=null&&r.price_pcc?dif/r.price_pcc:null;
-    const better=dif==null?null:dif===0?'Empate':dif>0?'PCComponentes':'Zococity';
+    const hasZoco=r.price_zoco!=null, hasPcc=r.price_pcc!=null;
+    const competitors=[
+      {name:'PCComponentes',price:r.price_pcc},
+      {name:'Carrefour',price:r.price_carrefour},
+      {name:'Fnac',price:r.price_fnac}
+    ].filter(x=>x.price!=null);
+    const best=competitors.sort((a,b)=>a.price-b.price)[0];
+    const dif=hasZoco&&best?r.price_zoco-best.price:null;
+    const difp=dif!=null&&best.price?dif/best.price:null;
+    const better=dif==null?null:dif===0?'Empate':dif>0?best.name+' más barato':'Zococity más barato';
     const zocoStock=r.stock_zoco===true?'<span class="badge b-ok">En stock</span>':r.stock_zoco===false?'<span class="badge b-out">Agotado</span>':'<span class="badge b-no">Sin dato</span>';
     const pccDetails=hasPcc
       ? `<div class="seller-line">${sellerBadge(r)}${r.seller_pcc&&!r.seller_pcc.toLowerCase().includes('pccomponentes')?`<span class="seller-name">${esc(r.seller_pcc)}</span>`:''}${availBadge(r)}</div>${r.title_pcc?`<div class="pcc-title">${esc(r.title_pcc)}</div>`:''}${r.code_pcc?`<div class="pcc-code">Cód. ${esc(r.code_pcc)}</div>`:''}${r.source_pcc?`<div class="pcc-source">${esc(r.source_pcc)}</div>`:''}`
       : `<div class="pcc-empty">${r.in_pcc?'Precio no disponible':'Sin oferta localizada'}</div>${r.note_pcc?`<div class="pcc-note">${esc(r.note_pcc)}</div>`:''}${r.source_pcc?`<div class="pcc-source">${esc(r.source_pcc)}</div>`:''}`;
     const diffCell=dif==null?'<span class="muted">—</span>':dif===0
       ? '<div class="delta"><span class="delta-amount is-neutral">Empate</span><span class="delta-label">Mismo precio</span></div>'
-      : `<div class="delta"><span class="delta-amount ${dif>0?'is-pcc':'is-zoco'}">${eur(Math.abs(dif))}</span><span class="delta-label">${better} más barato</span><span class="delta-percent">${Math.abs(difp*100).toFixed(1)}% de diferencia</span></div>`;
+      : `<div class="delta"><span class="delta-amount ${dif>0?'is-pcc':'is-zoco'}">${eur(Math.abs(dif))}</span><span class="delta-label">${better}</span><span class="delta-percent">${Math.abs(difp*100).toFixed(1)}% frente al precio más bajo</span></div>`;
+    const links=[
+      ['Zococity',ZOCO_BASE+esc(r.handle)],['PCComponentes',r.url_pcc],
+      ['Carrefour',r.url_carrefour],['Fnac',r.url_fnac]
+    ].filter(x=>x[1]);
     return `<tr>
       <td class="product-cell" data-label="Producto"><div class="product-name"><a href="${ZOCO_BASE}${esc(r.handle)}" target="_blank" rel="noopener">${esc(r.title_zoco||r.handle)}</a></div><div class="product-meta"><span class="category-tag">${esc(r.cat||'Audio')}</span>${r.brand?`<span class="brand-ref">${esc(r.brand)}</span>`:''}${r.sku_zoco?`<span class="product-ref">${esc(r.sku_zoco)}</span>`:''}</div></td>
       <td class="price-cell" data-label="Zococity">${hasZoco?`<div class="price-value">${eur(r.price_zoco)}</div>`:'<div class="pcc-empty">Sin precio</div>'}<div class="stock-line">${zocoStock}</div></td>
       <td class="price-cell" data-label="PCComponentes">${hasPcc?`<div class="price-value">${eur(r.price_pcc)}</div>`:pccDetails}${hasPcc?pccDetails:''}</td>
-      <td data-label="Diferencia">${diffCell}</td>
-      <td data-label="Ver en tienda"><div class="link-stack"><a class="table-link" href="${ZOCO_BASE}${esc(r.handle)}" target="_blank" rel="noopener">Zococity <span aria-hidden="true">↗</span></a>${r.url_pcc?`<a class="table-link" href="${esc(r.url_pcc)}" target="_blank" rel="noopener">PCComponentes <span aria-hidden="true">↗</span></a>`:'<span class="muted">—</span>'}</div></td>
+      ${retailerCell(r,'carrefour','Carrefour')}
+      ${retailerCell(r,'fnac','Fnac')}
+      <td data-label="Mejor precio vs Zococity">${diffCell}</td>
+      <td data-label="Ver en tienda"><div class="link-stack">${links.map(([name,url])=>`<a class="table-link" href="${url}" target="_blank" rel="noopener">${name} <span aria-hidden="true">↗</span></a>`).join('')}</div></td>
     </tr>`;
   }).join('');
-  $('foot').textContent = 'Precios con IVA y sin gastos de envío · disponibilidad y vendedores sujetos a cambios en tienda';
+  $('foot').textContent = 'Precios con IVA y sin gastos de envío · vendedor, disponibilidad y fecha de lectura por tienda';
 }
 
 /* ---- progreso ---- */
+
 async function poll(){
   try{
     const st = await api('/api/status');
@@ -463,7 +499,7 @@ function updateProg(st){
   $('prog').classList.toggle('on', !!(on || hasErr));
   if(hasErr && !on) showErr('Último proceso con error: ' + st.last_result.error);
   if(on){
-    const phases={zoco:'Leyendo catálogo de Zococity', pcc_fichas:'Abriendo fichas de PCComponentes en directo', pcc_buscar:'Verificando productos en el buscador de PCC', inicio:'Preparando'};
+    const phases={zoco:'Leyendo catálogo de Zococity', pcc_fichas:'Abriendo fichas de PCComponentes en directo', pcc_buscar:'Verificando productos en el buscador de PCC', carrefour:'Leyendo ofertas de Carrefour', fnac:'Leyendo ofertas de Fnac', inicio:'Preparando'};
     $('progPhase').textContent = phases[st.phase]||st.phase||'…';
     const total=st.total||0, done=st.done||0;
     $('progCount').textContent = done+'/'+total;

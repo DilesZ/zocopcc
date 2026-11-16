@@ -24,7 +24,7 @@ tecnología: precio, stock, vendedor y código de artículo en ambas tiendas.
 └──────────────────────┘
 ```
 
-1. **Programación**: cron-job.org solicita la actualización cada 15 minutos en
+1. **Programación**: cron-job.org solicita la actualización cada 45 minutos en
    zona `Europe/Madrid`. El workflow conserva también el cron nativo de GitHub
    como respaldo, aunque GitHub puede retrasar o perder eventos programados.
 2. **Scraping**: la API de Vercel inicia GitHub Actions. Un runner
@@ -94,7 +94,7 @@ clave se expone al navegador.
 ### Programación automática activa
 
 El disparador externo de [cron-job.org](https://cron-job.org/) está configurado
-para solicitar la actualización cada 15 minutos en zona horaria `Europe/Madrid`.
+para solicitar la actualización cada 45 minutos en zona horaria `Europe/Madrid`.
 GitHub Actions hace el scraping y publica los datos; su cron nativo permanece
 como respaldo. GitHub puede retrasar o descartar ejecuciones programadas, así que
 confirma el evento en Actions y la hora publicada en la página.
@@ -105,8 +105,8 @@ La tarea ya está configurada; estos pasos sirven solo si hay que recrearla:
    `[Convert]::ToHexString([Security.Cryptography.RandomNumberGenerator]::GetBytes(32)).ToLowerInvariant()`.
 2. En Vercel → el proyecto → **Settings → Environment Variables**, crea
    `PRICE_CRON_SECRET` para **Production** con esa clave y vuelve a desplegar.
-3. En cron-job.org crea una tarea **POST** cada 15 minutos con zona horaria
-   `Europe/Madrid` y URL:
+3. En cron-job.org crea tres jobs **POST** coordinados con zona horaria
+   `Europe/Madrid` para formar una cadencia exacta de 45 minutos. Los tres usan la URL:
    `https://zocopcc.vercel.app/api/refresh?skip_search=1&source=automatic`
 4. En sus cabeceras HTTP añade
    `Authorization: Bearer <la misma clave>`.

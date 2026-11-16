@@ -44,11 +44,11 @@ comparison UI, publication, or scheduled refreshes in this repository.
 
 ## Refresh operations
 
-The live schedule currently comes from cron-job.org at 15-minute intervals in
-`Europe/Madrid`. It calls the Vercel API with `source=automatic` and a bearer secret.
-GitHub Actions also contains a scheduled trigger, but confirm actual runs in GitHub
-Actions rather than assuming that a cron entry fired. See the root `README.md` for
-operator setup and recovery steps.
+The live schedule currently uses three coordinated cron-job.org jobs to maintain a
+45-minute cadence in `Europe/Madrid`. They call the Vercel API with
+`source=automatic` and a bearer secret. GitHub Actions also has three matching
+scheduled rules, but confirm actual runs in GitHub Actions rather than assuming a
+cron entry fired. See the root `README.md` for operator setup and recovery steps.
 
 Never print secret values. `GITHUB_ACTIONS_TOKEN` and `PRICE_CRON_SECRET` belong in
 Vercel Production; the latter must match cron-job.org's Authorization header. An
