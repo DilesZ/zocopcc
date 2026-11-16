@@ -1,9 +1,7 @@
 # Instrucciones del proyecto
 
 Este repositorio publica una comparativa estática de precios cuyo catálogo base
-es Zococity. La automatización actual obtiene precios de Zococity y
-PCComponentes; el diseño debe permitir incorporar otras tiendas sin mezclar sus
-datos ni romper el sitio existente.
+es Zococity. La automatización compara sus precios con PCComponentes, Carrefour y Fnac, sin mezclar los datos ni perder la identidad del vendedor.
 
 ## Antes de cambiar código
 
@@ -18,8 +16,7 @@ datos ni romper el sitio existente.
 
 - `download/zoco-pcc-monitor/products.json`: catálogo canónico de productos,
   identificado hoy por el `handle` de Zococity.
-- `download/zoco-pcc-monitor/zoco_fetcher.py` y `pcc_fetcher.py`: lectura y
-  normalización de las tiendas actuales.
+- `download/zoco-pcc-monitor/zoco_fetcher.py`, `pcc_fetcher.py`, `carrefour_fetcher.py`, `fnac_fetcher.py` y `retailer_common.py`: lectura directa de fichas configuradas y normalización de cada tienda. Carrefour y Fnac usan URLs de producto guardadas en `products.json` y validan coincidencia exacta por EAN/GTIN en JSON-LD.
 - `download/zoco-pcc-monitor/pipeline.py`: orquesta lecturas, mantiene la
   instantánea anterior cuando una fuente falla y escribe metadatos de ejecución.
 - `download/zoco-pcc-monitor/index.html`: interfaz fuente. `scripts/build_public.py`
