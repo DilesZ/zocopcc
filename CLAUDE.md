@@ -16,7 +16,8 @@ es Zococity. La automatización compara sus precios con PCComponentes, Carrefour
 
 - `download/zoco-pcc-monitor/products.json`: catálogo canónico de productos,
   identificado hoy por el `handle` de Zococity.
-- `download/zoco-pcc-monitor/zoco_fetcher.py`, `pcc_fetcher.py`, `carrefour_fetcher.py`, `fnac_fetcher.py` y `retailer_common.py`: lectura directa de fichas configuradas y normalización de cada tienda. Carrefour y Fnac usan URLs de producto guardadas en `products.json` y validan coincidencia exacta por EAN/GTIN en JSON-LD.
+- `download/zoco-pcc-monitor/zoco_fetcher.py`, `pcc_fetcher.py`, `carrefour_fetcher.py`, `fnac_fetcher.py` y `retailer_common.py`: lectura directa de fichas configuradas y normalización de cada tienda. Carrefour y Fnac usan URLs de producto guardadas en `products.json` y validan coincidencia exacta por EAN/GTIN en JSON-LD (Carrefour publica el EAN como `sku`).
+- `download/zoco-pcc-monitor/awin_fetcher.py`: feed de producto autorizado de Awin, opcional. Si `AWIN_CARREFOUR_FEED_URL` o `AWIN_FNAC_FEED_URL` están configurados, sus ofertas sustituyen a la lectura directa de esa tienda; si faltan o el feed falla, se usa el scraper de fichas. Tras una denegación, la lectura directa se pausa 6 horas o hasta que cambie la URL.
 - `download/zoco-pcc-monitor/pipeline.py`: orquesta lecturas, mantiene la
   instantánea anterior cuando una fuente falla y escribe metadatos de ejecución.
 - `download/zoco-pcc-monitor/index.html`: interfaz fuente. `scripts/build_public.py`

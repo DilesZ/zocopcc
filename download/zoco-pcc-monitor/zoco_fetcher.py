@@ -10,7 +10,7 @@ con título, marca, precio, stock, SKU y EAN por variante).
 OJO (lección dura): tab.evaluate() de nodriver NO espera promesas — un fetch().then()
 devuelve None. Usa XMLHttpRequest síncrono, que devuelve el texto directamente.
 """
-import asyncio, glob, json, os, platform, shutil, subprocess, time
+import asyncio, glob, json, os, platform, shutil, socket, subprocess, tempfile, time
 
 ZOCO_BASE = 'https://zococity.es/'
 
@@ -31,6 +31,8 @@ def find_chrome():
         '/opt/google/chrome/chrome',
         '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
         'C:/Program Files/Google/Chrome/Application/chrome.exe',
+        os.path.expandvars(r'%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe'),
+        os.path.expandvars(r'%PROGRAMFILES(X86)%\Google\Chrome\Application\chrome.exe'),
     ]
     for pat in pats:
         hits = sorted(glob.glob(pat))
@@ -72,40 +74,157 @@ def _kill_stray_chrome():
     if platform.system() != 'Linux':
         return
     try:
-        subprocess.run(['pkill', '-f', 'remote-debugging-port'],
+        subprocess.run(['pkill', '-f', '(chrome|chromium).*remote-debugging-port'],
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
     except Exception:
         pass
 
 
-async def start_browser(attempts=4, backoff=5):
-    """Arranca Chrome y devuelve la sesion de nodriver, con reintentos.
+def _free_port():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(('127.0.0.1', 0))
+        return sock.getsockname()[1]
 
-    nodriver solo espera ~2,75 s a que Chrome abra su puerto de depuracion
-    (0,25 s + 5 intentos de 0,5 s). En un runner frio (primer arranque: binario
-    en cache, perfil nuevo) se queda corto y aborta con
-    'Failed to connect to browser'. El primer intento deja el sistema caliente,
-    asi que reintentando arranca a tiempo.
+
+def _chrome_log_path():
+    return os.path.join(tempfile.gettempdir(), 'zoco-chrome.log')
+
+
+def _read_log_tail(path, lines=30):
+    try:
+        with open(path, 'r', encoding='utf-8', errors='replace') as handle:
+            return ''.join(handle.readlines()[-lines:]).strip()
+    except OSError:
+        return ''
+
+
+def _launch_chrome(executable, port):
+    """Lanza Chrome con un puerto fijo y devuelve el proceso.
+
+    nodriver solo espera 2,75 s a que Chrome abra el puerto de depuracion. En un
+    runner frio (primer arranque, perfil nuevo) ese margen se agota y nodriver
+    aborta con 'Failed to connect to browser'. Lanzando Chrome nosotros podemos
+    esperar hasta `startup_timeout` segundos y conservar su stderr para saber
+    por que no arranco.
     """
     import nodriver as uc
+    log_path = _chrome_log_path()
+    config = uc.Config(
+        browser_executable_path=executable,
+        headless=False,
+        browser_args=chrome_args(),
+        sandbox=chrome_sandbox(),
+        host='127.0.0.1',
+        port=port,
+        **ensure_display(),
+    )
+    command = [executable, *config()]
+    # stdout y stderr van al mismo archivo: una tuberia que nadie lee se llena
+    # y bloquea a Chrome. El hijo conserva su copia tras cerrar la del padre.
+    log = open(log_path, 'wb')
+    try:
+        if platform.system() == 'Windows':
+            proc = subprocess.Popen(command, stdin=subprocess.DEVNULL,
+                                    stdout=log, stderr=log)
+        else:
+            proc = subprocess.Popen(command, stdin=subprocess.DEVNULL,
+                                    stdout=log, stderr=log, start_new_session=True)
+    except Exception:
+        log.close()
+        raise
+    log.close()
+    proc._zoco_log_path = log_path
+    return proc
+
+
+def _wait_debug_port(port, timeout, proc):
+    """Espera a que Chrome publique /json/version; falla antes si el proceso muere."""
+    import urllib.request
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    url = f'http://127.0.0.1:{port}/json/version'
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if proc.poll() is not None:
+            raise RuntimeError(f'Chrome termino durante el arranque (codigo {proc.returncode})')
+        try:
+            with opener.open(url, timeout=1.5) as response:
+                if response.status == 200:
+                    return
+        except Exception:
+            pass
+        time.sleep(0.25)
+    raise TimeoutError(f'Chrome no abrio el puerto de depuracion en {timeout}s')
+
+
+def _terminate_chrome(proc):
+    try:
+        if proc is not None and proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                try:
+                    proc.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    pass
+    except Exception:
+        pass
+
+
+async def _start_once(executable, startup_timeout):
+    """Arranca Chrome y conecta nodriver al puerto ya abierto."""
+    import nodriver as uc
+    port = _free_port()
+    proc = _launch_chrome(executable, port)
+    try:
+        _wait_debug_port(port, startup_timeout, proc)
+        browser = await asyncio.wait_for(
+            uc.start(host='127.0.0.1', port=port,
+                     browser_executable_path=executable),
+            timeout=15,
+        )
+        # nodriver se ha conectado a un Chrome que no ha lanzado el; se le da
+        # el proceso para que browser.stop() pueda cerrarlo.
+        browser._process = proc
+        browser._process_pid = proc.pid
+        return browser
+    except Exception:
+        _terminate_chrome(proc)
+        raise
+
+
+async def start_browser(attempts=3, startup_timeout=35, backoff=2):
+    """Arranca Chrome y devuelve la sesion de nodriver, con reintentos.
+
+    Se lanza Chrome fuera de nodriver para no depender de su espera fija de
+    2,75 s. Cada intento tolera un arranque frio de hasta 35 s; si Chrome muere
+    o no abre el puerto, se registra su stderr y se reintenta.
+    """
+    executable = find_chrome()
+    attempts = max(1, int(attempts))
     last = None
     for i in range(1, attempts + 1):
         try:
-            return await uc.start(browser_executable_path=find_chrome(), headless=False,
-                                  browser_args=chrome_args(), sandbox=chrome_sandbox(),
-                                  **ensure_display())
+            return await _start_once(executable, startup_timeout)
         except Exception as e:
             last = e
             print(f'[chrome] no se pudo arrancar (intento {i}/{attempts}): {e}', flush=True)
+            tail = _read_log_tail(_chrome_log_path())
+            if tail:
+                print(f'[chrome] stderr:\n{tail[-3000:]}', flush=True)
             if i < attempts:
                 _kill_stray_chrome()
-                time.sleep(backoff * i)
+                await asyncio.sleep(backoff * i)
     raise last
 
 
 def ensure_display():
-    """En Linux sin pantalla gráfica, arranca Xvfb :99. Devuelve kwargs para nodriver."""
+    """En Linux sin pantalla grafica, arranca Xvfb :99. Devuelve kwargs para nodriver."""
     global _XVFB_PROC
+    if _XVFB_PROC is not None and _XVFB_PROC.poll() is not None:
+        os.environ.pop('DISPLAY', None)
+        _XVFB_PROC = None
     if platform.system() != 'Linux' or os.environ.get('DISPLAY'):
         return {}
     try:
@@ -113,6 +232,8 @@ def ensure_display():
                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         os.environ['DISPLAY'] = ':99'
         time.sleep(1.5)
+        if _XVFB_PROC.poll() is not None:
+            raise SystemExit('Xvfb no pudo arrancar en :99 (display ocupado?)')
         return {'xvfb_display': ':99'}
     except FileNotFoundError:
         raise SystemExit('Sin DISPLAY y sin Xvfb. Instala xvfb (apt install xvfb) o exporta DISPLAY')

@@ -6,7 +6,7 @@ Modo de uso:
     python3 pipeline.py --limit 2           # solo 2 productos (prueba rápida)
     python3 pipeline.py --skip-search       # sin verificación del buscador (más rápido)
 """
-import json, os, re, sys, threading, time
+import json, os, re, shutil, sys, threading, time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -19,6 +19,7 @@ from zoco_fetcher import fetch_products
 from pcc_fetcher import fetch_fichas, verify_search, pick_offer, seller_of, avail_of, parse_card_price
 from fnac_fetcher import fetch_fnac
 from carrefour_fetcher import fetch_carrefour
+from awin_fetcher import fetch_awin_offers
 
 DATA_LOCK = threading.Lock()
 
@@ -30,34 +31,59 @@ def load_json(path, default):
         return default
 
 
+def write_json_atomic(path, payload):
+    """Escribe primero en un temporal y sustituye al final.
+
+    Un corte a mitad de escritura no puede dejar data.json truncado; el
+    workflow puede reintentar el scraping sin perder la instantanea anterior.
+    """
+    tmp = path + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=1)
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(tmp, path)
 
 
-def merge_store_offer(rec, store, offer, previous):
+
+
+def merge_store_offer(rec, store, offer, previous, catalog_url=None):
     """Conserva el último dato confirmado si la lectura de una tienda falla."""
+    offer = offer or {}
     fields = ('title', 'price', 'seller', 'stock', 'sku', 'ean', 'url', 'source')
-    if offer and offer.get('status') == 'matched':
+    if offer.get('status') == 'matched':
         rec[f'title_{store}'] = offer.get('title')
         rec[f'price_{store}'] = offer.get('price')
         rec[f'seller_{store}'] = offer.get('seller') or None
         rec[f'stock_{store}'] = offer.get('availability')
         rec[f'sku_{store}'] = offer.get('sku') or None
         rec[f'ean_{store}'] = offer.get('ean')
-        rec[f'url_{store}'] = offer.get('url')
+        rec[f'url_{store}'] = offer.get('url') or catalog_url
         observed = offer.get('observed_at') or datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds')
-        rec[f'source_{store}'] = f'Ficha {store.title()} en directo · {observed[:16].replace("T", " ")}'
-        rec[f'{store}_live'] = True
+        source_label = offer.get('source') or f'Ficha {store.title()} en directo'
+        rec[f'source_{store}'] = f'{source_label} · {observed[:16].replace("T", " ")}'
+        rec[f'{store}_live'] = bool(offer.get('live', True))
         rec[f'{store}_status'] = 'matched'
         rec.pop(f'note_{store}', None)
+        rec.pop(f'{store}_blocked_at', None)
         return
-    had_value = any(previous.get(f'price_{store}') is not None for _ in (0,))
+    had_value = previous.get(f'price_{store}') is not None
     for field in fields:
         key = f'{field}_{store}'
         rec[key] = previous.get(key)
-        if field == 'url' and not rec[key]:
-            rec[key] = (offer or {}).get('url')
+    rec[f'url_{store}'] = rec.get(f'url_{store}') or offer.get('url') or catalog_url
     rec[f'{store}_live'] = False
-    rec[f'{store}_status'] = 'stale' if had_value else (offer or {}).get('status', 'unresolved')
-    if (offer or {}).get('error'):
+    rec[f'{store}_status'] = 'stale' if had_value else offer.get('status', 'unresolved')
+    blocked_at = offer.get('blocked_at')
+    if not blocked_at and rec.get(f'{store}_status') == 'blocked':
+        blocked_at = previous.get(f'{store}_blocked_at')
+    if blocked_at:
+        rec[f'{store}_blocked_at'] = blocked_at
+    else:
+        rec.pop(f'{store}_blocked_at', None)
+    if offer.get('status') == 'cancelled':
+        rec[f'note_{store}'] = 'Lectura cancelada antes de completar esta tienda.'
+    elif offer.get('error'):
         rec[f'note_{store}'] = offer['error']
     elif had_value:
         rec[f'note_{store}'] = 'Se conserva el último precio confirmado; la ficha no se verificó en esta actualización.'
@@ -163,7 +189,8 @@ def merge(products, zoco, fichas, buscador, retailers, prev):
 
         previous = prev.get(h) or {}
         for store in ('carrefour', 'fnac'):
-            merge_store_offer(rec, store, (retailers.get(store) or {}).get(h), previous)
+            merge_store_offer(rec, store, (retailers.get(store) or {}).get(h), previous,
+                              catalog_url=p.get(f'url_{store}'))
         out.append(rec)
     return out
 
@@ -176,7 +203,13 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         products = products[:limit]
     previous_snapshot = load_json(DATA, {})
     previous_meta = previous_snapshot.get('meta') or {}
-    prev = {r.get('handle'): r for r in previous_snapshot.get('products') or []}
+    prev_gen = previous_snapshot.get('generated_at')
+    prev = {}
+    for r in previous_snapshot.get('products') or []:
+        rec = dict(r)
+        if prev_gen:
+            rec.setdefault('_snapshot_generated_at', prev_gen)
+        prev[rec.get('handle')] = rec
 
     def cb(phase, n, total, current):
         if on_progress:
@@ -199,16 +232,25 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         if queries:
             buscador = verify_search(queries, on_progress=cb, cancel=cancel)
 
-    # 4) Nuevas tiendas: resolver URLs desde sus sitemaps oficiales y validar el EAN exacto.
+    # 4) Nuevas tiendas: feed autorizado de Awin si esta configurado; si no,
+    # lectura directa de las URLs de producto y validacion del EAN exacto.
     retailer_products = []
     for p in products:
         zp = zoco.get(p['handle']) or {}
         pp = prev.get(p['handle']) or {}
-        retailer_products.append({**p, 'ean': zp.get('ean') or pp.get('ean')})
-    retailers = {
-        'carrefour': fetch_carrefour(retailer_products, prev, on_progress=cb, cancel=cancel),
-        'fnac': fetch_fnac(retailer_products, prev, on_progress=cb, cancel=cancel),
-    }
+        retailer_products.append({**p, 'ean': zp.get('ean') or pp.get('ean') or p.get('ean')})
+    awin_retailers = fetch_awin_offers(retailer_products, on_progress=cb, cancel=cancel)
+    retailers = {}
+    used_feed = {}
+    for store, fetcher in (('carrefour', fetch_carrefour), ('fnac', fetch_fnac)):
+        feed = awin_retailers.get(store)
+        if feed is None or (feed and all(item.get('status') == 'error' for item in feed.values())):
+            # Sin feed configurado, o feed ilegible: se mantiene la lectura directa.
+            retailers[store] = fetcher(retailer_products, prev, on_progress=cb, cancel=cancel)
+            used_feed[store] = False
+        else:
+            retailers[store] = feed
+            used_feed[store] = True
 
     # 5) Fusión y escritura
     records = merge(products, zoco, fichas, buscador, retailers, prev)
@@ -228,8 +270,8 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         'meta': {
             'zoco_source': 'Catálogo Shopify de zococity.es leído en directo (XHR /products/<handle>.js vía nodriver)',
             'pcc_source': 'Fichas oficiales de pccomponentes.com leídas en directo (JSON-LD vía nodriver, supera Cloudflare)',
-            'carrefour_source': 'Fichas de producto del sitemap oficial y JSON-LD con EAN exacto',
-            'fnac_source': 'Fichas de producto del sitemap oficial y JSON-LD con EAN exacto',
+            'carrefour_source': 'Feed de producto autorizado de Awin, EAN exacto' if used_feed.get('carrefour') else 'Fichas oficiales por URL de producto y EAN exacto',
+            'fnac_source': 'Feed de producto autorizado de Awin, EAN exacto' if used_feed.get('fnac') else 'Fichas oficiales por URL de producto y EAN exacto',
             'limit': limit, 'skip_search': skip_search,
             'n_zoco': sum(1 for r in records if r.get('zoco_live')),
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),
@@ -247,12 +289,11 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
     with DATA_LOCK:
         if limit:
             # las actualizaciones de prueba (limit=N) no tocan el snapshot principal
-            json.dump(snapshot, open(os.path.join(BASE, 'data_test.json'), 'w', encoding='utf-8'),
-                      ensure_ascii=False, indent=1)
+            write_json_atomic(os.path.join(BASE, 'data_test.json'), snapshot)
         else:
             if os.path.exists(DATA):
-                os.replace(DATA, DATA_PREV)
-            json.dump(snapshot, open(DATA, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+                shutil.copy2(DATA, DATA_PREV)
+            write_json_atomic(DATA, snapshot)
     return snapshot
 
 

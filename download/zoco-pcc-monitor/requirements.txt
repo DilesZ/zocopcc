@@ -1,2 +1,5 @@
 nodriver>=0.38
 openpyxl>=3.1
+# Windows no trae la base de zonas horarias del sistema; el pipeline usa
+# Europe/Madrid tanto en local como en el runner Linux.
+tzdata>=2024.1

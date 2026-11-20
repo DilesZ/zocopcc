@@ -48,13 +48,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Recuperar la instantanea publicada anterior
         run: cp public/data.json download/zoco-pcc-monitor/data.json
 
       - name: Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -71,6 +71,8 @@ jobs:
           LIMIT: ${{ inputs.limit }}
           SKIP_SEARCH: ${{ inputs.skip_search }}
           TRIGGER_TYPE: ${{ inputs.trigger_type }}
+          AWIN_CARREFOUR_FEED_URL: ${{ secrets.AWIN_CARREFOUR_FEED_URL }}
+          AWIN_FNAC_FEED_URL: ${{ secrets.AWIN_FNAC_FEED_URL }}
           # En CI el sandbox de Chrome no arranca (nodriver: "Failed to connect
           # to browser"). Con esto se desactiva solo en el runner; en el PC
           # local el sandbox sigue activo.
@@ -86,7 +88,26 @@ jobs:
           echo "argumentos: ${ARGS[*]:-(todos)}"
           # Chrome real headed + Xvfb (lo arranca zoco_fetcher.ensure_display):
           # es lo unico que supera el reto de Cloudflare de PCComponentes.
-          python3 pipeline.py "${ARGS[@]}"
+          # El pipeline solo escribe data.json al final, asi que un intento
+          # fallido no deja datos a medias; se reintenta una vez.
+          SUCCESS=0
+          for attempt in 1 2; do
+            echo "== Intento $attempt de 2 =="
+            if python3 pipeline.py "${ARGS[@]}"; then
+              SUCCESS=1
+              break
+            fi
+            echo "El intento $attempt fallo."
+            pkill -f '(chrome|chromium).*remote-debugging-port' 2>/dev/null || true
+            if [ "$attempt" -eq 1 ]; then
+              echo "Se limpia Chrome y se reintenta en 10 s."
+              sleep 10
+            fi
+          done
+          if [ "$SUCCESS" -ne 1 ]; then
+            echo "El scraping fallo tras 2 intentos."
+            exit 1
+          fi
 
       - name: Regenerar el sitio estatico
         run: python3 scripts/build_public.py

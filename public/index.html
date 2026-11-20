@@ -329,7 +329,7 @@
           <option value="">Todos los productos</option>
           <option value="both">Con oferta en 2 o más tiendas</option>
           <option value="only">Solo en Zococity</option>
-          <option value="live">Con lectura directa en Carrefour o Fnac</option>
+          <option value="live">Con lectura en Carrefour o Fnac</option>
         </select></div>
       </div>
       <div class="table-wrap" role="region" aria-label="Comparativa de precios, vendedor y disponibilidad por producto" tabindex="0">
@@ -400,7 +400,7 @@ function render(){
   $('kpis').innerHTML=[
     ['Productos monitorizados',p.length,'Catálogo de Zococity',''],
     ['Con oferta en 2 o más tiendas',multi,'Coincidencia exacta por EAN',''],
-    ['Lecturas directas Carrefour/Fnac',newStoreLive,'En la última actualización',''],
+    ['Lecturas Carrefour/Fnac',newStoreLive,'Ficha oficial o feed autorizado',''],
     ['Mejor precio más frecuente',leader,`${wins.Zococity} Zococity · ${wins.PCComponentes} PCComponentes · ${wins.Carrefour} Carrefour · ${wins.Fnac} Fnac`,'is-pine'],
   ].map(k=>`<article class="stat ${k[3]}"><span class="stat-label">${k[0]}</span><strong class="stat-value">${k[1]}</strong><span class="stat-note">${k[2]}</span></article>`).join('');
   const cats=[...new Set(p.map(x=>x.cat).filter(Boolean))].sort();
