@@ -23,8 +23,8 @@ Comparativa de 54 productos de audio y tecnología entre [Zococity](https://zoco
 ```
 
 1. **Programación**: cron-job.org solicita la actualización cada 45 minutos en
-   zona `Europe/Madrid`. El workflow conserva también el cron nativo de GitHub
-   como respaldo, aunque GitHub puede retrasar o perder eventos programados.
+   zona `Europe/Madrid`; GitHub Actions ejecuta el scraping por `workflow_dispatch`.
+   El workflow no tiene un segundo cron para evitar duplicar lecturas.
 2. **Scraping**: la API de Vercel inicia GitHub Actions. Un runner
    `ubuntu-24.04` arranca Chrome con `nodriver` sobre un display virtual (`Xvfb`)
    y lee las fichas configuradas para las cuatro tiendas.
@@ -42,8 +42,11 @@ Comparativa de 54 productos de audio y tecnología entre [Zococity](https://zoco
 
 ## Fuentes de precios
 
-Zococity se lee directamente y PCComponentes, Carrefour y Fnac usan fichas públicas configuradas. Carrefour y Fnac se verifican por coincidencia exacta de EAN/GTIN; el comparador no consulta APIs de precios ni feeds de terceros. Si no hay URL, falta el EAN o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto. Tras una denegación, la tienda se pausa 6 horas (o hasta que cambie la URL) para no insistir en cada actualización.
+Zococity se lee directamente y PCComponentes, Carrefour y Fnac usan fichas públicas configuradas. Carrefour y Fnac se verifican por coincidencia exacta de EAN/GTIN; el comparador no consulta APIs de precios ni feeds de terceros.
 
+Si la ficha coincide pero no publica un precio válido, se marca `no_price`; cualquier precio anterior se conserva como dato antiguo y no se cuenta como actual. Si no hay URL, falta el EAN o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto.
+
+Tras una denegación, la tienda se pausa 6 horas; entre fichas se esperan 4 segundos para evitar ráfagas de peticiones.
 ## Estructura
 
 ```
@@ -95,11 +98,7 @@ clave se expone al navegador.
 
 ### Programación automática activa
 
-El disparador externo de [cron-job.org](https://cron-job.org/) está configurado
-para solicitar la actualización cada 45 minutos en zona horaria `Europe/Madrid`.
-GitHub Actions hace el scraping y publica los datos; su cron nativo permanece
-como respaldo. GitHub puede retrasar o descartar ejecuciones programadas, así que
-confirma el evento en Actions y la hora publicada en la página.
+El disparador externo de [cron-job.org](https://cron-job.org/) solicita la actualización cada 45 minutos en zona horaria `Europe/Madrid`. GitHub Actions ejecuta el scraping y publica los datos. El cron nativo de GitHub está desactivado para evitar una segunda lectura programada.
 
 La tarea ya está configurada; estos pasos sirven solo si hay que recrearla:
 
@@ -113,16 +112,7 @@ La tarea ya está configurada; estos pasos sirven solo si hay que recrearla:
 4. En sus cabeceras HTTP añade
    `Authorization: Bearer <la misma clave>`.
 
-Una respuesta HTTP **202** significa que la solicitud quedó aceptada por GitHub;
-la tarea completa y actualiza la web al terminar. Las llamadas automáticas se
-guardan en `last_automatic_update`. Conserva también el `schedule` de GitHub como
-respaldo adicional; la concurrencia impide que se ejecuten dos scrapeos a la vez.
-
-### Alternativas
-
-cron-job.org mantiene tres jobs coordinados cada 45 minutos en zona horaria `Europe/Madrid`; el workflow también mantiene tres reglas cron equivalentes en GitHub. Para confirmar una ejecución, revisa el historial de
-cron-job.org, luego **GitHub → Actions → Refrescar precios**, y por último el sello
-de actualización publicado en la web. También se puede iniciar desde **Run workflow**.
+Una respuesta HTTP **202** significa que GitHub aceptó la solicitud; la tarea completa y actualiza la web al terminar. Las llamadas automáticas se guardan en `last_automatic_update`. Para comprobar una ejecución, revisa cron-job.org, **GitHub → Actions → Refrescar precios** y el sello de actualización de la web. **Run workflow** sigue disponible para una ejecución manual.
 
 Para hacerlo manualmente desde el ordenador:
 

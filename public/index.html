@@ -452,7 +452,7 @@ function retailerCell(r, store, label){
     const sellerText=seller?`<span class="seller-name">${esc(seller)}</span>`:'<span class="muted">Vendedor no indicado</span>';
     detail=`<div class="seller-line">${sellerText}${availability}${live?'':'<span class="badge b-no">dato anterior</span>'}</div>`;
   }else{
-    const messages={matched:'Producto encontrado; sin precio publicado',unresolved:'Sin coincidencia exacta verificada',blocked:'Lectura detenida por protección de la tienda',error:'No se pudo leer la ficha',stale:'Sin lectura directa; se conserva el dato anterior'};
+    const messages={matched:'Producto encontrado; sin precio publicado',no_price:'Producto encontrado; sin precio publicado',unresolved:'Sin coincidencia exacta verificada',blocked:'Lectura detenida por protección de la tienda',error:'No se pudo leer la ficha',stale:'Sin lectura directa; se conserva el dato anterior'};
     detail=`<div class="pcc-empty">${messages[status]||'Sin oferta confirmada'}</div>`;
   }
   return `<td class="price-cell" data-label="${label}">${price!=null?`<div class="price-value">${eur(price)}</div>`:''}${detail}${r['title_'+store]?`<div class="pcc-title">${esc(r['title_'+store])}</div>`:''}${note?`<div class="pcc-note">${esc(note)}</div>`:''}${source?`<div class="pcc-source">${esc(source)}</div>`:''}</td>`;

@@ -50,7 +50,8 @@ def merge_store_offer(rec, store, offer, previous, catalog_url=None):
     """Conserva el último dato confirmado si la lectura de una tienda falla."""
     offer = offer or {}
     fields = ('title', 'price', 'seller', 'stock', 'sku', 'ean', 'url', 'source')
-    if offer.get('status') == 'matched':
+    has_price = offer.get('price') is not None and offer.get('price') > 0
+    if offer.get('status') == 'matched' and has_price:
         rec[f'title_{store}'] = offer.get('title')
         rec[f'price_{store}'] = offer.get('price')
         rec[f'seller_{store}'] = offer.get('seller') or None
@@ -64,6 +65,30 @@ def merge_store_offer(rec, store, offer, previous, catalog_url=None):
         rec[f'{store}_live'] = bool(offer.get('live', True))
         rec[f'{store}_status'] = 'matched'
         rec.pop(f'note_{store}', None)
+        rec.pop(f'{store}_blocked_at', None)
+        return
+    no_price_match = offer.get('status') == 'matched_no_price' or (
+        offer.get('status') == 'matched' and not has_price
+    )
+    if no_price_match:
+        had_value = previous.get(f'price_{store}') is not None
+        for field in fields:
+            key = f'{field}_{store}'
+            rec[key] = previous.get(key)
+        if not had_value:
+            rec[f'title_{store}'] = offer.get('title') or None
+            rec[f'ean_{store}'] = offer.get('ean') or None
+            observed = offer.get('observed_at')
+            if offer.get('source') and observed:
+                rec[f'source_{store}'] = f"{offer['source']} · {observed[:16].replace('T', ' ')}"
+        rec[f'url_{store}'] = offer.get('url') or previous.get(f'url_{store}') or catalog_url
+        rec[f'{store}_live'] = False
+        rec[f'{store}_status'] = 'stale' if had_value else 'no_price'
+        rec[f'note_{store}'] = (
+            'La ficha coincide por EAN, pero no publica un precio válido; se conserva el último precio confirmado.'
+            if had_value else
+            'La ficha coincide por EAN, pero no publica un precio válido en esta lectura.'
+        )
         rec.pop(f'{store}_blocked_at', None)
         return
     had_value = previous.get(f'price_{store}') is not None
@@ -265,8 +290,8 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
             'n_zoco': sum(1 for r in records if r.get('zoco_live')),
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),
             'n_buscador': len(buscador),
-            'n_carrefour': sum(1 for r in records if r.get('carrefour_live')),
-            'n_fnac': sum(1 for r in records if r.get('fnac_live')),
+            'n_carrefour': sum(1 for r in records if r.get('carrefour_live') and r.get('price_carrefour') is not None),
+            'n_fnac': sum(1 for r in records if r.get('fnac_live') and r.get('price_fnac') is not None),
             'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
             'workflow_event': event_name,
             'trigger_type': trigger_type,

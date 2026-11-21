@@ -15,7 +15,7 @@ from zoneinfo import ZoneInfo
 
 from zoco_fetcher import start_browser
 
-PAGE_GAP_SECONDS = 2.0
+PAGE_GAP_SECONDS = 4.0
 PAGE_TIMEOUT_SECONDS = 25
 # Tras una denegacion no se insiste en cada actualizacion (cada 45 min).
 # Se reintenta una sola vez pasadas 6 horas, o antes si cambia la URL.
@@ -226,7 +226,7 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
     stop_retailer = False
     blocked_at = None
     try:
-        for handle, urls in items:
+        for item_index, (handle, urls) in enumerate(items):
             product = products[handle]
             expected_ean = product.get('ean')
             result = None
@@ -261,18 +261,22 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
                         break
                     exact = _exact_product(data, expected_ean, retailer, product.get('query') or product.get('title_zoco'))
                     if exact:
+                        has_price = exact.get('price') is not None and exact.get('price') > 0
                         result = {
-                            **exact, 'status': 'matched', 'url': url,
-                            'source': 'EAN visible y oferta JSON-LD en ficha oficial',
+                            **exact, 'status': 'matched' if has_price else 'matched_no_price', 'url': url,
+                            'source': 'EAN visible y oferta JSON-LD en ficha oficial' if has_price else
+                                      'Ficha oficial con EAN exacto; sin precio publicado',
                             'observed_at': datetime.now(ZoneInfo('Europe/Madrid')).isoformat(timespec='seconds'),
-                            'live': True,
+                            'live': has_price,
                         }
-                        completed += 1
-                        if on_progress:
-                            on_progress(retailer, completed, count, handle)
-                        break
+                        if has_price:
+                            completed += 1
+                            if on_progress:
+                                on_progress(retailer, completed, count, handle)
+                            break
                 except Exception as exc:
-                    result = {'status': 'error', 'url': url, 'error': str(exc)[:160]}
+                    if result is None:
+                        result = {'status': 'error', 'url': url, 'error': str(exc)[:160]}
                 completed += 1
                 if on_progress:
                     on_progress(retailer, completed, count, handle)
@@ -281,6 +285,10 @@ async def _fetch_pages(url_map, products, retailer, on_progress, cancel):
             if result is None:
                 result = {'status': 'unresolved', 'live': False}
             results[handle] = result
+            # Espacia también productos distintos; una ráfaga de navegaciones
+            # puede provocar denegaciones aunque cada ficha sea pública.
+            if item_index + 1 < len(items) and not cancel.get('stop') and not stop_retailer:
+                await asyncio.sleep(PAGE_GAP_SECONDS)
             if cancel.get('stop') or stop_retailer:
                 break
         # Los productos que no llegaron a visitarse no son "sin coincidencia":

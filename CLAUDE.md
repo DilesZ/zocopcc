@@ -53,11 +53,7 @@ es Zococity. La automatización compara sus precios con PCComponentes, Carrefour
   `Europe/Madrid`, con POST a `/api/refresh?skip_search=1&source=automatic` y
   `Authorization: Bearer …`. El secreto compartido se llama
   `PRICE_CRON_SECRET` y vive en Vercel Production y en la cabecera de cron-job.org.
-- El workflow de GitHub conserva tres reglas `schedule` que mantienen la misma
-  cadencia de 45 minutos. No asumas que se ejecutaron: comprueba Actions y la hora
-  de la instantánea. La concurrencia del
-  workflow evita scrapes simultáneos y el endpoint devuelve `already_running`
-  si ya hay uno activo.
+- El workflow se inicia con `workflow_dispatch` desde la API de Vercel o manualmente; no tiene `schedule` nativo para evitar duplicar los jobs activos de cron-job.org. Comprueba Actions y la hora de la instantánea antes de afirmar que se publicó. La concurrencia del workflow evita scrapes simultáneos y el endpoint devuelve `already_running` si ya hay uno activo.
 - `GITHUB_ACTIONS_TOKEN` y `PRICE_CRON_SECRET` son secretos de producción. No
   los pidas en el chat, no los escribas en archivos versionados y no cambies o
   roten claves sin indicación expresa del usuario.

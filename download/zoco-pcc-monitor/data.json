@@ -11,7 +11,7 @@
   "n_fichas": 27,
   "n_buscador": 0,
   "n_carrefour": 10,
-  "n_fnac": 32,
+  "n_fnac": 30,
   "workflow_run_id": "44927703374",
   "workflow_event": "workflow_dispatch",
   "trigger_type": "automatic",
@@ -59,9 +59,10 @@
    "sku_fnac": null,
    "ean_fnac": "6953175741060",
    "url_fnac": "https://www.fnac.es/mp9728616/Auriculares-planar-magneticos-FiiO-FT5-Negro",
-   "source_fnac": "EAN visible y oferta JSON-LD en ficha oficial · 2026-11-21 18:24",
-   "fnac_live": true,
-   "fnac_status": "matched"
+   "source_fnac": "Ficha oficial con EAN exacto; sin precio publicado",
+   "fnac_live": false,
+   "fnac_status": "no_price",
+   "note_fnac": "La ficha coincide por EAN, pero no publica un precio v?lido en esta lectura."
   },
   {
    "handle": "fiio-ft3",
@@ -1761,9 +1762,10 @@
    "sku_fnac": null,
    "ean_fnac": "3660216009296",
    "url_fnac": "https://www.fnac.es/mp9728672/Altavoces-activos-Triangle-LN01A-con-multiples-conexiones-Castano",
-   "source_fnac": "EAN visible y oferta JSON-LD en ficha oficial · 2026-11-21 18:25",
-   "fnac_live": true,
-   "fnac_status": "matched"
+   "source_fnac": "Ficha oficial con EAN exacto; sin precio publicado",
+   "fnac_live": false,
+   "fnac_status": "no_price",
+   "note_fnac": "La ficha coincide por EAN, pero no publica un precio v?lido en esta lectura."
   },
   {
    "handle": "sonos-ray",
