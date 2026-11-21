@@ -19,7 +19,6 @@ from zoco_fetcher import fetch_products
 from pcc_fetcher import fetch_fichas, verify_search, pick_offer, seller_of, avail_of, parse_card_price
 from fnac_fetcher import fetch_fnac
 from carrefour_fetcher import fetch_carrefour
-from awin_fetcher import fetch_awin_offers
 
 DATA_LOCK = threading.Lock()
 
@@ -232,25 +231,15 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         if queries:
             buscador = verify_search(queries, on_progress=cb, cancel=cancel)
 
-    # 4) Nuevas tiendas: feed autorizado de Awin si esta configurado; si no,
-    # lectura directa de las URLs de producto y validacion del EAN exacto.
+    # 4) Carrefour y Fnac: lectura directa de las fichas públicas configuradas.
     retailer_products = []
     for p in products:
         zp = zoco.get(p['handle']) or {}
         pp = prev.get(p['handle']) or {}
         retailer_products.append({**p, 'ean': zp.get('ean') or pp.get('ean') or p.get('ean')})
-    awin_retailers = fetch_awin_offers(retailer_products, on_progress=cb, cancel=cancel)
     retailers = {}
-    used_feed = {}
     for store, fetcher in (('carrefour', fetch_carrefour), ('fnac', fetch_fnac)):
-        feed = awin_retailers.get(store)
-        if feed is None or (feed and all(item.get('status') == 'error' for item in feed.values())):
-            # Sin feed configurado, o feed ilegible: se mantiene la lectura directa.
-            retailers[store] = fetcher(retailer_products, prev, on_progress=cb, cancel=cancel)
-            used_feed[store] = False
-        else:
-            retailers[store] = feed
-            used_feed[store] = True
+        retailers[store] = fetcher(retailer_products, prev, on_progress=cb, cancel=cancel)
 
     # 5) Fusión y escritura
     records = merge(products, zoco, fichas, buscador, retailers, prev)
@@ -270,8 +259,8 @@ def run(on_progress=None, cancel=None, limit=None, skip_search=False):
         'meta': {
             'zoco_source': 'Catálogo Shopify de zococity.es leído en directo (XHR /products/<handle>.js vía nodriver)',
             'pcc_source': 'Fichas oficiales de pccomponentes.com leídas en directo (JSON-LD vía nodriver, supera Cloudflare)',
-            'carrefour_source': 'Feed de producto autorizado de Awin, EAN exacto' if used_feed.get('carrefour') else 'Fichas oficiales por URL de producto y EAN exacto',
-            'fnac_source': 'Feed de producto autorizado de Awin, EAN exacto' if used_feed.get('fnac') else 'Fichas oficiales por URL de producto y EAN exacto',
+            'carrefour_source': 'Fichas oficiales por URL de producto y EAN exacto',
+            'fnac_source': 'Fichas oficiales por URL de producto y EAN exacto',
             'limit': limit, 'skip_search': skip_search,
             'n_zoco': sum(1 for r in records if r.get('zoco_live')),
             'n_fichas': sum(1 for r in records if r.get('pcc_live') and (r.get('source_pcc') or '').startswith('Ficha')),

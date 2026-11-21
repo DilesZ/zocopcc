@@ -42,20 +42,7 @@ Comparativa de 54 productos de audio y tecnología entre [Zococity](https://zoco
 
 ## Fuentes de precios
 
-Zococity se lee directamente y PCComponentes usa sus fichas configuradas. Carrefour y Fnac pueden leerse de dos formas: un feed de producto autorizado de Awin (si está configurado) o URLs de producto guardadas en `products.json`. En ambos casos el scraper acepta un precio únicamente si coincide el mismo EAN/GTIN. Si no hay URL, el feed no trae el EAN o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto. Tras una denegación, la tienda se pausa 6 horas (o hasta que cambie la URL) para no insistir en cada actualización.
-
-### Activar los feeds de Fnac y Carrefour
-
-La forma recomendada para esas dos tiendas es usar sus feeds de productos de Awin. El feed publica precios y enlaces a producto y puede incluir EAN/GTIN; el comparador solo acepta filas que coincidan con el EAN del producto de Zococity. La frecuencia de descarga del proyecto es cada 45 minutos, pero la antigüedad de cada precio depende de cuándo Fnac o Carrefour actualicen su feed.
-
-1. Crea una cuenta de partner en [Awin](https://ui.awin.com/) y solicita unirte a [Fnac ES (anunciante 77630)](https://ui.awin.com/merchant-profile/77630) y [Carrefour (anunciante 25399)](https://ui.awin.com/merchant-profile/25399). Ambos perfiles identifican a comparadores de precios como partners objetivo.
-2. En **Toolbox → Create-a-Feed**, elige cada anunciante, idioma español y formato CSV. Incluye al menos el EAN/GTIN, nombre, precio, moneda, stock y enlace profundo. El feed debe tener precios en EUR y ofrecer los EAN que usa el catálogo.
-3. Guarda la URL de descarga de cada feed como secreto de **GitHub → Settings → Secrets and variables → Actions**:
-   - `AWIN_FNAC_FEED_URL`
-   - `AWIN_CARREFOUR_FEED_URL`
-4. Al activar ambos secretos, el siguiente workflow leerá las ofertas Awin. Las URLs incluyen una clave privada: no las publiques ni las pegues en el código. El importador conserva el enlace de afiliación tal como lo entrega Awin.
-
-Awin puede exigir revisión antes de habilitar un programa o feed. Si no hay feed disponible para una tienda, la lectura directa existente sigue siendo el respaldo; una denegación se deja indicada y no se interpreta como ausencia de producto.
+Zococity se lee directamente y PCComponentes, Carrefour y Fnac usan fichas públicas configuradas. Carrefour y Fnac se verifican por coincidencia exacta de EAN/GTIN; el comparador no consulta APIs de precios ni feeds de terceros. Si no hay URL, falta el EAN o la página deniega el acceso, la oferta queda sin verificar y no se marca como ausencia de producto. Tras una denegación, la tienda se pausa 6 horas (o hasta que cambie la URL) para no insistir en cada actualización.
 
 ## Estructura
 

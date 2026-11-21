@@ -71,8 +71,6 @@ jobs:
           LIMIT: ${{ inputs.limit }}
           SKIP_SEARCH: ${{ inputs.skip_search }}
           TRIGGER_TYPE: ${{ inputs.trigger_type }}
-          AWIN_CARREFOUR_FEED_URL: ${{ secrets.AWIN_CARREFOUR_FEED_URL }}
-          AWIN_FNAC_FEED_URL: ${{ secrets.AWIN_FNAC_FEED_URL }}
           # En CI el sandbox de Chrome no arranca (nodriver: "Failed to connect
           # to browser"). Con esto se desactiva solo en el runner; en el PC
           # local el sandbox sigue activo.
